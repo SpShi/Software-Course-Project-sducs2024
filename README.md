@@ -34,6 +34,6 @@
 
 5.尝试movie/src/com/fate/movie/util/DBHelper的main函数的运行
 
-6.尝试运行tomcat，如果出现404，修改movie.iml中tomcat的版本为正确版本。
+6.尝试运行tomcat，如果出现404，修改movie.iml中tomcat的版本为正确版本，具体可以看下载后导入idea后显示的版本。
 
 ![APW7~76I%XKONS0ZN%A(M}7](https://github.com/SpShi/Software-Course-Project-sducs2024/assets/162112744/e8224189-197f-4d3b-88a4-d717fc2c0c66)
