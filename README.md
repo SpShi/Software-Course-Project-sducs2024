@@ -37,3 +37,33 @@
 6.尝试运行tomcat，如果出现404，修改movie.iml中tomcat的版本为正确版本，具体可以看下载后导入idea后显示的版本。
 
 ![APW7~76I%XKONS0ZN%A(M}7](https://github.com/SpShi/Software-Course-Project-sducs2024/assets/162112744/e8224189-197f-4d3b-88a4-d717fc2c0c66)
+
+如果出现了错误,请仔细观察server的output中的 "严重","错误"等关键字.
+
+***
+## lib代码简单介绍:
+### jar包的库
+
+## src代码简单介绍:
+
+### action:表单的处理
+
+### bean:具体的类的定义
+
+### biz:类的函数的实现
+
+### dao:与数据库的交互
+
+### filter:过滤一些不合法的访问
+
+### util:support
+name|effect|ps.
+--|--|--
+DateHelper|日期处理|日期格式的具体规定
+DBHelper|基础测试|可以运行一下主函数测试是否存在错误
+
+### c3p0:与数据库链接的具体参数
+
+## web代码简单介绍:
+
+#### 看名字猜一下就行 ~~(绝对不是因为太多了我不想写)~~
