@@ -22,11 +22,8 @@
 </head>
     <body>
         <div class="top" cellpadding="0">
-<<<<<<< HEAD
-                <div class="usr"> 当前用户:&nbsp;&nbsp;&nbsp;&nbsp;
-=======
                 <div class="usr"> 当前用户:&nbsp;&nbsp;
->>>>>>> 042e5bd (init)
+
                     <b>${user.name}</b>&nbsp;
                 </div>
                 <div class="outbox">
