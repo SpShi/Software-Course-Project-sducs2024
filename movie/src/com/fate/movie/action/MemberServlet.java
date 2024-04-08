@@ -66,10 +66,12 @@ public class MemberServlet extends HttpServlet {
                 //2.2 提取session中的验证码,进行判断
                 String code =session.getAttribute("code").toString();
                 //不区分大小写
-                if(!code.equalsIgnoreCase(memberCode)){
-                    out.println("<script>alert('验证码输入错误');location.href = 'login.html';</script>");
-                    return;
-                }
+
+                //暂时去掉提高效率(1717)
+//                if(!code.equalsIgnoreCase(memberCode)){
+//                    out.println("<script>alert('验证码输入错误');location.href = 'login.html';</script>");
+//                    return;
+//                }
 
 
                 // 3.调用UserBiz的getUser方法，根据用户名和密码获取对应的用户对象
