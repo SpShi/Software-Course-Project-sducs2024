@@ -9,17 +9,8 @@ import java.io.Serializable;
 public class User {
 
     private long id;
-    private String name;
     private String pwd;
-    private long typeId;
-    private double balance;
-    private java.sql.Date regdate;
-    private String tel;
-    private String idNumber;
-    private  long state;
-    //外键会员
-    //private MemberType  type;
-
+    private long type;
 
     public long getId() {
         return id;
@@ -27,15 +18,6 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 
@@ -47,65 +29,20 @@ public class User {
         this.pwd = pwd;
     }
 
-    public long getTypeId() {
-        return typeId;
+    public long getType() {
+        return type;
     }
 
-    public void setTypeId(long typeId) {
-        this.typeId = typeId;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public java.sql.Date getRegdate() {
-        return regdate;
-    }
-
-    public void setRegdate(java.sql.Date regdate) {
-        this.regdate = regdate;
-    }
-
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-    public long getState() {
-        return state;
-    }
-
-    public void setState(long state) {
-        this.state = state;
-    }
-
-    public String getIdNumber() {
-        return idNumber;
-    }
-
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
+    public void setType(long type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return "Member{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
                 ", pwd='" + pwd + '\'' +
-                ", balance='" + balance + '\'' +
-                ", regdate=" + regdate +
-                ", tel='" + tel + '\'' +
-                ", idNumber='" + idNumber + '\'' +
-                ", state=" + state +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
