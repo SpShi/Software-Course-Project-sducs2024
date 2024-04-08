@@ -18,11 +18,12 @@
 	    <!--mysql需要使用的驱动类-->
         <property name="driverClass">com.mysql.jdbc.Driver</property>
 		<!--连接语句-->
+<!--        数据库名为moviedb-->
         <property name="jdbcUrl">jdbc:mysql://127.0.0.1:3306/moviedb?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=Asia/Shanghai</property>
 		<!--mysql的用户名-->
         <property name="user">root</property>
 		<!--我的mysql的密码:根据自己机器进行修改-->
-        <property name="password">123456</property>
+        <property name="password">root</property>
 		<!--连接池初始化时创建的连接数:10-->
         <property name="initialPoolSize">10</property>
 		<!--maxIdleTime：连接的最大空闲时间，如果超过这个时间，某个数据库连接还没有被使用，则会断开掉这个连接。-->
