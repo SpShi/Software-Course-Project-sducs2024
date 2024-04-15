@@ -23,7 +23,6 @@
     <body>
         <div class="top" cellpadding="0">
                 <div class="usr"> 当前用户:&nbsp;&nbsp;
-
                     <b>${user.name}</b>&nbsp;
                 </div>
                 <div class="outbox">
