@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 08/04/2024 22:09:06
+ Date: 15/04/2024 17:20:34
 */
 
 SET NAMES utf8mb4;
@@ -265,6 +265,21 @@ INSERT INTO `record` VALUES (00000000004, 6, 11, '2022-12-26 15:48:18', NULL, 00
 INSERT INTO `record` VALUES (00000000005, 5, 10, '2022-12-26 19:58:41', '2022-12-26 20:53:50', 00028, 5, '往世乐土', 00000000004, 0003);
 INSERT INTO `record` VALUES (00000000006, 5, 1, '2022-12-26 20:49:14', '2022-12-26 20:53:50', 00036, 5, '罗小黑战记', 00000000003, 0012);
 INSERT INTO `record` VALUES (00000000007, 3, 1, '2022-12-27 14:55:07', NULL, 00033, 3, '罗小黑战记', 00000000003, 0013);
+
+-- ----------------------------
+-- Table structure for sp
+-- ----------------------------
+DROP TABLE IF EXISTS `sp`;
+CREATE TABLE `sp`  (
+  `id` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `name` int(15) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sp
+-- ----------------------------
+INSERT INTO `sp` VALUES (0000000001, 1000000001);
 
 -- ----------------------------
 -- Table structure for type
