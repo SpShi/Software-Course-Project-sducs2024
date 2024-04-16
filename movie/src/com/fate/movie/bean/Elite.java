@@ -73,11 +73,11 @@ public class Elite {
 
 
     public long getAge() {
-        return gender;
+        return age;
     }
 
-    public void setAge(long gender) {
-        this.gender = gender;
+    public void setAge(long age) {
+        this.gender = age;
     }
 
 
@@ -127,6 +127,13 @@ public class Elite {
         return intention;
     }
 
+    public void setIntention(String intention) {
+        this.intention = intention;
+    }
+
+    public String getSelfevaluation() {
+        return selfevaluation;
+    }
     public void setSelfevaluation(String selfevaluation) {
         this.selfevaluation = selfevaluation;
     }

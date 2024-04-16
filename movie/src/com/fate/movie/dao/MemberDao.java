@@ -57,7 +57,7 @@ public class MemberDao {
      * @return
      * @throws SQLException
      */
-    public int modifyBalance(String idNumber,double amount) throws SQLException {
+    public int modifyIdNumber(String idNumber,double amount) throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql="update member set balance = balance + ? where idNumber = ?";
         int count = runner.update(conn,sql,amount,idNumber);
