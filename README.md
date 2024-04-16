@@ -26,3 +26,5 @@
 04151722 latest已更新,添加user类成功,并且经过大致测试其他部分可正常运行  -Pardo
 
 04151941 latest已更新,添加enterprise类，administrator类成功，还没有测试  -SpShi
+
+04161740 latest已更新,添加elite类成功,并且经过大致测试其他部分可正常运行  -Pardo
