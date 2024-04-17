@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 15/04/2024 17:20:34
+ Date: 17/04/2024 12:25:27
 */
 
 SET NAMES utf8mb4;
@@ -47,10 +47,10 @@ INSERT INTO `往世乐土` VALUES (12, 'Hua', '2022-12-25 16:30:45', '浮生');
 INSERT INTO `往世乐土` VALUES (13, 'Pardofelis', '2022-12-25 16:31:19', '空梦');
 
 -- ----------------------------
--- Table structure for administrator
+-- Table structure for admin
 -- ----------------------------
-DROP TABLE IF EXISTS `administrator`;
-CREATE TABLE `administrator`  (
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin`  (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `tel` int(12) NOT NULL,
@@ -110,11 +110,11 @@ CREATE TABLE `elite`  (
 DROP TABLE IF EXISTS `enterprise`;
 CREATE TABLE `enterprise`  (
   `id` int(10) NOT NULL,
-  `license` int(14) UNSIGNED NOT NULL COMMENT '注册号',
-  `idnumber` varchar(18) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `ename` varchar(70) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '企业名称',
+  `idnumber` varchar(18) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `license` int(14) UNSIGNED NOT NULL COMMENT '注册号',
   `tel` int(12) UNSIGNED NOT NULL,
+  `ename` varchar(70) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '企业名称',
   `state` int(1) UNSIGNED ZEROFILL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
