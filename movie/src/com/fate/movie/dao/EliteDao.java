@@ -141,6 +141,6 @@ public class EliteDao {
 
 
     public static void main(String[] args) {
-        EliteDao dao  = new EliteDao();
+        EliteDao eliteDao  = new EliteDao();
     }
 }

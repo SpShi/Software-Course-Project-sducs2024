@@ -151,6 +151,6 @@ public class MemberDao {
     }
     
     public static void main(String[] args) {
-        MemberDao dao  = new MemberDao();
+        MemberDao memberDao  = new MemberDao();
     }
 }

@@ -2,7 +2,7 @@ package com.fate.movie.bean;
 
 import com.sun.org.apache.xpath.internal.objects.XString;
 
-public class Administrator {
+public class Admin {
     private long id;
     private String name;
     private long tel;

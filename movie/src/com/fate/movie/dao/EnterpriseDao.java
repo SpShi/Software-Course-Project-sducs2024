@@ -95,7 +95,7 @@ public class EnterpriseDao {
 
     public Enterprise getById(long id) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="select select id,`name`,idNumber,state,license,tel,ename,state from  enterprise where id=?";
+        String sql="select id,`name`,idNumber,state,license,tel,ename,state from  enterprise where id=?";
         Enterprise enterprise = runner.query(conn,sql,new BeanHandler<Enterprise>(Enterprise.class),id);
         DBHelper.close(conn);
         return  enterprise;
@@ -109,7 +109,7 @@ public class EnterpriseDao {
      */
     public Enterprise getByLicense(long license) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="select select id,`name`,idNumber,state,license,tel,ename,state from  enterprise where license=?";
+        String sql="select id,`name`,idNumber,state,license,tel,ename,state from  enterprise where license=?";
         Enterprise enterprise = runner.query(conn,sql,new BeanHandler<Enterprise>(Enterprise.class),license);
         DBHelper.close(conn);
         return  enterprise;
@@ -118,7 +118,7 @@ public class EnterpriseDao {
 
 
     public static void main(String[] args) {
-        EnterpriseDao dao  = new EnterpriseDao();
+        EnterpriseDao enterpriseDao  = new EnterpriseDao();
     }
 }
 
