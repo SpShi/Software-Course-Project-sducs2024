@@ -1,12 +1,10 @@
 package com.fate.movie.dao;
 
 import com.fate.movie.bean.Elite;
-import com.fate.movie.bean.Member;
 import com.fate.movie.util.DBHelper;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -143,6 +141,6 @@ public class EliteDao {
 
 
     public static void main(String[] args) {
-        MemberDao dao  = new MemberDao();
+        EliteDao dao  = new EliteDao();
     }
 }
