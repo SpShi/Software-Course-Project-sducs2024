@@ -77,7 +77,7 @@ public class Elite {
     }
 
     public void setAge(long age) {
-        this.gender = age;
+        this.age = age;
     }
 
 

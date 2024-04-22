@@ -1,5 +1,6 @@
 package com.fate.movie.biz;
 
+import com.fate.movie.bean.Member;
 import com.fate.movie.bean.User;
 import com.fate.movie.dao.UserDao;
 
@@ -86,7 +87,15 @@ public class UserBiz {
         }
         return count;
     }
-
+    public User getUser(long id, String pwd){
+        User  user = null;
+        try {
+            user  = userDao.getuser(id,pwd);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return user;
+    }
     // 截取字符串的方法
     public static String getStr(String str,int a,int b)
     {

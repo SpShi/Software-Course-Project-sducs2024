@@ -54,6 +54,19 @@ public class UserDao {
         return  users;
     }
 
+    public User getuser(long id, String pwd) throws SQLException {
+        //create poject
+        Connection connection= DBHelper.getConnection();
+        //conect
+        String sql="SELECT * FROM user WHERE id=? and pwd=?";
+        //sql
+        User user=runner.query(connection,sql,new BeanHandler<User>(User.class),id,pwd);
+        //quary
+        connection.close();
+        //close
+        return  user;
+        //return
+    }
     /**
      * 根据会员编号查会员信息
      * @param id
