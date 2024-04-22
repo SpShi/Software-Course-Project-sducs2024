@@ -1,9 +1,9 @@
 package com.fate.movie.action;
 
-import com.fate.movie.bean.Elite;
-import com.fate.movie.bean.User;
-import com.fate.movie.biz.EliteBiz;
-import com.fate.movie.biz.UserBiz;
+
+import com.alibaba.fastjson.JSON;
+import com.fate.movie.bean.*;
+import com.fate.movie.biz.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,23 +15,23 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet("/elite.let")
-public class EliteServlet extends HttpServlet{
+@WebServlet("/admin.let")
+public class AdminServlet extends HttpServlet{
     UserBiz userBiz=new UserBiz();
-    EliteBiz eliteBiz=new EliteBiz();
+    AdminBiz adminBiz=new AdminBiz();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
 
     /**
-     * /elite.let?type=add 添加个人
-     * /elite.let?type=modifypre&id=xx 修改前准备
-     * /elite.let?type=modify        修改
-     * /elite.let?type=remove&id=xx    删除
-     * /elite.let?type=query&pageIndex=1 :分页查询(request:转发)
-     * /elite.let?type=details&id=xx   展示个人详细信息
-     * /elite.let?type=doajax&name=xx  :使用ajax查询个人名对应的个人信息
+     * /admin.let?type=add 添加管理员
+     * /admin.let?type=modifypre&id=xx 修改前准备
+     * /admin.let?type=modify        修改
+     * /admin.let?type=remove&id=xx    删除
+     * /admin.let?type=query&pageIndex=1 :分页查询(request:转发)
+     * /admin.let?type=details&id=xx   展示管理员详细信息
+     * /admin.let?type=doajax&name=xx  :使用ajax查询管理员名对应的管理员信息
      * @param req
      * @param resp
      * @throws ServletException
@@ -54,7 +54,7 @@ public class EliteServlet extends HttpServlet{
         //判断类型
         switch (type){
             case"login":
-                // 2.从login.html中获取用户名和密码,验证码
+                // 2.从login.html中获取管理员名和密码,验证码
                 long id1 = Long.parseLong(req.getParameter("id"));
                 String pwd1 = req.getParameter("pwd");
                 String valCode = req.getParameter("valcode");
@@ -70,22 +70,22 @@ public class EliteServlet extends HttpServlet{
 //                }
 
 
-                // 3.调用UserBiz的getUser方法，根据用户名和密码获取对应的用户对象
+                // 3.调用UserBiz的getUser方法，根据管理员名和密码获取对应的管理员对象
                 User usernow=userBiz.getUser(id1,pwd1);
 
-                // 4.判断用户对象是否为null: 
+                // 4.判断管理员对象是否为null: 
                 if(usernow==null){
-                    //  4.1 如果是null表示用户名或密码不正确 ，提示错误，回到登录页面. 
-                    out.println("<script>alert('用户名或密码不存在');location.href = 'login.html';</script>");
+                    //  4.1 如果是null表示管理员名或密码不正确 ，提示错误，回到登录页面. 
+                    out.println("<script>alert('管理员名或密码不存在');location.href = 'login.html';</script>");
                 }else {
-                    //  4.2 非空：表示登录成功, 将用户对象保存到session中,提示登录成功后,将页面跳转到index.jsp
+                    //  4.2 非空：表示登录成功, 将管理员对象保存到session中,提示登录成功后,将页面跳转到index.jsp
                     session.setAttribute("user",usernow);//user-->Object
                     session.setAttribute("type",usernow.getType());
-                    if(usernow.getType()==0)
+                    if(usernow.getType()==2)
                     {
-                        out.println("<script>alert('登录成功');location.href='index_elite.jsp';</script>");
+                        out.println("<script>alert('登录成功');location.href='index_admin.jsp';</script>");
                     }
-                    else out.println("<script>alert('未知用户类型');location.href = 'login.html';</script>");
+                    else out.println("<script>alert('未知管理员类型');location.href = 'login.html';</script>");
                 }
                 break;
             case "addpre":
@@ -93,33 +93,17 @@ public class EliteServlet extends HttpServlet{
                 //转发
 
                 HttpSession session1 = req.getSession();
-                req.getRequestDispatcher("elite_add.jsp").forward(req,resp);
+                req.getRequestDispatcher("admin_add.jsp").forward(req,resp);
                 break;
             case "add":
 
                 String namea =  req.getParameter("name");
                 String pwda =  req.getParameter("pwd");
-                String idnuma=req.getParameter("idnum");
-                long gendera=Long.parseLong(req.getParameter("gender"));
-                long agea=Long.parseLong(req.getParameter("age"));
-                long degreesa=Long.parseLong(req.getParameter("degrees"));
                 String tela =  req.getParameter("tel");
-                String resumea=req.getParameter("resume");
-                String majora=req.getParameter("major");
-                String emaila=req.getParameter("email");
-                String ctfcta=req.getParameter("ctfct");
-                String intta=req.getParameter("intt");
-                String slfea=req.getParameter("slfe");
-                String expea=req.getParameter("expe");
 
-                if(!eliteBiz.checktel(tela))
+                if(!adminBiz.checktel(tela))
                 {
-                    out.println("<script>alert('电话号码不合法'); location.href='elite.let?type=query';</script>");
-                    return;
-                }
-                if(!eliteBiz.checkiN(idnuma))
-                {
-                    out.println("<script>alert('身份证号码不合法'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('电话号码不合法'); location.href='admin.let?type=query';</script>");
                     return;
                 }
                 long idtmp=userBiz.getidBysp();
@@ -127,15 +111,14 @@ public class EliteServlet extends HttpServlet{
                 int count = userBiz.add(idtmp,pwda,0);
                 if(count<=0){
                     userBiz.modifysp(1,idtmp-1);
-                    out.println("<script>alert('用户注册失败'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('管理员注册失败'); location.href='admin.let?type=query';</script>");
                 }
-                count = eliteBiz.add(idtmp,namea,idnuma,resumea,gendera, agea,degreesa,Long.parseLong(tela),
-                        majora, emaila, ctfcta, intta, slfea,expea);
+                count = adminBiz.add(idtmp,namea,Long.parseLong(tela));
                 if(count>0){
-                    out.println("<script>alert('用户注册成功'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('管理员注册成功'); location.href='admin.let?type=query';</script>");
                 }else{
                     userBiz.modifysp(1,idtmp-1);
-                    out.println("<script>alert('用户注册失败'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('管理员注册失败'); location.href='admin.let?type=query';</script>");
                 }
 
                 break;
@@ -146,14 +129,14 @@ public class EliteServlet extends HttpServlet{
                 }
                 //类型&会员的信息
                 long id = Long.parseLong(req.getParameter("id"));
-                Elite elite = eliteBiz.getById(id);
+                Admin admin = adminBiz.getById(id);
 
-                req.setAttribute("elite",elite);
+                req.setAttribute("admin",admin);
 
                 HttpSession session2 = req.getSession();
                 Long type1=(Long) session2.getAttribute("type");
-                if(type1==0){
-                    req.getRequestDispatcher("elite_modify.jsp").forward(req,resp);
+                if(type1==2){
+                    req.getRequestDispatcher("admin_modify.jsp").forward(req,resp);
                 }
 
                 break;
@@ -163,36 +146,19 @@ public class EliteServlet extends HttpServlet{
                     return;
                 }
                 String namem =  req.getParameter("name");
-                String idnumm=req.getParameter("idnum");
-                long genderm=Long.parseLong(req.getParameter("gender"));
-                long agem=Long.parseLong(req.getParameter("age"));
-                long degreesm=Long.parseLong(req.getParameter("degrees"));
                 String telm =  req.getParameter("tel");
-                String resumem=req.getParameter("resume");
-                String majorm=req.getParameter("major");
-                String emailm=req.getParameter("email");
-                String ctfctm=req.getParameter("ctfct");
-                String inttm=req.getParameter("intt");
-                String slfem=req.getParameter("slfe");
-                String expem=req.getParameter("expe");
 
-                if(!eliteBiz.checktel(telm))
+                if(!adminBiz.checktel(telm))
                 {
-                    out.println("<script>alert('电话号码不合法'); location.href='elite.let?type=query';</script>");
-                    return;
-                }
-                if(!eliteBiz.checkiN(idnumm))
-                {
-                    out.println("<script>alert('身份证号码不合法'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('电话号码不合法'); location.href='admin.let?type=query';</script>");
                     return;
                 }
                 long idm=Long.parseLong(req.getParameter("id"));
-                int countm = eliteBiz.modify(idm,namem,idnumm,resumem,genderm, agem,degreesm,Long.parseLong(telm),
-                        majorm, emailm, ctfctm, inttm, slfem,expem);
+                int countm = adminBiz.modify(idm,namem,Long.parseLong(telm));
                 if(countm>0){
-                    out.println("<script>alert('用户修改成功'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('管理员修改成功'); location.href='admin.let?type=query';</script>");
                 }else{
-                    out.println("<script>alert('用户注册失败'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('管理员注册失败'); location.href='admin.let?type=query';</script>");
                 }
 
                 break;
@@ -201,17 +167,17 @@ public class EliteServlet extends HttpServlet{
                     out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
-                long eliteId = Long.parseLong(req.getParameter("id"));
+                long adminId = Long.parseLong(req.getParameter("id"));
                 try {
-                    int count2 = eliteBiz.remove(eliteId);
+                    int count2 = adminBiz.remove(adminId);
                     if(count2>0){
-                        out.println("<script>alert('个人用户删除成功'); location.href='elite.let?type=query';</script>");
+                        out.println("<script>alert('管理员删除成功'); location.href='admin.let?type=query';</script>");
                     }else{
-                        out.println("<script>alert('个人用户删除失败'); location.href='elite.let?type=query';</script>");
+                        out.println("<script>alert('管理员删除失败'); location.href='admin.let?type=query';</script>");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    out.println("<script>alert('"+e.getMessage()+"'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('"+e.getMessage()+"'); location.href='admin.let?type=query';</script>");
                 }
                 break;
             case "query":
@@ -219,12 +185,12 @@ public class EliteServlet extends HttpServlet{
                     out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
-                List<Elite> eliteList = eliteBiz.getAll();
-                req.setAttribute("eliteList",eliteList);
+                List<Admin> adminList = adminBiz.getAll();
+                req.setAttribute("adminList",adminList);
                 HttpSession session3 = req.getSession();
                 Long type3=(Long) session3.getAttribute("type");
-                if(type3==0){
-                    req.getRequestDispatcher("elite_list.jsp").forward(req,resp);
+                if(type3==2){
+                    req.getRequestDispatcher("admin_list.jsp").forward(req,resp);
                 }
                 break;
             case "exit":
@@ -243,9 +209,9 @@ public class EliteServlet extends HttpServlet{
                     return;
                 }
                 //修改密码
-                //1.获取用户输入的新的密码
+                //1.获取管理员输入的新的密码
                 String newPwd = req.getParameter("newpwd");
-                //2.获取用户的编号-session
+                //2.获取管理员的编号-session
                 long idmp = ((User)session.getAttribute("user")).getId();
 
                 //3.调用biz层方法
