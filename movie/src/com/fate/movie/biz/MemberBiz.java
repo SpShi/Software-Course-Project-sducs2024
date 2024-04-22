@@ -56,7 +56,7 @@ public class MemberBiz {
   public int modifyBalance(String idNumber,double amount){
     int count = 0;
     try {
-      count = memberDao.modifyBalance(idNumber,amount);
+      count = memberDao.modifyIdNumber(idNumber,amount);
     } catch (SQLException throwables) {
       throwables.printStackTrace();
     }
