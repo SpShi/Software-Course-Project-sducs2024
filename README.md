@@ -39,6 +39,8 @@
 
 04222225 latest已更新,增加了CompServlet与AdminServlet,更新sql文件 -Pardo
 
+04231755 latest已更新,增加了elite_add.jsp，需要测试，尤其是性别选择部分 -SpShi
+
 
 ## 怎样提交修改后的代码
 
