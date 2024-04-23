@@ -167,7 +167,7 @@
 //                }
 //                String namem =  req.getParameter("name");
 //                String pwdm =  req.getParameter("pwd");
-//                String idnumm=req.getParameter("idnum");
+//                String idnumm=req.getParameter("idnum");//身份证号码
 //                long genderm=Long.parseLong(req.getParameter("gender"));
 //                long agem=Long.parseLong(req.getParameter("age"));
 //                long degreesm=Long.parseLong(req.getParameter("degrees"));
