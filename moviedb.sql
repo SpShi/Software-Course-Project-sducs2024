@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 17/04/2024 12:25:27
+ Date: 22/04/2024 22:24:58
 */
 
 SET NAMES utf8mb4;
@@ -126,7 +126,7 @@ DROP TABLE IF EXISTS `jobs`;
 CREATE TABLE `jobs`  (
   `id` int(18) NOT NULL,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '岗位名称',
-  `place` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '所属单位',
+  `place` int(20) DEFAULT NULL COMMENT '所属单位',
   `age` int(3) UNSIGNED DEFAULT NULL,
   `gender` int(1) UNSIGNED ZEROFILL DEFAULT NULL COMMENT '0代表不设限,1表示限定男性,2表示限定女性',
   `degrees` int(2) UNSIGNED ZEROFILL DEFAULT NULL,

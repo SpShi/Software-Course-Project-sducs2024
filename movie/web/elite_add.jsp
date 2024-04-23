@@ -110,17 +110,25 @@
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
-                                                <td>用户类型</td>
+                                                <td width="10%">身份证号：</td>
+                                                <td width="20%"><input class="text" type="text" name="idnum" value=""
+                                                                       required/></td>
+                                                <td class="err">长度17个字符</td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>性别</td>
                                                 <td>
-                                                    <c:forEach items="${memberTypes}" var="mt">
+                                                    <c:forEach items="${genders}" var="mt">
                                                         <c:if test="${mt.id==1}">
-                                                            <input type="radio" name="memberType" value="${mt.id}"
-                                                                   checked/> ${mt.name}&nbsp;&nbsp;
+                                                            <input type="radio" name="gender" value="${mt.id}"
+                                                                   checked/> ${mt.name}男&nbsp;&nbsp;
                                                             <input type="hidden" value="${mt.recharge}"/>
                                                         </c:if>
                                                         <c:if test="${mt.id!=1}">
-                                                            <input type="radio" name="memberType"
-                                                                   value="${mt.id}"/> ${mt.name}&nbsp;&nbsp;
+                                                            <input type="radio" name="gender"
+                                                                   value="${mt.id}"/> ${mt.name}女&nbsp;&nbsp;
                                                             <input type="hidden" value="${mt.recharge}"/>
                                                         </c:if>
                                                     </c:forEach>
@@ -130,10 +138,28 @@
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
-                                                <td>充值金额</td>
+                                                <td>年龄</td>
                                                 <td>
-                                                    <input class="text" id="balance" type="number" name="balance"
-                                                           value="100" readonly/>
+                                                    <input class="text" id="balance" type="number" name="age"
+                                                           value="" readonly/>
+                                                </td>
+                                                <td class="err">您的年龄应在18岁到60岁之间</td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>学历</td>
+                                                <td>
+                                                    <select id="education" name="degrees">
+                                                        <option value="0">无学历</option>
+                                                        <option value="1">小学毕业</option>
+                                                        <option value="2">初中毕业</option>
+                                                        <option value="3">高中毕业</option>
+                                                        <option value="4">学士学位</option>
+                                                        <option value="5">硕士学位</option>
+                                                        <option value="6">博士学位</option>
+                                                    </select>
                                                 </td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
@@ -144,14 +170,69 @@
                                                 <td>
                                                     <input class="text" type="tel" name="tel" required/>
                                                 </td>
+                                                <td class="err">请输入13位电话号码</td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
-                                                <td>身份证号</td>
+                                                <td>简历</td>
                                                 <td>
-                                                    <input class="text" type="text" name="idNumber" required/>
+                                                    <input class="text" type="text" name="resume" required/>
+                                                </td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>专业</td>
+                                                <td>
+                                                    <input class="text" type="text" name="major" required/>
+                                                </td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>邮箱</td>
+                                                <td>
+                                                    <input class="text" type="text" name="email" required/>
+                                                </td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>证书</td>
+                                                <td>
+                                                    <input class="text" type="text" name="ctfct" required/>
+                                                </td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>求职意向</td>
+                                                <td>
+                                                    <input class="text" type="text" name="intt" required/>
+                                                </td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>自我评估</td>
+                                                <td>
+                                                    <input class="text" type="text" name="slfe" required/>
+                                                </td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>工作经验</td>
+                                                <td>
+                                                    <input class="text" type="text" name="expe" required/>
                                                 </td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
