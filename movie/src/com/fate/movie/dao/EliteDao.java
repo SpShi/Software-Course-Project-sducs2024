@@ -76,6 +76,20 @@ public class EliteDao {
     }
 
     /**
+     *  update 表名 set 列名 = 值 where 列名=值;
+     * @param id
+     * @param age
+     * @return
+     * @throws SQLException
+     */
+    public int modifyage(long id,long age) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        String sql="update elite age = ? where id=?";
+        int count = runner.update(conn,sql,age,id);
+        DBHelper.close(conn);
+        return count;
+    }
+    /**
      * 删除某位人才,回收利用该会员的id(待实现)
      * @param id
      * @return

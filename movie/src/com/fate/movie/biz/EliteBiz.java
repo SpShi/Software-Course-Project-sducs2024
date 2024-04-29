@@ -5,6 +5,8 @@ import com.fate.movie.bean.Elite;
 import com.fate.movie.dao.EliteDao;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,6 +58,31 @@ public class EliteBiz {
 
         }
         return elites;
+
+    }
+    public long update(){
+        int res=0;
+        List<Elite> elitess = null;
+        try {
+            elitess =  eliteDao.getAll();
+            for(Elite i:elitess)
+            {
+                String s=i.getIdNumber();
+                s=getStr(s,6,14);
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+                String now=formatter.format(new Date());
+                long age= Long.parseLong(now.substring(0,3))-Long.parseLong(s.substring(0,3));
+                age=Long.parseLong(now.substring(4,8))<Long.parseLong(s.substring(4,8))?age:age-1;
+                if(age!=i.getAge()) {
+                    eliteDao.modifyage(i.getId(),age);
+                    res++;
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -1;
+        }
+        return res;
 
     }
     public Elite getById(long id){
