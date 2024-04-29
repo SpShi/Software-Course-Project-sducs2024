@@ -1,20 +1,20 @@
 package com.fate.movie.biz;
 
 
-import com.fate.movie.bean.Enterprise;
-import com.fate.movie.dao.EnterpriseDao;
+import com.fate.movie.bean.Comp;
+import com.fate.movie.dao.CompDao;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EnterpriseBiz {
-    EnterpriseDao enterpriseDao = new EnterpriseDao();
+public class CompBiz {
+    CompDao compDao = new CompDao();
     public int add(long id,String name,String idNumber,long license,long tel,String ename){
         int count = 0;
         try {
-            count = enterpriseDao.add(id,name,idNumber,license,tel,ename);
+            count = compDao.add(id,name,idNumber,license,tel,ename);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -23,7 +23,7 @@ public class EnterpriseBiz {
     public int modify(long id,String name,String idNumber,long license,long tel,String ename){
         int count = 0;
         try {
-            count = enterpriseDao.modify(id,name,idNumber,license,tel,ename);
+            count = compDao.modify(id,name,idNumber,license,tel,ename);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -31,11 +31,11 @@ public class EnterpriseBiz {
     }
     public int remove(long id) throws Exception {
         //1.判断会员账号余额 >0 :提示不能删除
-        Enterprise enterprise =getById(id);
+        Comp comp =getById(id);
         //3.删除
         int count =0;
         try {
-            count = enterpriseDao.remove(id);
+            count = compDao.remove(id);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -43,10 +43,10 @@ public class EnterpriseBiz {
 
     }
 
-    public List<Enterprise> getAll(){
-        List<Enterprise> enterprises = null;
+    public List<Comp> getAll(){
+        List<Comp> enterprises = null;
         try {
-            enterprises =  enterpriseDao.getAll();
+            enterprises =  compDao.getAll();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
@@ -54,14 +54,24 @@ public class EnterpriseBiz {
         return enterprises;
 
     }
-    public Enterprise getById(long id){
-        Enterprise enterprise = null;
+    public int modifystate(long id,long change){
+        int count = 0;
+        long state=change;
         try {
-            enterprise = enterpriseDao.getById(id);
+            count = compDao.modifystate(id,state);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return enterprise;
+        return count;
+    }
+    public Comp getById(long id){
+        Comp comp = null;
+        try {
+            comp = compDao.getById(id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return comp;
     }
 
     public static boolean checkiN(String idNumber) {
@@ -115,14 +125,14 @@ public class EnterpriseBiz {
      * @param license
      * @return
      */
-    public Enterprise getByLicense(long license){
-        Enterprise enterprise = null;
+    public Comp getByLicense(long license){
+        Comp comp = null;
         try {
-            enterprise = enterpriseDao.getByLicense(license);
+            comp = compDao.getByLicense(license);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return enterprise;
+        return comp;
     }
 
     public static boolean checktel(String tele) {

@@ -85,6 +85,16 @@ public class EliteBiz {
         return res;
 
     }
+    public int modifystate(long id,long change){
+        int count = 0;
+        long state=change;
+        try {
+            count = eliteDao.modifystate(id,state);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return count;
+    }
     public Elite getById(long id){
         Elite elite = null;
         try {

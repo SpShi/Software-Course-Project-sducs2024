@@ -1,7 +1,7 @@
 package com.fate.movie.dao;
 
 
-import com.fate.movie.bean.Enterprise;
+import com.fate.movie.bean.Comp;
 import com.fate.movie.util.DBHelper;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class EnterpriseDao {
+public class CompDao {
     QueryRunner runner = new QueryRunner();
 
     /**
@@ -76,14 +76,27 @@ public class EnterpriseDao {
      * @throws SQLException
      */
 
-    public List<Enterprise> getAll() throws SQLException {
+    public List<Comp> getAll() throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql="select id,`name`,idNumber,state,license,tel,ename,state from  enterprise";
-        List<Enterprise> enterprises = runner.query(conn,sql,new BeanListHandler<Enterprise>(Enterprise.class));
+        List<Comp> enterprises = runner.query(conn,sql,new BeanListHandler<Comp>(Comp.class));
         DBHelper.close(conn);
         return  enterprises;
     }
-
+    /**
+     *
+     * @param id
+     * @param state
+     * @return
+     * @throws SQLException
+     */
+    public int modifystate(long id,long state) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        String sql="update enterprise state = ? where id=?";
+        int count = runner.update(conn,sql,state,id);
+        DBHelper.close(conn);
+        return count;
+    }
     /**
      * 根据人才编号查人才信息
      * @param id
@@ -93,12 +106,12 @@ public class EnterpriseDao {
 
 
 
-    public Enterprise getById(long id) throws SQLException {
+    public Comp getById(long id) throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql="select id,`name`,idNumber,state,license,tel,ename,state from  enterprise where id=?";
-        Enterprise enterprise = runner.query(conn,sql,new BeanHandler<Enterprise>(Enterprise.class),id);
+        Comp comp = runner.query(conn,sql,new BeanHandler<Comp>(Comp.class),id);
         DBHelper.close(conn);
-        return  enterprise;
+        return comp;
     }
 
     /**
@@ -107,18 +120,18 @@ public class EnterpriseDao {
      * @return
      * @throws SQLException
      */
-    public Enterprise getByLicense(long license) throws SQLException {
+    public Comp getByLicense(long license) throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql="select id,`name`,idNumber,state,license,tel,ename,state from  enterprise where license=?";
-        Enterprise enterprise = runner.query(conn,sql,new BeanHandler<Enterprise>(Enterprise.class),license);
+        Comp comp = runner.query(conn,sql,new BeanHandler<Comp>(Comp.class),license);
         DBHelper.close(conn);
-        return  enterprise;
+        return comp;
     }
 
 
 
     public static void main(String[] args) {
-        EnterpriseDao enterpriseDao  = new EnterpriseDao();
+        CompDao compDao = new CompDao();
     }
 }
 

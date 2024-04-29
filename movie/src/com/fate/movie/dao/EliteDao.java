@@ -89,6 +89,21 @@ public class EliteDao {
         DBHelper.close(conn);
         return count;
     }
+
+    /**
+     *
+     * @param id
+     * @param state
+     * @return
+     * @throws SQLException
+     */
+    public int modifystate(long id,long state) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        String sql="update elite state = ? where id=?";
+        int count = runner.update(conn,sql,state,id);
+        DBHelper.close(conn);
+        return count;
+    }
     /**
      * 删除某位人才,回收利用该会员的id(待实现)
      * @param id

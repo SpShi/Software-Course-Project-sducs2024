@@ -1,6 +1,6 @@
 package com.fate.movie.bean;
 
-public class Enterprise {
+public class Comp {
     private long id;
     private long license;
     private String idnumber;

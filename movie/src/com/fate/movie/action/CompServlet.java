@@ -1,7 +1,6 @@
 package com.fate.movie.action;
 
 
-import com.alibaba.fastjson.JSON;
 import com.fate.movie.bean.*;
 import com.fate.movie.biz.*;
 
@@ -18,7 +17,7 @@ import java.util.List;
 @WebServlet("/comp.let")
 public class CompServlet extends HttpServlet{
     UserBiz userBiz=new UserBiz();
-    EnterpriseBiz enterpriseBiz=new EnterpriseBiz();
+    CompBiz compBiz =new CompBiz();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -104,28 +103,22 @@ public class CompServlet extends HttpServlet{
                 Long licensea=Long.parseLong(req.getParameter("license"));
                 String enamea=req.getParameter("ename");
 
-                if(!enterpriseBiz.checktel(tela))
+                if(!compBiz.checktel(tela))
                 {
                     out.println("<script>alert('电话号码不合法'); location.href='comp.let?type=query';</script>");
                     return;
                 }
-                if(!enterpriseBiz.checkiN(idnuma))
+                if(!compBiz.checkiN(idnuma))
                 {
                     out.println("<script>alert('身份证号码不合法'); location.href='comp.let?type=query';</script>");
                     return;
                 }
-                long idtmp=userBiz.getidBysp();
-                userBiz.modifysp(1,idtmp+1);
-                int count = userBiz.add(idtmp,pwda,0);
-                if(count<=0){
-                    userBiz.modifysp(1,idtmp-1);
-                    out.println("<script>alert('企业注册失败'); location.href='comp.let?type=query';</script>");
-                }
-                count = enterpriseBiz.add(idtmp,namea,idnuma,licensea,Long.parseLong(tela),enamea);
+                User usera=(User)session.getAttribute("id");
+                long idtmp=usera.getId();
+                 int count = compBiz.add(idtmp,namea,idnuma,licensea,Long.parseLong(tela),enamea);
                 if(count>0){
                     out.println("<script>alert('企业注册成功'); location.href='comp.let?type=query';</script>");
                 }else{
-                    userBiz.modifysp(1,idtmp-1);
                     out.println("<script>alert('企业注册失败'); location.href='comp.let?type=query';</script>");
                 }
 
@@ -137,9 +130,9 @@ public class CompServlet extends HttpServlet{
                 }
                 //类型&会员的信息
                 long id = Long.parseLong(req.getParameter("id"));
-                Enterprise enterprise = enterpriseBiz.getById(id);
+                Comp comp = compBiz.getById(id);
 
-                req.setAttribute("enterprise",enterprise);
+                req.setAttribute("enterprise", comp);
 
                 HttpSession session2 = req.getSession();
                 Long type1=(Long) session2.getAttribute("type");
@@ -159,22 +152,19 @@ public class CompServlet extends HttpServlet{
                 Long licensem=Long.parseLong(req.getParameter("license"));
                 String enamem=req.getParameter("ename");
 
-                if(!enterpriseBiz.checktel(telm))
+                if(!compBiz.checktel(telm))
                 {
                     out.println("<script>alert('电话号码不合法'); location.href='comp.let?type=query';</script>");
                     return;
                 }
-                if(!enterpriseBiz.checkiN(idnumm))
+                if(!compBiz.checkiN(idnumm))
                 {
                     out.println("<script>alert('身份证号码不合法'); location.href='comp.let?type=query';</script>");
                     return;
                 }
-                long idm=Long.parseLong(req.getParameter("id"));
-                int countm = userBiz.modify(idm,pwdm,0);
-                if(countm<=0){
-                    out.println("<script>alert('企业修改失败'); location.href='comp.let?type=query';</script>");
-                }
-                count = enterpriseBiz.modify(idm,namem,idnumm,licensem,Long.parseLong(telm),enamem);
+                User userm=(User)session.getAttribute("id");
+                long idm=userm.getId();
+                int countm = compBiz.modify(idm,namem,idnumm,licensem,Long.parseLong(telm),enamem);
                 if(countm>0){
                     out.println("<script>alert('企业修改成功'); location.href='comp.let?type=query';</script>");
                 }else{
@@ -189,7 +179,7 @@ public class CompServlet extends HttpServlet{
                 }
                 long memId = Long.parseLong(req.getParameter("id"));
                 try {
-                    int count2 = enterpriseBiz.remove(memId);
+                    int count2 = compBiz.remove(memId);
                     if(count2>0){
                         out.println("<script>alert('企业删除成功'); location.href='comp.let?type=query';</script>");
                     }else{
@@ -205,7 +195,7 @@ public class CompServlet extends HttpServlet{
                     out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
-                List<Enterprise> compList = enterpriseBiz.getAll();
+                List<Comp> compList = compBiz.getAll();
                 req.setAttribute("compList",compList);
                 HttpSession session3 = req.getSession();
                 Long type3=(Long) session3.getAttribute("type");

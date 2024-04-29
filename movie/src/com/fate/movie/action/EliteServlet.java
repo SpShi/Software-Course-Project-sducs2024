@@ -96,9 +96,8 @@ public class EliteServlet extends HttpServlet{
                 req.getRequestDispatcher("elite_add.jsp").forward(req,resp);
                 break;
             case "add":
-
+                User usera=(User)session.getAttribute("id");
                 String namea =  req.getParameter("name");
-                String pwda =  req.getParameter("pwd");
                 String idnuma=req.getParameter("idnum");
                 long gendera=Long.parseLong(req.getParameter("gender"));
                 long agea=Long.parseLong(req.getParameter("age"));
@@ -122,20 +121,13 @@ public class EliteServlet extends HttpServlet{
                     out.println("<script>alert('身份证号码不合法'); location.href='elite.let?type=query';</script>");
                     return;
                 }
-                long idtmp=userBiz.getidBysp();
-                userBiz.modifysp(1,idtmp+1);
-                int count = userBiz.add(idtmp,pwda,0);
-                if(count<=0){
-                    userBiz.modifysp(1,idtmp-1);
-                    out.println("<script>alert('用户注册失败'); location.href='elite.let?type=query';</script>");
-                }
-                count = eliteBiz.add(idtmp,namea,idnuma,resumea,gendera, agea,degreesa,Long.parseLong(tela),
+
+                int count = eliteBiz.add(usera.getId(),namea,idnuma,resumea,gendera, agea,degreesa,Long.parseLong(tela),
                         majora, emaila, ctfcta, intta, slfea,expea);
                 if(count>0){
-                    out.println("<script>alert('用户注册成功'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('用户信息添加成功'); location.href='elite.let?type=query';</script>");
                 }else{
-                    userBiz.modifysp(1,idtmp-1);
-                    out.println("<script>alert('用户注册失败'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('用户信息添加失败'); location.href='elite.let?type=query';</script>");
                 }
 
                 break;
@@ -186,13 +178,13 @@ public class EliteServlet extends HttpServlet{
                     out.println("<script>alert('身份证号码不合法'); location.href='elite.let?type=query';</script>");
                     return;
                 }
-                long idm=Long.parseLong(req.getParameter("id"));
-                int countm = eliteBiz.modify(idm,namem,idnumm,resumem,genderm, agem,degreesm,Long.parseLong(telm),
+                User userm=(User)session.getAttribute("id");
+                int countm = eliteBiz.modify(userm.getId(),namem,idnumm,resumem,genderm, agem,degreesm,Long.parseLong(telm),
                         majorm, emailm, ctfctm, inttm, slfem,expem);
                 if(countm>0){
-                    out.println("<script>alert('用户修改成功'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('用户信息修改成功'); location.href='elite.let?type=query';</script>");
                 }else{
-                    out.println("<script>alert('用户注册失败'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('用户信息修改失败'); location.href='elite.let?type=query';</script>");
                 }
 
                 break;

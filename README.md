@@ -45,6 +45,8 @@
 
 04222225 latest已更新,发生错误,保留elite_add.jsp并回滚,可以进行登录 -Pardo
 
+04222225 latest已更新,修改了Elite*,Comp*,Job*,可以进行登录 -Pardo
+
 ## 怎样提交修改后的代码
 
 main存放正确的代码,一个latest存放最新的,一个alter依然是的main代码作为main的备用方案,修改latest后更新readme,其他人在修改代码之前先看看在自己修改代码后有没有人提交代码同步一下
