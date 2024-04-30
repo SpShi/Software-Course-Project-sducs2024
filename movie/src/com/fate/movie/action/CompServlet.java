@@ -97,7 +97,6 @@ public class CompServlet extends HttpServlet{
             case "add":
 
                 String namea =  req.getParameter("name");
-                String pwda =  req.getParameter("pwd");
                 String idnuma=req.getParameter("idnum");
                 String tela =  req.getParameter("tel");
                 Long licensea=Long.parseLong(req.getParameter("license"));
@@ -146,7 +145,6 @@ public class CompServlet extends HttpServlet{
                     return;
                 }
                 String namem =  req.getParameter("name");
-                String pwdm =  req.getParameter("pwd");
                 String idnumm=req.getParameter("idnum");
                 String telm =  req.getParameter("tel");
                 Long licensem=Long.parseLong(req.getParameter("license"));

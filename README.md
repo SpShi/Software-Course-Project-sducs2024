@@ -43,11 +43,11 @@
 
 04231755 latest已更新,增加了elite_add.jsp，需要测试，尤其是性别选择部分 -SpShi
 
-04222225 latest已更新,发生错误,保留elite_add.jsp并回滚,可以进行登录 -Pardo
+04281225 latest已更新,发生错误,保留elite_add.jsp并回滚,可以进行登录 -Pardo
 
-04222225 latest已更新,修改了Elite*,Comp*,Job*,可以进行登录 -Pardo
+04291725 latest已更新,修改了Elite*,Comp*,Job*,可以进行登录 -Pardo
 
-04222225 latest已更新,添加了user_add.jsp等,可以进行登录 -Pardo
+04301316 latest已更新,添加了user_add.jsp等,可以进行登录 -Pardo
 
 ## 怎样提交修改后的代码
 

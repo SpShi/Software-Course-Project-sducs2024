@@ -140,9 +140,10 @@
                                                         <option value="1">小学毕业</option>
                                                         <option value="2">初中毕业</option>
                                                         <option value="3">高中毕业</option>
-                                                        <option value="4">学士学位</option>
-                                                        <option value="5">硕士学位</option>
-                                                        <option value="6">博士学位</option>
+                                                        <option value="4">专科</option>
+                                                        <option value="5">学士学位</option>
+                                                        <option value="6">硕士学位</option>
+                                                        <option value="7">博士学位</option>
                                                     </select>
                                                 </td>
                                                 <td></td>
