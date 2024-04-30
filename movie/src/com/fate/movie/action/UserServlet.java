@@ -122,11 +122,12 @@ public class UserServlet extends HttpServlet {
                 break;
             case "add":
                 String pwda =  req.getParameter("pwd");
+                long typea=Long.parseLong(req.getParameter("type"));
                 long idtmp=userBiz.getidBysp();
                 userBiz.modifysp(1,idtmp+1);
-                int count = userBiz.add(idtmp,pwda,0);
+                int count = userBiz.add(idtmp,pwda,typea);
                 if(count>0){
-                    out.println("<script>alert('用户注册成功,您的id为"+idtmp+"'); location.href='user.let?type=query';</script>");
+                    out.println("<script>alert('用户注册成功,请牢记您的ID后重新登录'); location.href='user.let?type=query';</script>");
                 }else{
                     userBiz.modifysp(1,idtmp-1);
                     out.println("<script>alert('用户注册失败'); location.href='user.let?type=query';</script>");
@@ -141,14 +142,7 @@ public class UserServlet extends HttpServlet {
                 List<User> userList = userBiz.getAll();
                 req.setAttribute("userList",userList);
                 HttpSession session3 = req.getSession();
-                Long state3=(Long) session3.getAttribute("state");
-                if(state3==0){
-                    req.getRequestDispatcher("mem_list_beta.jsp").forward(req,resp);
-                }
-                else
-                {
-                    req.getRequestDispatcher("mem_list.jsp").forward(req,resp);
-                }
+                req.getRequestDispatcher("user_list.jsp").forward(req,resp);
                 break;
             case "exit":
                 if(session.getAttribute("user")==null){

@@ -60,7 +60,7 @@
                         <table>
                             <tr>
                                 <td width="100" align="center"><img src="./Images/mime.gif"/></td>
-                                <td valign="bottom"><h3 style="letter-spacing:1px;">个人用户注册 </h3></td>
+                                <td valign="bottom"><h3 style="letter-spacing:1px;">添加个人信息 </h3></td>
                             </tr>
                         </table>
                     </td>
@@ -94,22 +94,6 @@
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
-                                                <td>密码：</td>
-                                                <td><input class="text" type="password" name="pwd" value="" required/>
-                                                </td>
-                                                <td class="err">必须包含字母和数字，长度6~15位</td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>确认密码：</td>
-                                                <td><input class="text" type="password" name="pwd2" value="" required/>
-                                                </td>
-                                                <td class="err">两次密码必须一致</td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
                                                 <td width="10%">身份证号：</td>
                                                 <td width="20%"><input class="text" type="text" name="idnum" value=""
                                                                        required/></td>
@@ -120,16 +104,16 @@
                                                 <td width="2%">&nbsp;</td>
                                                 <td>性别</td>
                                                 <td>
-                                                    <c:forEach items="${genders}" var="mt">
-                                                        <c:if test="${mt.id==1}">
-                                                            <input type="radio" name="gender" value="${mt.id}"
-                                                                   checked/> ${mt.name}男&nbsp;&nbsp;
-                                                            <input type="hidden" value="${mt.recharge}"/>
+                                                    <c:forEach items="gender" var="mt">
+                                                        <c:if test="0">
+                                                            <input type="radio" name="gender" value="0"
+                                                                   checked/> 其他&nbsp;&nbsp;
                                                         </c:if>
-                                                        <c:if test="${mt.id!=1}">
-                                                            <input type="radio" name="gender"
-                                                                   value="${mt.id}"/> ${mt.name}女&nbsp;&nbsp;
-                                                            <input type="hidden" value="${mt.recharge}"/>
+                                                        <c:if test="1">
+                                                            <input type="radio" name="gender" value="1"/> 女&nbsp;&nbsp;
+                                                        </c:if>
+                                                        <c:if test="2">
+                                                            <input type="radio" name="gender" value="2"/> 男
                                                         </c:if>
                                                     </c:forEach>
                                                 </td>
