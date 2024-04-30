@@ -53,3 +53,75 @@
 
 main存放正确的代码,一个latest存放最新的,一个alter依然是的main代码作为main的备用方案,修改latest后更新readme,其他人在修改代码之前先看看在自己修改代码后有没有人提交代码同步一下
 
+## todo
+
+代码构成主要的代码都在web与src文件夹下
+
+### src
+
+#### action:
+表单的处理,也就是与前端最近的部分,里面所有的req.getParameter
+(getParameter() 方法是 javax.servlet.ServletRequest 接口的一部分，常用于从 HTTP 请求（如 GET 或 POST）中提取参数)都是从前端获取信息
+setAttribute
+(这个函数接受两个参数：
+name：这是我们要设置的属性的名称，数据类型是String。
+value: 这是我们要设置的值，它的数据类型是Object。
+它没有返回值，它的任务就是将值存储在指定的属性名中。
+例如，我们可以在session中设置一个用户属性的值：
+session.setAttribute("user", user);
+在这里，"user"是属性的名称，user则是我们要存储的User对象。
+后面，我们可以使用getAttribute()方法来获取存储的对象。)
+是往前端发送信息(可以这么理解)
+
+#### bean
+
+具体的类的定义,打开看一下就明白了
+
+#### biz
+
+中间实现代码实现把具体的数据库操作组成方法向servlet中提供
+
+#### dao
+
+与数据库的交互具体细节实现(里面写了具体的sql)
+
+#### filter
+
+过滤一些不合法的访问
+
+#### listener
+
+暂时用不到,之前是为了把movie与member的type提取出来做一个下拉框或选择框做的
+
+#### util
+
+support
+
+#### web:
+
+还是那句话见名知意
+_add就是注册或者添加新成员的界面
+_list是从数据库中读出所有数据属于管理员能看的界面
+_details是详细信息显示下面一般跟一个修改或确认按钮
+_modify是修改个人信息的界面
+_beta不用管这是当时为了区分管理员与非管理员设定的,现在我们直接写新的就行
+
+然后主要是前后端一起写,确实有点慢,而且我觉得你们也大概看懂了代码,
+
+具体的参数取servlet里找
+比如comp_add，就是compservlet的add方法下的这些值，要在html里体现
+![XQPVAOJ68HWZ)YC@L`%4K)S_tmb](https://github.com/SpShi/Software-Course-Project-sducs2024/assets/162112744/69838775-6cfe-4570-8c94-b5593a7cbc83)
+
+
+### 现在需要完成的前端
+user_details.jsp
+elite_modify.jsp
+elite_details.jsp
+comp_add.jsp
+comp_modify.jsp
+comp_details.jsp
+jobs_add.jsp
+jobs_details.jsp
+jobs_remove.jsp
+jobs_modify.jsp
+
