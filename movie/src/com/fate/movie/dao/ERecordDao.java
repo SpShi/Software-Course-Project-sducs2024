@@ -24,7 +24,7 @@ public class ERecordDao {
      * @return
      * @throws SQLException
      */
-    public List<ERecord> getRecordByEliteId(long eliteId) throws SQLException {
+    public List<ERecord> getRecordsByEliteId(long eliteId) throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql ="select * from e2c_record where eliteid= ?";
         List<ERecord> records = runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),eliteId);
@@ -89,11 +89,7 @@ public class ERecordDao {
     }
 
     /**
-     * 全部:0
-     *     已归还:1
-     *    未归还 :2
-     *    最近一周需归还:3
-     * @param typeId
+     *
      * @param keyWork
      * @return
      * @throws SQLException
@@ -101,37 +97,15 @@ public class ERecordDao {
 
     public  List<Map<String,Object>>  query( String keyWork) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        StringBuilder sb = new StringBuilder("select * from recordView where 1=1 ");
+        StringBuilder sb = new StringBuilder("select * from erecordview where 1=1 ");
         if(keyWork!=null){
-            sb.append(" and movieName like '%"+keyWork+"%' or memberName like '%"+keyWork+"%' or   concat(buyDate,'') like '%"+keyWork+"%'");
+            sb.append(" and message like '%"+keyWork+"%' or memberName like '%"+keyWork+"%' or   concat(buyDate,'') like '%"+keyWork+"%'");
         }
         List<Map<String,Object>> data =runner.query(conn,sb.toString(),new MapListHandler());
         DBHelper.close(conn);
         return data;
     }
-    public  List<Map<String,Object>>  query_beta(String name,int typeId,String keyWork) throws SQLException {
-        Connection conn = DBHelper.getConnection();
-        StringBuilder sb = new StringBuilder("select * from recordView where memberName=? and 1=1 ");
-        switch (typeId){
-            case 0:
-                break;
-            case 1:
-                sb.append("and  backDate is not null ");
-                break;
-            case 2:
-                sb.append("and  backDate is  null ");
-                break;
-            case 3:
-                sb.append("and  backDate is null and  returnDate < date_add(CURRENT_DATE,interval 1 DAY) ");
-                break;
-        }
-        if(keyWork!=null){
-            sb.append(" and movieName like '%"+keyWork+"%' or memberName like '%"+keyWork+"%' or   concat(buyDate,'') like '%"+keyWork+"%'");
-        }
-        List<Map<String,Object>> data =runner.query(conn,sb.toString(),new MapListHandler(),name);
-        DBHelper.close(conn);
-        return data;
-    }
+
     public static void main(String[] args) {
         try {
             List<Map<String,Object>> records = new RecordDao().query(0,null);

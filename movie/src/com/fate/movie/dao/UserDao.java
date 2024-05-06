@@ -90,9 +90,10 @@ public class UserDao {
     public long getidBysp() throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql="select `name` from sp where id=1";
-        long num = runner.query(conn,sql,new ScalarHandler<>());
+        int num = runner.query(conn,sql,new ScalarHandler<>());
+        long longNum =  num;
         DBHelper.close(conn);
-        return num;
+        return longNum;
     }
     public int modifyspname(long id,long name) throws SQLException {
         String sql="update sp set name = ? where id=?";

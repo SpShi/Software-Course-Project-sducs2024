@@ -122,12 +122,12 @@ public class UserServlet extends HttpServlet {
                 break;
             case "add":
                 String pwda =  req.getParameter("pwd");
-                long typea=Long.parseLong(req.getParameter("type"));
+                long typea=Long.parseLong(req.getParameter("user_type"));
                 long idtmp=userBiz.getidBysp();
                 userBiz.modifysp(1,idtmp+1);
                 int count = userBiz.add(idtmp,pwda,typea);
                 if(count>0){
-                    out.println("<script>alert('用户注册成功,请牢记您的ID后重新登录'); location.href='user.let?type=query';</script>");
+                    out.println("<script>alert('用户注册成功,请牢记您的ID:"+idtmp+"后重新登录'); location.href='user.let?type=query';</script>");
                 }else{
                     userBiz.modifysp(1,idtmp-1);
                     out.println("<script>alert('用户注册失败'); location.href='user.let?type=query';</script>");

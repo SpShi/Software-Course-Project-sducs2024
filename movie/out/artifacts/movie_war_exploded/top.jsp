@@ -37,7 +37,7 @@
 .top{
     width:100%; 
     height:64px;
-    background-color:  #409EFF;
+    background-color: #409EFF;
     /* color: #409EFF; */
 }
 .usr{
@@ -68,7 +68,7 @@
 }
 .outbox:hover{
   opacity: 0.2;
-  background-color:#007dfa;
+  background-color:#6b6c6d;
   /* color: black; */
 }
 

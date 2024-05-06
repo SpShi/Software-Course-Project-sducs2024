@@ -36,23 +36,30 @@
 </head>
 
 <body>
-    <table width="100%" height="200" border="0" cellpadding="0" cellspacing="0" >
+    <table width="100%" height="200" border="0" cellpadding="0" cellspacing="0" class="le">
         <tr>
             <td width="182" valign="top">
                 <div id="container">
+ <!-- *********** -->
+                    <h1 class="type"><a href="javascript:void(0)">个人中心</a></h1>
+                    <div class="content">
+                        <ul class="RM">
+                            <li><a href="./set_pwd.jsp" target="main">修改密码</a></li>
+                            <li><a href="./user_list.jsp" target="main">账号信息</a></li>
+                            <li><a href="./" target="main">个人简历</a></li>
+                        </ul>
+                    </div>
+<!-- *********** -->
                     <h1 class="type"><a href="javascript:void(0)">用户管理</a></h1>
                     <div class="content">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td><img src="./Images/menu_top_line.gif" width="182" height="5" /></td>
-                            </tr>
-                        </table>
+                      
                         <ul class="RM">
-                            <li><a href="./member.let?type=addpre" target="main">用户注册</a></li>
+                            <!-- <li><a href="./member.let?type=addpre" target="main">用户注册</a></li> -->
                             <li><a href="./member.let?type=query" target="main">用户管理</a></li>
                             <li><a href="./mem_recharge.jsp" target="main">用户充值</a></li>
                         </ul>
                     </div>
+<!-- *********** -->
                     <h1 class="type"><a href="javascript:void(0)"> 电影管理</a></h1>
                     <div class="content">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -65,59 +72,36 @@
                             <li><a href="./movie.let?type=query&pageIndex=1" target="main"> 电影列表</a></li>
                         </ul>
                     </div>
+<!-- *********** -->
                     <h1 class="type"><a href="javascript:void(0)"> 影厅管理</a></h1>
                     <div class="content">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td><img src="./Images/menu_top_line.gif" width="182" height="5" /></td>
-                            </tr>
-                        </table>
+                
                         <ul class="RM">
                             <li><a href="./chamber_add.jsp" target="main">添加影厅</a></li>
                             <li><a href="./chamber.let?type=query&pageIndex=1" target="main"> 影厅列表</a></li>
                         </ul>
                     </div>
+<!-- *********** -->
                     <h1 class="type"><a href="javascript:void(0)"> 电影类型管理</a></h1>
                     <div class="content">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td><img src="./Images/menu_top_line.gif" width="182" height="5" /></td>
-                            </tr>
-                        </table>
+                       
                         <ul class="RM">
                             <li><a href="type_add.jsp" target="main">添加类型</a></li>
                             <li><a href="type_list.jsp" target="main">类型列表</a></li>
                         </ul>
                     </div>
+                    <!-- *********** -->
                     <h1 class="type"><a href="javascript:void(0)">常用操作</a></h1>
                     <div class="content">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td><img src="./Images/menu_top_line.gif" width="182" height="5" /></td>
-                            </tr>
-                        </table>
+
                         <ul class="RM">
                             <li><a href="./movie_rent.jsp" target="main"> 电影购票</a></li>
                             <li><a href="./return_list.jsp" target="main"> 退票</a></li>
                             <li><a href="./rent_list.jsp" target="main">查看购票历史信息</a></li>
                         </ul>
                     </div>
-                    <!-- *********** -->
-                    <h1 class="type"><a href="javascript:void(0)">个人中心</a></h1>
-                    <div class="content">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td><img src="./Images/menu_top_line.gif" width="182" height="5" /></td>
-                            </tr>
-                        </table>
-                        <ul class="RM">
-                            <li><a href="./set_pwd.jsp" target="main">修改密码</a></li>
-                        
-                        </ul>
-                    </div>
-                   
-                    <!-- *********** -->
-                   
+
+                    <!-- *********** --
                     <div class="content">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
@@ -139,3 +123,36 @@
     </table>
 </body>
 </html>
+<style>
+.le{
+    background-color: rgb(255, 255, 255);
+}
+.type{
+margin-top: 15px;
+margin-bottom: 15px;
+font-weight:normal;
+}
+.content{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    width:210px;
+    height:30px;
+    background-color: #ececec;
+}
+.content{width:182px;height:26px;}
+.RM ul {list-style-type:none;display:block; margin-top: 15px;
+margin-bottom: 15px;}
+.RM li {
+    line-height:26px;
+    color:#333333;
+    height:30px;
+    width:200px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+.RM {width:182px;left:0px;top:0px;clip:rect(0px,0px,0px,0px);}
+.RM a:link,.RM a:visited {line-height:26px;color:#333333;background:url(../images/menu_bg1.gif) no-repeat;height:26px;width:182px;display:block;text-align:center;overflow:hidden;}
+.RM a:hover {font-weight:bold;color:#409EFF; }
+
+</style>

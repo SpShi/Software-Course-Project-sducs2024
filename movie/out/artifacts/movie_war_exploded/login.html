@@ -25,29 +25,26 @@
 <img class="body"></img>
     <div class="login">
     <form id="fmLogin" method="post" action="member.let?type=login" >
-       
             <table valign="top" width="90%" style="margin-left: 15px">
                 <h4 style="letter-spacing:1px;font-size:23px;margin: 20px 10px; color: rgb(119, 118, 118);">登录</h4>
                 <tr class="lab"><td>账&nbsp;&nbsp;&nbsp;&nbsp;号：</td>
-                    <td><input class="input" placeholder="请输入账号" type="text" name="name" value=""/></td></tr>
+                    <td><input class="input" placeholder="请输入账号" type="text" name="name" value="super"/></td></tr>
                 <tr class="lab"><td>密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
-                    <td><input class="input" placeholder="请输入密码" type="password" name="pwd" value="" /></td></tr>
+                    <td><input class="input" placeholder="请输入密码" type="password" name="pwd" value="123" /></td></tr>
             </table>
             <div style="margin-top: 70px; background-color: #e0e8ef;">
                 <td><input class="btlg" type="submit" value="登录" /></td>
                 <td><input class="btre" type="reset" value="重填" /></td>
             </div>
+<!--        ///有bug 要先登录才能注册-->
             <div class="regis">
-                没有账号?&nbsp;&nbsp;<a style="color: #409EFF;" href="./user.let?type=addpre">注册</a>
+                没有账号?&nbsp;&nbsp;<a style="color: #409EFF;" href="./user.let?type=addpre" >注册</a>
             </div>
         </form>
     </div>
-
-
-
 </body>
 <style>
-    .body{
+  .body{
         background: url("./Images/movie.jpeg");
         background-repeat: no-repeat;
         background-size: 100% 100%;
@@ -59,7 +56,7 @@
         
 
     }
-    .login{
+.login{
         float: right;
         width: 300px;
         height:400px;
@@ -110,11 +107,8 @@
         margin-top: 70px;
         margin-left: 32%;
         font-size: 13px;
-      /*<tr><td>验证码：</td><td style="position: relative;"><input type="text" name="valcode"
-      value="" style="width:60px;"/>&nbsp;<img id="code" src="code.let" title="点我换一张"
-      style="position: absolute; top:2px;" /></td></tr>*/
+      
     }
-
 
 </style>
 

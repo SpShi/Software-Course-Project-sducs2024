@@ -135,6 +135,30 @@ public class EliteDao {
     }
 
     /**
+     *
+     * @param agel
+     * @param ageh
+     * @param gender
+     * @param degrees
+     * @param salary
+     * @param key
+     * @param desc
+     * @return
+     * @throws SQLException
+     */
+    public List<Elite> getAllwithLimit(int agel, int ageh, int gender, int degrees,
+                                      int salary, String key, boolean desc) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        String sql="select * from  jobs ";
+        sql=sql+ "where age>=? AND age<=? AND gender=? AND degrees>? AND salary <=? ORDER BY salary ";
+        if(key!="") sql+="and intro like '%"+key+"%'";
+        if(desc) sql=sql+"desc";
+        sql+="ORDER BY salary ";
+        List<Elite> jobs = runner.query(conn,sql,new BeanListHandler<Elite>(Elite.class),agel,ageh,gender,degrees,salary);
+        DBHelper.close(conn);
+        return  jobs;
+    }
+    /**
      * 根据人才编号查人才信息
      * @param id
      * @return
