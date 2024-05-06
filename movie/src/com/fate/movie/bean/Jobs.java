@@ -11,6 +11,7 @@ public class Jobs {
     private String certificates;
     private int salary;
     private String email;
+    private String intro;
 
     public long getId() {
         return id;
@@ -86,9 +87,17 @@ public class Jobs {
         this.email = email;
     }
 
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
     @Override
     public String toString() {
-        return "Member{" +
+        return "Job{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", place='" + place +
@@ -99,6 +108,7 @@ public class Jobs {
                 ", certificates='" + certificates + '\'' +
                 ", salary='" + salary +
                 ", email='" + email + '\'' +
+                ", introduction='" + intro + '\'' +
                 '}';
     }
 }

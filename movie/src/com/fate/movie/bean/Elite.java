@@ -148,7 +148,7 @@ public class Elite {
 
     @Override
     public String toString() {
-        return "Member{" +
+        return "Elite{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", idNumber='" + idNumber + '\'' +

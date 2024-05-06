@@ -49,7 +49,7 @@ public class Minfo implements Serializable {
 
     @Override
     public String toString() {
-        return "Movie{" +
+        return "Minfo{" +
                 "id=" + id +
                 ", mname='" + mname + '\'' +
                 ", desc='" + desc + '\'' +

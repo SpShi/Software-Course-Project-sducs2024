@@ -68,7 +68,7 @@ public class Comp {
 
     @Override
     public String toString() {
-        return "Member{" +
+        return "Comp{" +
                 "id=" + id +
                 ", license='" + license + '\'' +
                 ", idnumber='" + idnumber + '\'' +
