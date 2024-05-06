@@ -96,10 +96,10 @@ public class MemberServlet extends HttpServlet {
                 }
                 break;
             case "addpre":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
-                    return;
-                }
+//                if(session.getAttribute("user")==null){
+//                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+//                    return;
+//                }
                 //获取所有的会员类型
                 List<MemberType> memberTypes = memberTypeBiz.getAll();
                 //存request
@@ -107,20 +107,20 @@ public class MemberServlet extends HttpServlet {
                 //转发
                 HttpSession session1 = req.getSession();
                 Long state=(Long) session1.getAttribute("state");
-                if(state==0){
-                    req.getRequestDispatcher("mem_add_beta.jsp").forward(req,resp);
-                }
-                else
-                {
+//                if(state==0){
+//                    req.getRequestDispatcher("mem_add_beta.jsp").forward(req,resp);
+//                }
+//                else
+//                {
                     req.getRequestDispatcher("mem_add.jsp").forward(req,resp);
-                }
+//                }
 
                 break;
             case "add":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
-                    return;
-                }
+//                if(session.getAttribute("user")==null){
+//                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+//                    return;
+//                }
                 String name =  req.getParameter("name");
                 String pwd =  req.getParameter("pwd");
                 long memberTypeId =  Long.parseLong(req.getParameter("memberType"));

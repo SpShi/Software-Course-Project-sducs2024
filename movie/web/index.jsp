@@ -23,7 +23,7 @@
   <!--主体部分-->
   <frameset cols="185,*">
     <!--主体左部分-->
-    <frame src="./left.jsp" name="left" noresize="noresize" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" />
+    <frame src="./left.jsp" name="left" noresize="noresize" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" background-color="#ffffff" />
     <!--主体右部分-->
     <frame src="./main.jsp" name="main" frameborder="0" scrolling="auto" marginwidth="0" marginheight="0" />
   </frameset>
