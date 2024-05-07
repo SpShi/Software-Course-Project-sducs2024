@@ -29,16 +29,18 @@ public class UserBiz {
         }
         return count;
     }
+
+    /**
+     * 删除前保证没有子信息
+     * @param id
+     * @return
+     * @throws Exception
+     */
     public int remove(long id) throws Exception {
-        //1.判断会员账号余额 >0 :提示不能删除
-        User user = getById(id);
-//        if(member.getBalance()>0){
-//            throw new Exception("此会员消费金额大于0,删除失败");
-//        }
-//        //2.有外键不能删除
-//        if(memberDao.exits(id)){
-//            throw new Exception("此会员有子信息,删除失败");
-//        }
+
+        if(userDao.exits_e(id)){
+            throw new Exception("此会员有子信息,删除失败");
+        }
         //3.删除
         int count =0;
         try {
@@ -87,6 +89,13 @@ public class UserBiz {
         }
         return count;
     }
+
+    /**
+     * 密码账号判定
+     * @param id
+     * @param pwd
+     * @return
+     */
     public User getUser(long id, String pwd){
         User  user = null;
         try {

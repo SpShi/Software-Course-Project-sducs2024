@@ -2,6 +2,12 @@ package com.fate.movie.bean;
 
 import java.util.Date;
 
+/**
+ * 书的实体类:注意外键
+ * 1.DBUtil无法生成表以外的数据
+ * 2.外键的实体对象没有数据，需要后期手动添加biz(业务去实现)
+ */
+
 public class ERecord {
     private int id;
     private long eliteid;

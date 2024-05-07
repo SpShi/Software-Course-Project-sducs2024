@@ -5,6 +5,7 @@ import com.fate.movie.util.DBHelper;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ public class AdminDao {
     QueryRunner runner = new QueryRunner();
 
     /**
+     * 添加管理员
      * @param id
      * @param name
      * @param tel
@@ -29,6 +31,7 @@ public class AdminDao {
     }
 
     /**
+     * 修改管理员信息
      * @param id
      * @param name
      * @param tel
@@ -45,7 +48,7 @@ public class AdminDao {
     }
 
     /**
-     * 删除某位人才,回收利用该会员的id(待实现)
+     * 删除某位管理员,回收利用该会员的id(待实现)
      *
      * @param id
      * @return
@@ -76,7 +79,7 @@ public class AdminDao {
     }
 
     /**
-     * 根据人才编号查人才信息
+     * 根据管理员编号查管理员信息
      *
      * @param id
      * @return
@@ -92,6 +95,13 @@ public class AdminDao {
         return admin;
     }
 
+    public boolean exits(long id) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        String sql="select count(id) from admin where id = ?";
+        Number number= runner.query(conn,sql,new ScalarHandler<>(),id);
+        DBHelper.close(conn);
+        return number.intValue()>0?true:false;
+    }
 
     public static void main(String[] args) {
         AdminDao adminDao = new AdminDao();

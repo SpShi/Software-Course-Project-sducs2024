@@ -31,15 +31,7 @@ public class AdminBiz {
         return count;
     }
     public int remove(long id) throws Exception {
-        //1.判断会员账号余额 >0 :提示不能删除
         Admin admin = getById(id);
-//        if(member.getBalance()>0){
-//            throw new Exception("此会员消费金额大于0,删除失败");
-//        }
-//        //2.有外键不能删除
-//        if(memberDao.exits(id)){
-//            throw new Exception("此会员有子信息,删除失败");
-//        }
         //3.删除
         int count =0;
         try {
@@ -79,6 +71,11 @@ public class AdminBiz {
         return str.substring(a,b);
     }
 
+    /**
+     * 判断电话号码是否合法
+     * @param tele
+     * @return
+     */
     public static boolean checktel(String tele) {
         try {
             if (tele.length() != 11) {

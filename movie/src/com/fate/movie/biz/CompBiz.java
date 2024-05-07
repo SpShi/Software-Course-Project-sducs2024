@@ -29,9 +29,17 @@ public class CompBiz {
         }
         return count;
     }
+
+    /**
+     * 删除公司时要注意先删除公司发布的岗位
+     * @param id
+     * @return
+     * @throws Exception
+     */
     public int remove(long id) throws Exception {
-        //1.判断会员账号余额 >0 :提示不能删除
-        Comp comp =getById(id);
+        if(compDao.exits_e(id)){
+            throw new Exception("此会员有子信息,删除失败");
+        }
         //3.删除
         int count =0;
         try {
@@ -54,9 +62,8 @@ public class CompBiz {
         return enterprises;
 
     }
-    public int modifystate(long id,long change){
-        int count = 0;
-        long state=change;
+    public int modifystate(long id,long state){
+        int count=0;
         try {
             count = compDao.modifystate(id,state);
         } catch (SQLException throwables) {

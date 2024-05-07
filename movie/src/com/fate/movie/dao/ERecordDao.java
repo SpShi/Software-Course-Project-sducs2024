@@ -44,6 +44,13 @@ public class ERecordDao {
         return records;
     }
 
+    /**
+     * 查询特定工作的所有简历
+     * @param jobid
+     * @param desc
+     * @return
+     * @throws SQLException
+     */
     public List<ERecord> getRecordsByJobId(long jobid,boolean desc) throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql ="select * from e2c_record where jobid= ? order by senddate";
@@ -64,7 +71,7 @@ public class ERecordDao {
      */
 
     public int add(long eliteid,long jobid, Date sendDate,String comment ) throws SQLException {
-        String sql="insert into e2c_record values(null,?,?,?,null,?,?,?,?,?)";
+        String sql="insert into e2c_record values(?,?,?,?)";
         Connection conn = DBHelper.getConnection();
         int count = runner.update(conn,sql,eliteid,jobid,sendDate,comment);
         DBHelper.close(conn);
@@ -72,7 +79,7 @@ public class ERecordDao {
     }
 
     /**
-     *
+     *重新投递简历
      * @param sendDate
      * @param comment
      * @param eliteid
@@ -89,7 +96,7 @@ public class ERecordDao {
     }
 
     /**
-     *
+     *查询关键词
      * @param keyWork
      * @return
      * @throws SQLException
@@ -99,13 +106,32 @@ public class ERecordDao {
         Connection conn = DBHelper.getConnection();
         StringBuilder sb = new StringBuilder("select * from erecordview where 1=1 ");
         if(keyWork!=null){
-            sb.append(" and message like '%"+keyWork+"%' or memberName like '%"+keyWork+"%' or   concat(buyDate,'') like '%"+keyWork+"%'");
+            sb.append(" and message like '%"+keyWork+"%' or major like '%"+keyWork+"%' or selfevaluation like '%"+keyWork+
+                    "%' or intention like '%"+keyWork+"%' or experience like '%"+keyWork+"%' or certificate like '%"+keyWork+"%' ");
         }
         List<Map<String,Object>> data =runner.query(conn,sb.toString(),new MapListHandler());
         DBHelper.close(conn);
         return data;
     }
 
+    /**
+     * 查询特定人物的关键词
+     * @param name
+     * @param keyWork
+     * @return
+     * @throws SQLException
+     */
+    public  List<Map<String,Object>>  query_beta(String name,String keyWork) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        StringBuilder sb = new StringBuilder("select * from erecordview where name=? ");
+        if(keyWork!=null){
+            sb.append(" and message like '%"+keyWork+"%' or major like '%"+keyWork+"%' or selfevaluation like '%"+keyWork+
+                    "%' or intention like '%"+keyWork+"%' or experience like '%"+keyWork+"%' or certificate like '%"+keyWork+"%' ");
+        }
+        List<Map<String,Object>> data =runner.query(conn,sb.toString(),new MapListHandler(),name);
+        DBHelper.close(conn);
+        return data;
+    }
     public static void main(String[] args) {
         try {
             List<Map<String,Object>> records = new RecordDao().query(0,null);

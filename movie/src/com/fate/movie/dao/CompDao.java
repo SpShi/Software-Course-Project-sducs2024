@@ -6,6 +6,7 @@ import com.fate.movie.util.DBHelper;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ public class CompDao {
     QueryRunner runner = new QueryRunner();
 
     /**
-     * 
+     * 添加公司
      * @param id
      * @param name
      * @param idNumber
@@ -35,7 +36,7 @@ public class CompDao {
     }
 
     /**
-     * 
+     * 修改公司详细信息
      * @param id
      * @param name
      * @param idNumber
@@ -56,7 +57,7 @@ public class CompDao {
     }
 
     /**
-     * 删除某位人才,回收利用该会员的id(待实现)
+     * 删除指定公司,回收利用该会员的id(待实现)
      * @param id
      * @return
      * @throws SQLException
@@ -84,7 +85,7 @@ public class CompDao {
         return  enterprises;
     }
     /**
-     *
+     *修改公司状态
      * @param id
      * @param state
      * @return
@@ -98,7 +99,7 @@ public class CompDao {
         return count;
     }
     /**
-     * 根据人才编号查人才信息
+     * 根据公司编号查公司信息
      * @param id
      * @return
      * @throws SQLException
@@ -115,7 +116,7 @@ public class CompDao {
     }
 
     /**
-     * 根据人才身份证查人才信息
+     * 根据公司注册号查公司信息
      * @paramidNumber
      * @return
      * @throws SQLException
@@ -128,8 +129,27 @@ public class CompDao {
         return comp;
     }
 
+    /**
+     * 判定存在
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    public boolean exits(long id) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        String sql="select count(id) from enterprise where id = ?";
+        Number number= runner.query(conn,sql,new ScalarHandler<>(),id);
+        DBHelper.close(conn);
+        return number.intValue()>0?true:false;
+    }
 
-
+    public boolean exits_e(long id) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        String sql="select count(id) from jobs where place = ?";
+        Number number= runner.query(conn,sql,new ScalarHandler<>(),id);
+        DBHelper.close(conn);
+        return number.intValue()>0?true:false;
+    }
     public static void main(String[] args) {
         CompDao compDao = new CompDao();
     }

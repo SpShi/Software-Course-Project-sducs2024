@@ -5,6 +5,7 @@ import com.fate.movie.util.DBHelper;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -76,7 +77,7 @@ public class EliteDao {
     }
 
     /**
-     *  update 表名 set 列名 = 值 where 列名=值;
+     * 更新年龄信息
      * @param id
      * @param age
      * @return
@@ -91,7 +92,7 @@ public class EliteDao {
     }
 
     /**
-     *
+     *修改帐号状态
      * @param id
      * @param state
      * @return
@@ -135,7 +136,7 @@ public class EliteDao {
     }
 
     /**
-     *
+     *带条件的查询
      * @param agel
      * @param ageh
      * @param gender
@@ -190,7 +191,13 @@ public class EliteDao {
         DBHelper.close(conn);
         return  elite;
     }
-
+    public boolean exits(long id) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        String sql="select count(id) from elite where id = ?";
+        Number number= runner.query(conn,sql,new ScalarHandler<>(),id);
+        DBHelper.close(conn);
+        return number.intValue()>0?true:false;
+    }
 
 
     public static void main(String[] args) {

@@ -43,7 +43,7 @@ public class JobsBiz {
         //1.判断会员账号余额 >0 :提示不能删除
         Jobs jobs = getById(id);
         //2.有外键不能删除
-        if(jobsDao.exits(id)){
+        if(jobsDao.exits_e(id)){
             throw new Exception("此会员有子信息,删除失败");
         }
         //3.删除

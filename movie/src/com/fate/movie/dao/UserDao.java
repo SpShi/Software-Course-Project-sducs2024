@@ -29,6 +29,15 @@ public class UserDao {
         DBHelper.close(conn);
         return count;
     }
+
+    /**
+     * 修改密码
+     * @param id
+     * @param pwd
+     * @param type
+     * @return
+     * @throws SQLException
+     */
     public int modify(long id,String pwd,long type) throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql="update user set  pwd=?,type=? " +
@@ -37,6 +46,13 @@ public class UserDao {
         DBHelper.close(conn);
         return count;
     }
+
+    /**
+     * 注销用户
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public int remove(long id) throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql="delete from user where id=?";
@@ -54,6 +70,13 @@ public class UserDao {
         return  users;
     }
 
+    /**
+     * 登录密码账号判定
+     * @param id
+     * @param pwd
+     * @return
+     * @throws SQLException
+     */
     public User getuser(long id, String pwd) throws SQLException {
         //create poject
         Connection connection= DBHelper.getConnection();
@@ -82,7 +105,7 @@ public class UserDao {
     }
 
     /**
-     * 根据会员身份证查会员信息
+     * 获取账号
      * @paramidNumber
      * @return
      * @throws SQLException
@@ -103,18 +126,33 @@ public class UserDao {
         return count;
     }
 
+    public boolean exits(long id) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        String sql="select count(id) from user where id = ?";
+        Number number= runner.query(conn,sql,new ScalarHandler<>(),id);
+        DBHelper.close(conn);
+        return number.intValue()>0?true:false;
+    }
     /**
      * 判断会员编号是否存在Record中(作为外键 ）
      * @param id
      * @return
      */
-//    public boolean exits(long id) throws SQLException {
-//        Connection conn = DBHelper.getConnection();
-//        String sql="select count(id) from record where memberId = ?";
-//        Number number= runner.query(conn,sql,new ScalarHandler<>(),id);
-//        DBHelper.close(conn);
-//        return number.intValue()>0?true:false;
-//    }
+    public boolean exits_e(long id) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        int res=0;
+        String sql="select count(id) from elite where id = ?";
+        Number number= runner.query(conn,sql,new ScalarHandler<>(),id);
+        res=number.intValue();
+        sql="select count(id) from enterprise where id = ?";
+        number= runner.query(conn,sql,new ScalarHandler<>(),id);
+        res+=number.intValue();
+        sql="select count(id) from admin where id = ?";
+        number= runner.query(conn,sql,new ScalarHandler<>(),id);
+        res+=number.intValue();
+        DBHelper.close(conn);
+        return res>0?true:false;
+    }
 
     public int modifyPwd(long id,String pwd) throws SQLException {
         String sql="update user set pwd = ? where id=?";
