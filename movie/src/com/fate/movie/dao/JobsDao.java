@@ -146,7 +146,9 @@ public class JobsDao {
         if(key!="") sql+="and intro like '%"+key+"%'";
         if(desc) sql=sql+"desc";
         sql+="ORDER BY salary ";
-        List<Jobs> jobs = runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),place,agel,ageh,gender,degrees,salary);
+        List<Jobs> jobs ;
+        if(place==0) jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),agel,ageh,gender,degrees,salary);
+        else jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),place,agel,ageh,gender,degrees,salary);
         DBHelper.close(conn);
         return  jobs;
     }

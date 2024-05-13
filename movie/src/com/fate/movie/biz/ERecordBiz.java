@@ -17,10 +17,10 @@ public class ERecordBiz {
     EliteBiz eliteBiz = new EliteBiz();
     JobsDao jobsDao = new JobsDao();
     JobsBiz jobsBiz = new JobsBiz();
-    public List<ERecord> getRecordsByEliteId(long eliteid){
+    public List<ERecord> getRecordsByEliteId(long eliteid,int state){
         List<ERecord> records = null;
         try {
-            records=eRecordDao.getRecordsByEliteId(eliteid);
+            records=eRecordDao.getRecordsByEliteId(eliteid,state);
             Elite elite = eliteBiz.getById(eliteid);
             for(ERecord record:records){
                 long jobId = record.getJobid();
@@ -33,10 +33,10 @@ public class ERecordBiz {
         }
         return records;
     }
-    public List<ERecord> getRecordsByJobId(long jobId,boolean desc){
+    public List<ERecord> getRecordsByJobId(long jobId,boolean desc,int state){
         List<ERecord> records = null;
         try {
-            records=eRecordDao.getRecordsByJobId(jobId,desc);
+            records=eRecordDao.getRecordsByJobId(jobId,desc,state);
             //1.外键信息
             //1.1 获取会员对象
             // Jobs jobs = jobsDao.getById(jobsId);//拿不到外键对象
@@ -104,38 +104,21 @@ public class ERecordBiz {
     }
 
     /**
-     * 归还功能
-     * 开启事务
-     * 1.eRecordDao modify: 押金，归还日期，操作员的编号
-     * 2.jobsDao modify: 余额
-     * 3.电影信息表  modify :数量
-     * 成功：提交
-     * 失败:回滚
+     * 回复简历
      * @param eliteid
-     * @param jobsidList
+     * @param jobid
      * @param comment
+     * @param state
      * @return
      */
-    public int  modify(long eliteid,List<Long> jobsidList,String comment) {
+    public int  modify(long eliteid,long jobid,String comment,int state) {
         //1.开启事务
         try {
             //1.启动事务
             DBHelper.beginTransaction();
-            double total = 0;
-            Elite elite=eliteBiz.getById(eliteid);
-            //2.拿到投简历的工作编号
-            for(long jobsid: jobsidList){
-                //电影编号
+            java.util.Date currentDate = new java.util.Date();
+            eRecordDao.modify(currentDate,comment,state,eliteid,jobid);
 
-                //电影对象
-                Jobs jobs = jobsBiz.getById(jobsid);
-                //调用价格
-                //算押金
-                //调用recordDao-->insert
-                java.util.Date currentDate = new java.util.Date();
-                eRecordDao.modify(currentDate,comment,eliteid,jobsid);
-
-            }
             //.事务结束:
             DBHelper.commitTransaction();//事务提交:成功
         } catch (SQLException throwables) {
@@ -166,30 +149,30 @@ public class ERecordBiz {
      * @param keyword
      * @return
      */
-    public List<Map<String,Object>> query( String keyword){
+    public List<Map<String,Object>> query( String keyword,int state){
         List<Map<String,Object>> rows = null;
         try {
-            rows = eRecordDao.query(keyword);
+            rows = eRecordDao.query(keyword,state);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return rows;
 
     }
-    public List<Map<String,Object>> query_0(long id,String keyword){
+    public List<Map<String,Object>> query_0(long id,String keyword,int state){
         List<Map<String,Object>> rows = null;
         try {
-            rows = eRecordDao.query_0(id,keyword);
+            rows = eRecordDao.query_0(id,keyword,state);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return rows;
 
     }
-    public List<Map<String,Object>> query_1(long id,String keyword){
+    public List<Map<String,Object>> query_1(long id,String keyword,int state){
         List<Map<String,Object>> rows = null;
         try {
-            rows = eRecordDao.query_1(id,keyword);
+            rows = eRecordDao.query_1(id,keyword,state);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

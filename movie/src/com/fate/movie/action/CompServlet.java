@@ -64,7 +64,7 @@ public class CompServlet extends HttpServlet{
                 //暂时去掉提高效率(1717)
 
 //                if(!code.equalsIgnoreCase(valCode)){
-//                    out.println("<script>alert('验证码输入错误');location.href = 'login.html';</script>");
+//                    out.println("<script>alert('验证码输入错误');location.href = 'login_new.html';</script>");
 //                    return;
 //                }
 
@@ -75,16 +75,16 @@ public class CompServlet extends HttpServlet{
                 // 4.判断企业对象是否为null: 
                 if(usernow==null){
                     //  4.1 如果是null表示企业名或密码不正确 ，提示错误，回到登录页面. 
-                    out.println("<script>alert('企业名或密码不存在');location.href = 'login.html';</script>");
+                    out.println("<script>alert('企业名或密码不存在');location.href = 'login_new.html';</script>");
                 }else {
                     //  4.2 非空：表示登录成功, 将企业对象保存到session中,提示登录成功后,将页面跳转到index.jsp
-                    session.setAttribute("user",usernow);//user-->Object
+                    session.setAttribute("user_now",usernow);//user-->Object
                     session.setAttribute("user_type",usernow.getType());
                     if(usernow.getType()==1)
                     {
                         out.println("<script>alert('登录成功');location.href='index_comp.jsp';</script>");
                     }
-                    else out.println("<script>alert('未知企业类型');location.href = 'login.html';</script>");
+                    else out.println("<script>alert('未知企业类型');location.href = 'login_new.html';</script>");
                 }
                 break;
             case "addpre":
@@ -123,8 +123,8 @@ public class CompServlet extends HttpServlet{
 
                 break;
             case "modifypre":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 //类型&会员的信息
@@ -140,8 +140,8 @@ public class CompServlet extends HttpServlet{
                 }
                 break;
             case "modify":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 String namem =  req.getParameter("name");
@@ -171,8 +171,8 @@ public class CompServlet extends HttpServlet{
 
                 break;
             case "remove":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 long memId = Long.parseLong(req.getParameter("id"));
@@ -189,8 +189,8 @@ public class CompServlet extends HttpServlet{
                 }
                 break;
             case "query":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 List<Comp> compList = compBiz.getAll();
@@ -202,33 +202,33 @@ public class CompServlet extends HttpServlet{
                 }
                 break;
             case "exit":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 //1.清除session
                 session.invalidate();
                 //2.跳转到login.html(框架中需要回去)  top.jsp->parent->index.jsp
-                out.println("<script>alert('Success');parent.window.location.href='login.html';</script>");
+                out.println("<script>alert('Success');parent.window.location.href='login_new.html';</script>");
                 break;
             case "modifyPwd":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 //修改密码
                 //1.获取企业输入的新的密码
                 String newPwd = req.getParameter("newpwd");
                 //2.获取企业的编号-session
-                long idmp = ((User)session.getAttribute("user")).getId();
+                long idmp = ((User)session.getAttribute("user_now")).getId();
 
                 //3.调用biz层方法
                 int countz = userBiz.modifyPwd(idmp,newPwd);
                 //4.响应-参考exit
                 if(countz>0){
-                    out.println("<script>alert('密码修改成功');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('密码修改成功');parent.window.location.href='login_new.html';</script>");
                 }else{
-                    out.println("<script>alert('密码修改失败');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('密码修改失败');parent.window.location.href='login_new.html';</script>");
                 }
                 break;
             default:

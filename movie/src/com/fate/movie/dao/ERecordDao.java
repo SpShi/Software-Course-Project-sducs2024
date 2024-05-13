@@ -25,10 +25,15 @@ public class ERecordDao {
      * @return
      * @throws SQLException
      */
-    public List<ERecord> getRecordsByEliteId(long eliteId) throws SQLException {
+    public List<ERecord> getRecordsByEliteId(long eliteId,int state) throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql ="select * from e2c_record where eliteid= ?";
-        List<ERecord> records = runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),eliteId);
+        List<ERecord> records;
+        if(state <2) {
+            sql+=" and state=?";
+            records= runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),eliteId,state);
+        }
+        else records= runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),eliteId);
         DBHelper.close(conn);
         return records;
     }
@@ -52,11 +57,21 @@ public class ERecordDao {
      * @return
      * @throws SQLException
      */
-    public List<ERecord> getRecordsByJobId(long jobid,boolean desc) throws SQLException {
+    public List<ERecord> getRecordsByJobId(long jobid,boolean desc,int state) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql ="select * from e2c_record where jobid= ? order by senddate";
-        if(desc) sql=sql+" desc";
-        List<ERecord> records = runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),jobid);
+        String sql ="select * from e2c_record where jobid= ? ";
+
+        List<ERecord> records;
+        if(state <2) {
+            sql+=" and state=? order by senddate";
+            if(desc) sql=sql+" desc";
+            records= runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),jobid,state);
+        }
+        else {
+            sql+="order by senddate";
+            if(desc) sql=sql+" desc";
+            records= runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),jobid);
+        }
         DBHelper.close(conn);
         return records;
     }
@@ -71,8 +86,8 @@ public class ERecordDao {
      * @throws SQLException
      */
 
-    public int add(long eliteid,long jobid, Date sendDate,String comment ) throws SQLException {
-        String sql="insert into e2c_record values(?,?,?,?)";
+    public int add(long eliteid,long jobid, Date sendDate,String comment) throws SQLException {
+        String sql="insert into e2c_record values(?,?,?,?,0)";
         Connection conn = DBHelper.getConnection();
         int count = runner.update(conn,sql,eliteid,jobid,sendDate,comment);
         DBHelper.close(conn);
@@ -88,10 +103,10 @@ public class ERecordDao {
      * @return
      * @throws SQLException
      */
-    public  int modify(Date sendDate,String comment,long eliteid,long jobid) throws SQLException {
-        String sql = "update  e2c_record set senddate =?,comment = ? where eliteid=? and jobid= ?";
+    public  int modify(Date sendDate,String comment,int state,long eliteid,long jobid) throws SQLException {
+        String sql = "update  e2c_record set backdate =?,comment = ?,state=? where eliteid=? and jobid= ?";
         Connection conn = DBHelper.getConnection();
-        int count = runner.update(conn,sql,sendDate,comment,eliteid,jobid);
+        int count = runner.update(conn,sql,sendDate,comment,state,eliteid,jobid);
         DBHelper.close(conn);
         return count;
     }
@@ -116,14 +131,17 @@ public class ERecordDao {
      * @throws SQLException
      */
 
-    public  List<Map<String,Object>>  query( String keyWork) throws SQLException {
+    public  List<Map<String,Object>>  query( String keyWork,int state) throws SQLException {
         Connection conn = DBHelper.getConnection();
         StringBuilder sb = new StringBuilder("select * from erecordview where 1=1 ");
+        if(state <2) sb.append(" and state=?");
         if(keyWork!=null){
             sb.append(" and message like '%"+keyWork+"%' or major like '%"+keyWork+"%' or selfevaluation like '%"+keyWork+
                     "%' or intention like '%"+keyWork+"%' or experience like '%"+keyWork+"%' or certificate like '%"+keyWork+"%' ");
         }
-        List<Map<String,Object>> data =runner.query(conn,sb.toString(),new MapListHandler());
+        List<Map<String,Object>> data;
+        if(state <2)  data=runner.query(conn,sb.toString(),new MapListHandler(),state);
+        else data =runner.query(conn,sb.toString(),new MapListHandler());
         DBHelper.close(conn);
         return data;
     }
@@ -135,25 +153,38 @@ public class ERecordDao {
      * @return
      * @throws SQLException
      */
-    public  List<Map<String,Object>>  query_0(long id,String keyWork) throws SQLException {
+    public  List<Map<String,Object>>  query_0(long id,String keyWork,int state) throws SQLException {
         Connection conn = DBHelper.getConnection();
         StringBuilder sb = new StringBuilder("select * from erecordview where eliteid=? ");
+
         if(keyWork!=null){
             sb.append(" and message like '%"+keyWork+"%' or major like '%"+keyWork+"%' or selfevaluation like '%"+keyWork+
                     "%' or intention like '%"+keyWork+"%' or experience like '%"+keyWork+"%' or certificate like '%"+keyWork+"%' ");
         }
-        List<Map<String,Object>> data =runner.query(conn,sb.toString(),new MapListHandler(),id);
+        List<Map<String,Object>> data;
+        if(state <2) {
+            sb.append(" and state=?");
+            data=runner.query(conn,sb.toString(),new MapListHandler(),id,state);
+        }
+        else data=runner.query(conn,sb.toString(),new MapListHandler(),id);
         DBHelper.close(conn);
         return data;
     }
-    public  List<Map<String,Object>>  query_1(long id,String keyWork) throws SQLException {
+    public  List<Map<String,Object>>  query_1(long id,String keyWork,int state) throws SQLException {
         Connection conn = DBHelper.getConnection();
         StringBuilder sb = new StringBuilder("select * from erecordview where place=? ");
+
         if(keyWork!=null){
             sb.append(" and message like '%"+keyWork+"%' or major like '%"+keyWork+"%' or selfevaluation like '%"+keyWork+
                     "%' or intention like '%"+keyWork+"%' or experience like '%"+keyWork+"%' or certificate like '%"+keyWork+"%' ");
         }
-        List<Map<String,Object>> data =runner.query(conn,sb.toString(),new MapListHandler(),id);
+
+        List<Map<String,Object>> data ;
+        if(state <2){
+            sb.append(" and state=?");
+            data=runner.query(conn,sb.toString(),new MapListHandler(),id,state);
+        }
+        else data=runner.query(conn,sb.toString(),new MapListHandler(),id);
         DBHelper.close(conn);
         return data;
     }

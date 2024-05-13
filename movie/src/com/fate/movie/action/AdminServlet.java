@@ -79,7 +79,7 @@ public class AdminServlet extends HttpServlet{
                     out.println("<script>alert('管理员名或密码不存在');location.href = 'login.html';</script>");
                 }else {
                     //  4.2 非空：表示登录成功, 将管理员对象保存到session中,提示登录成功后,将页面跳转到index.jsp
-                    session.setAttribute("user",usernow);//user-->Object
+                    session.setAttribute("user_now",usernow);//user-->Object
                     session.setAttribute("user_type",usernow.getType());
                     if(usernow.getType()==2)
                     {
@@ -123,7 +123,7 @@ public class AdminServlet extends HttpServlet{
 
                 break;
             case "modifypre":
-                if(session.getAttribute("user")==null){
+                if(session.getAttribute("user_now")==null){
                     out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
@@ -141,7 +141,7 @@ public class AdminServlet extends HttpServlet{
 
                 break;
             case "modify":
-                if(session.getAttribute("user")==null){
+                if(session.getAttribute("user_now")==null){
                     out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
@@ -163,7 +163,7 @@ public class AdminServlet extends HttpServlet{
 
                 break;
             case "remove":
-                if(session.getAttribute("user")==null){
+                if(session.getAttribute("user_now")==null){
                     out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
@@ -181,7 +181,7 @@ public class AdminServlet extends HttpServlet{
                 }
                 break;
             case "query":
-                if(session.getAttribute("user")==null){
+                if(session.getAttribute("user_now")==null){
                     out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
@@ -194,7 +194,7 @@ public class AdminServlet extends HttpServlet{
                 }
                 break;
             case "exit":
-                if(session.getAttribute("user")==null){
+                if(session.getAttribute("user_now")==null){
                     out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
@@ -204,7 +204,7 @@ public class AdminServlet extends HttpServlet{
                 out.println("<script>alert('Success');parent.window.location.href='login.html';</script>");
                 break;
             case "modifyPwd":
-                if(session.getAttribute("user")==null){
+                if(session.getAttribute("user_now")==null){
                     out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
@@ -212,7 +212,7 @@ public class AdminServlet extends HttpServlet{
                 //1.获取管理员输入的新的密码
                 String newPwd = req.getParameter("newpwd");
                 //2.获取管理员的编号-session
-                long idmp = ((User)session.getAttribute("user")).getId();
+                long idmp = ((User)session.getAttribute("user_now")).getId();
 
                 //3.调用biz层方法
                 int countz = userBiz.modifyPwd(idmp,newPwd);

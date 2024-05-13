@@ -42,10 +42,10 @@ public class ERecordServlet extends HttpServlet {
         String type = req.getParameter("type");
         HttpSession session = req.getSession();
         PrintWriter out = resp.getWriter();
-        User user = (User)session.getAttribute("user");
+        User user = (User)session.getAttribute("user_now");
 
         if(user==null){
-            out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+            out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
             return;
         }
 
@@ -71,10 +71,26 @@ public class ERecordServlet extends HttpServlet {
                     out.println("<script>alert('简历投递失败');location.href='main_new.jsp';</script>");
                 }
                 break;
-            case "queryelite":
+            case "reply":
+                //1.购买的会员编号
+                long idr = user.getId();
+                //2.购买的电影编号
+                Long eid = Long.parseLong(req.getParameter("ids"));
+                String commentr=req.getParameter("comment");
+                int sr=Integer.parseInt(req.getParameter("state"));
+                //4.调用biz
+                int countr=eRecordBiz.modify(eid,idr,commentr,sr);
+                if(countr>0){
 
+                    out.println("<script>alert('简历回复成功');location.href='main_new.jsp';</script>");
+                }else{
+                    out.println("<script>alert('简历回复失败');location.href='main_new.jsp';</script>");
+                }
+                break;
+            case "queryelite":
+                int statee = Integer.parseInt(req.getParameter("statee"));
                 Elite eliteq=eliteBiz.getById(user.getId());
-                List<ERecord> eRecords = eRecordBiz.getRecordsByEliteId(user.getId());
+                List<ERecord> eRecords = eRecordBiz.getRecordsByEliteId(user.getId(),statee);
                 req.setAttribute("eRecords",eRecords);
                 //4.转发
                 req.getRequestDispatcher("myjobs_list.jsp").forward(req,resp);
@@ -84,8 +100,9 @@ public class ERecordServlet extends HttpServlet {
                 //1.获取岗位信息
                 long jobid=Long.parseLong(req.getParameter("jobid"));
                 boolean desc=Boolean.parseBoolean(req.getParameter("desc"));
+                int statej=Integer.parseInt(req.getParameter("statej"));
                 //2.获取会员对象和所有的未还的记录
-                List<ERecord> jRecords = eRecordBiz.getRecordsByJobId(jobid,desc);
+                List<ERecord> jRecords = eRecordBiz.getRecordsByJobId(jobid,desc,statej);
                 //3.存request
                 req.setAttribute("jRecords",jRecords);
                 //4.转发
@@ -98,7 +115,7 @@ public class ERecordServlet extends HttpServlet {
                 keyword = keyword.isEmpty()?null:keyword;
                 if(user.getType()==0){
                     //获取数据
-                    List<Map<String,Object>> rows  = eRecordBiz.query_0(user.getId(),keyword);
+                    List<Map<String,Object>> rows  = eRecordBiz.query_0(user.getId(),keyword,2);
                     //转成json
                     out.print(JSON.toJSONString(rows));
                 }
@@ -106,14 +123,14 @@ public class ERecordServlet extends HttpServlet {
                     CompBiz compBiz=new CompBiz();
                     Comp comp=compBiz.getById(user.getId());
                     //获取数据
-                    List<Map<String,Object>> rows  = eRecordBiz.query_1(comp.getlicense(),keyword);
+                    List<Map<String,Object>> rows  = eRecordBiz.query_1(comp.getlicense(),keyword,2);
                     //转成json
                     out.print(JSON.toJSONString(rows));
                 }
                 else {
 
                     //获取数据
-                    List<Map<String,Object>> rows  = eRecordBiz.query(keyword);
+                    List<Map<String,Object>> rows  = eRecordBiz.query(keyword,2);
                     //转成json
                     out.print(JSON.toJSONString(rows));
                 }

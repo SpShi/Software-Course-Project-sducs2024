@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 13/05/2024 15:24:17
+ Date: 13/05/2024 20:32:25
 */
 
 SET NAMES utf8mb4;
@@ -118,6 +118,11 @@ CREATE TABLE `elite`  (
   `experience` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`, `age`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of elite
+-- ----------------------------
+INSERT INTO `elite` VALUES (1000000007, '123456', '370781200304176378', 0, '1', 1, 25, 0, 15153380271, 'major', '356303328@qq.com', '1', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for enterprise
@@ -295,7 +300,7 @@ CREATE TABLE `sp`  (
 -- ----------------------------
 -- Records of sp
 -- ----------------------------
-INSERT INTO `sp` VALUES (0000000001, 1000000007);
+INSERT INTO `sp` VALUES (0000000001, 1000000011);
 
 -- ----------------------------
 -- Table structure for type
@@ -334,7 +339,7 @@ CREATE TABLE `user`  (
   `pwd` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   `type` int(1) UNSIGNED ZEROFILL NOT NULL COMMENT '0是个人,1是公司,2是管理员',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1000000007 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1000000011 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -346,12 +351,16 @@ INSERT INTO `user` VALUES (1000000003, '1717', 0);
 INSERT INTO `user` VALUES (1000000004, '542', 1);
 INSERT INTO `user` VALUES (1000000005, '999', 1);
 INSERT INTO `user` VALUES (1000000006, '5217', 1);
+INSERT INTO `user` VALUES (1000000007, '123', 0);
+INSERT INTO `user` VALUES (1000000008, '123', 0);
+INSERT INTO `user` VALUES (1000000009, '123', 0);
+INSERT INTO `user` VALUES (1000000010, '123', 0);
 
 -- ----------------------------
 -- View structure for erecordview
 -- ----------------------------
 DROP VIEW IF EXISTS `erecordview`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY INVOKER VIEW `erecordview` AS select `r`.`id` AS `id`,`r`.`senddate` AS `senddate`,`r`.`comment` AS `message`,`e`.`name` AS `name`,`e`.`resume` AS `resume`,`e`.`gender` AS `gender`,`e`.`age` AS `age`,`e`.`degrees` AS `degrees`,`e`.`major` AS `major`,`e`.`certificate` AS `certificate`,`e`.`intention` AS `intention`,`e`.`selfevaluation` AS `selfevaluation`,`e`.`experience` AS `experience`,`e`.`id` AS `eliteid`,`j`.`place` AS `place` from ((`e2c_record` `r` join `elite` `e`) join `jobs` `j`) where ((`r`.`eliteid` = `e`.`id`) and (`r`.`jobid` = `j`.`id`));
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY INVOKER VIEW `erecordview` AS select `r`.`id` AS `id`,`r`.`senddate` AS `senddate`,`r`.`backdate` AS `backdate`,`r`.`comment` AS `message`,`e`.`name` AS `ename`,`e`.`resume` AS `resume`,`c`.`name` AS `cname`,`j`.`name` AS `jname`,`r`.`state` AS `state`,`e`.`degrees` AS `degrees`,`e`.`major` AS `major`,`e`.`certificate` AS `certificate`,`e`.`intention` AS `intention`,`e`.`selfevaluation` AS `selfevaluation`,`e`.`experience` AS `experience` from (((`e2c_record` `r` join `elite` `e`) join `jobs` `j`) join `enterprise` `c`) where ((`r`.`eliteid` = `e`.`id`) and (`r`.`jobid` = `j`.`id`) and (`j`.`place` = `c`.`id`));
 
 -- ----------------------------
 -- View structure for recordview

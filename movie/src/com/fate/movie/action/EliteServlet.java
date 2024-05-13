@@ -65,7 +65,7 @@ public class EliteServlet extends HttpServlet{
                 //暂时去掉提高效率(1717)
 
 //                if(!code.equalsIgnoreCase(valCode)){
-//                    out.println("<script>alert('验证码输入错误');location.href = 'login.html';</script>");
+//                    out.println("<script>alert('验证码输入错误');location.href = 'login_new.html';</script>");
 //                    return;
 //                }
 
@@ -76,27 +76,27 @@ public class EliteServlet extends HttpServlet{
                 // 4.判断用户对象是否为null: 
                 if(usernow==null){
                     //  4.1 如果是null表示用户名或密码不正确 ，提示错误，回到登录页面. 
-                    out.println("<script>alert('用户名或密码不存在');location.href = 'login.html';</script>");
+                    out.println("<script>alert('用户名或密码不存在');location.href = 'login_new.html';</script>");
                 }else {
                     //  4.2 非空：表示登录成功, 将用户对象保存到session中,提示登录成功后,将页面跳转到index.jsp
-                    session.setAttribute("user",usernow);//user-->Object
+                    session.setAttribute("user_now",usernow);//user-->Object
                     session.setAttribute("user_type",usernow.getType());
                     if(usernow.getType()==0)
                     {
-                        out.println("<script>alert('登录成功');location.href='index_elite.jsp';</script>");
+                        out.println("<script>alert('登录成功');location.href='elite.let?type=add';</script>");
                     }
-                    else out.println("<script>alert('未知用户类型');location.href = 'login.html';</script>");
+                    else out.println("<script>alert('未知用户类型');location.href = 'login_new.html';</script>");
                 }
                 break;
             case "addpre":
                 //存request
                 //转发
-
                 HttpSession session1 = req.getSession();
                 req.getRequestDispatcher("elite_add.jsp").forward(req,resp);
                 break;
             case "add":
-                User usera=(User)session.getAttribute("user");
+
+                User usera=(User)session.getAttribute("user_now");
                 String namea =  req.getParameter("name");
                 String idnuma=req.getParameter("idnum");
                 long gendera=Long.parseLong(req.getParameter("gender"));
@@ -113,27 +113,43 @@ public class EliteServlet extends HttpServlet{
 
                 if(!eliteBiz.checktel(tela))
                 {
-                    out.println("<script>alert('电话号码不合法'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('电话号码不合法'); location.href='elite.let?type=add';</script>");
                     return;
                 }
                 if(!eliteBiz.checkiN(idnuma))
                 {
-                    out.println("<script>alert('身份证号码不合法'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('身份证号码不合法'); location.href='elite.let?type=add';</script>");
                     return;
                 }
                 long telnum=Long.parseLong(tela);
                 int count = eliteBiz.add(usera.getId(),namea,idnuma,resumea,gendera, agea,degreesa,telnum,
                         majora, emaila, ctfcta, intta, slfea,expea);
+
+//                out.println(usera);
+//                out.println(namea);
+//                out.println(idnuma);
+//                out.println(gendera);
+//                out.println(agea);
+//                out.println(degreesa);
+//                out.println(Long.parseLong(tela));
+//                out.println(majora);
+//                out.println(emaila);
+//                out.println(ctfcta);
+//                out.println(intta);
+//                out.println(slfea);
+//                out.println(expea);
+
+
                 if(count>0){
                     out.println("<script>alert('用户信息添加成功'); location.href='elite.let?type=query';</script>");
                 }else{
-                    out.println("<script>alert('用户信息添加失败'); location.href='elite.let?type=query';</script>");
+                    out.println("<script>alert('用户信息添加失败'); location.href='elite.let?type=add';</script>");
                 }
 
                 break;
             case "modifypre":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 //类型&会员的信息
@@ -150,8 +166,8 @@ public class EliteServlet extends HttpServlet{
 
                 break;
             case "modify":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 String namem =  req.getParameter("name");
@@ -189,8 +205,8 @@ public class EliteServlet extends HttpServlet{
 
                 break;
             case "remove":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 long eliteId = Long.parseLong(req.getParameter("id"));
@@ -207,46 +223,47 @@ public class EliteServlet extends HttpServlet{
                 }
                 break;
             case "query":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 List<Elite> eliteList = eliteBiz.getAll();
                 req.setAttribute("eliteList",eliteList);
                 HttpSession session3 = req.getSession();
                 Long type3=(Long) session3.getAttribute("user_type");
+                out.println(eliteList);
                 if(type3==0){
-                    req.getRequestDispatcher("elite_list.jsp").forward(req,resp);
+                    req.getRequestDispatcher("elite_details.jsp").forward(req,resp);
                 }
                 break;
             case "exit":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 //1.清除session
                 session.invalidate();
                 //2.跳转到login.html(框架中需要回去)  top.jsp->parent->index.jsp
-                out.println("<script>alert('Success');parent.window.location.href='login.html';</script>");
+                out.println("<script>alert('Success');parent.window.location.href='login_new.html';</script>");
                 break;
             case "modifyPwd":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 //修改密码
                 //1.获取用户输入的新的密码
                 String newPwd = req.getParameter("newpwd");
                 //2.获取用户的编号-session
-                long idmp = ((User)session.getAttribute("user")).getId();
+                long idmp = ((User)session.getAttribute("user_now")).getId();
 
                 //3.调用biz层方法
                 int countz = userBiz.modifyPwd(idmp,newPwd);
                 //4.响应-参考exit
                 if(countz>0){
-                    out.println("<script>alert('密码修改成功');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('密码修改成功');parent.window.location.href='login_new.html';</script>");
                 }else{
-                    out.println("<script>alert('密码修改失败');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('密码修改失败');parent.window.location.href='login_new.html';</script>");
                 }
                 break;
             default:

@@ -15,48 +15,6 @@
     <meta http-equiv="keywords"  content = " 电影 java jsp"/>
     <meta http-equiv="author" content="Bronya"/>
     <link rel="stylesheet" type="text/css" href="./Style/skin.css" />
-    <script src="Js/jquery-3.3.1.min.js"></script>
-    <script>
-        $(function(){
-            $("#btnQuery").click(function(){
-                //拿到idn
-                var idn = $("#idNubmer").val();
-
-                //发送请求
-                location.href = "erecord.let?type=queryback&idn="+idn
-            });
-            $("#btnReturn").click(function(){
-
-                if(!$("#memberId").val()){
-                    alert("请输入用户信息");
-                    return;
-                }
-
-                //获取所有选中的上映日期
-                var idList = new Array();
-                $(".ck").each(function(){
-                    if($(this).prop("checked")) {
-                        idList.push($(this).val());
-                    }
-                });
-                if(idList.length==0){
-                    alert("请选择需要退票的电影信息");
-                    return;
-                }
-                console.log(idList);
-                //2.连城一个字符串
-                var idStr = idList.join("_");
-
-                //3.发送请求  erecord.let?type=back&mid=1&ids=1_2  erecord.let?type=back&mid=1&ids=1___
-                var path = "erecord.let?type=back&mid="+$("#memberId").val()+"&ids="+idStr;
-                location.href=path;
-                console.log(path);
-
-            });
-
-        });
-
-    </script>
 </head>
 <body>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -84,159 +42,59 @@
                         <table>
                             <tr>
                                 <td width="100" align="center"><img src="./Images/mime.gif" /></td>
-                                <td valign="bottom"><h3 style="letter-spacing:1px;">常用功能 >  电影退票 </h3></td>
+                                <td valign="bottom"><h3 style="letter-spacing:1px;">电影添加 > 简历投递情况查询</h3></td>
                             </tr>
                         </table>
                     </td>
                 </tr>
                 <!-- 一条线 -->
                 <tr>
-                    <td height="20" colspan="4">
+                    <td height="40" colspan="4">
                         <table width="100%" height="1" border="0" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
                             <tr><td></td></tr>
                         </table>
                     </td>
                 </tr>
-                <!-- 会员信息开始 -->
-                <tr>
-                    <td width="2%">&nbsp;</td>
-                    <td width="96%">
-                        <fieldset>
-                            <legend>查询会员</legend>
-                            <c:if test="${member==null}">
-                                <table width="100%"  class="cont"  >
-                                    <tr>
-                                        <td width="8%" class="run-right"> 会员证件号</td>
-                                        <td colspan="7"><input class="text" type="text" id="idNubmer" />
-                                            <input type="button" id="btnQuery" value="确定" style="width: 80px;"/>
-                                            <input type="button" id="btnReturn" value="批量退票" style="width: 80px;"/>
-                                        </td>
-                                        </td>
-
-                                    </tr>
-
-                                    <tr>
-                                        <td width="8%" class="run-right">会员名称</td>
-                                        <td width="17%"><input class="text" type="text"   disabled/>
-                                            <input type="hidden" id="memberId" value=""/>
-                                        </td>
-                                        <td width="8%" class="run-right">会员类型:</td>
-                                        <td width="17%"><input class="text" type="text" disabled /></td>
-                                        <td width="8%" class="run-right">可购数量</td>
-                                        <td width="17%"><input class="text" type="text"  disabled /></td>
-                                        <td width="8%" class="run-right">账户余额</td>
-                                        <td width="17%"><input class="text" type="text"  disabled /></td>
-                                    </tr>
-                                </table>
-                            </c:if>
-                            <c:if test="${member!=null}">
-                                <table width="100%"  class="cont"  >
-                                    <tr>
-                                        <td width="8%" class="run-right"> 会员证件号</td>
-                                        <td colspan="7"><input class="text" type="text" id="idNubmer"  value = "${member.idNumber}"/>
-                                            <input type="button" id="btnQuery" value="确定" disabled style="width: 80px;"/>
-                                            <input type="button" id="btnReturn" value="批量退票" style="width: 80px;"/>
-                                        </td>
-                                        </td>
-
-                                    </tr>
-
-                                    <tr>
-                                        <td width="8%" class="run-right">会员名称</td>
-
-                                        <td width="17%"><input class="text" type="text"  name="memberId"  value="${member.name}" disabled/>
-                                            <input type="hidden" id="memberId" value="${member.id}"/>
-                                        </td>
-                                        <td width="8%" class="run-right">会员类型:</td>
-                                        <td width="17%"><input class="text" type="text" name="memberId"  value="${member.type.name}"  disabled /></td>
-                                        <td width="8%" class="run-right">已购数量</td>
-                                        <%
-                                            List<Record>  records =(List<Record>)  request.getAttribute("records");
-                                        %>
-                                        <td width="17%"><input class="text" type="text"  name="memberId" value="<%=records.size()%>"  disabled /></td>
-                                        <td width="8%" class="run-right">账户余额</td>
-                                        <td width="17%"><input class="text" type="text"  name="memberId" value="${member.balance}"  disabled /></td>
-                                    </tr>
-                                </table>
-
-                            </c:if>
-                        </fieldset>
-                    </td>
-                    <td width="2%">&nbsp;</td>
-                </tr>
-
-                <!--空行-->
-                <tr>
-                    <td height="20" colspan="3">
-                    </td>
-                </tr>
-
-                <!--详细信息-->
+                <!-- 产品列表开始 -->
                 <tr>
                     <td width="2%">&nbsp;</td>
                     <td width="96%">
                         <table width="100%">
                             <tr>
                                 <td colspan="2">
-                                    <form action="" method="">
-                                        <table width="100%"  class="cont tr_color">
-                                            <tr>
-                                                <th><input type="checkbox" value="" id="ckAll"/>全选/全不选</th>
-                                                <th>电影名</th>
-                                                <th>购票时间</th>
-                                                <th>上映时间</th>
-                                                <th>导演</th>
-                                                <th>影厅</th>
-                                                <th>座位号</th>
-                                                <th>金额(元)</th>
-                                                <th>操作</th>
-                                            </tr>
-                                            <c:if test="${records==null}">
-                                                <tr align="center" class="d">
-                                                    <td colspan="8" ALIGN="center"><h2>暂无数据展示</h2></td>
-                                                </tr>
-                                            </c:if>
-                                            <c:if test ="${records!=null}">
-                                                <c:forEach items="${records}" var="r" >
-                                                    <!--逾期的处理-->
-                                                    <%
-                                                        Record record=(Record)pageContext.getAttribute("r");
-                                                        //系统的当前时间
-                                                        java.sql.Date  date = new java.sql.Date(System.currentTimeMillis());
-                                                        if(record.getBackDate().before(date)){
-                                                    %>
-                                                    <tr align="center" class="d" style="background-color:#f08080">
-                                                        <td><input type="checkbox" value="${r.id}"  class="ck" checked /></td>
-                                                        <td>${r.movie.name}</td>
-                                                        <td>${r.buyDate}</td>
-                                                        <td>${r.backDate}</td>
-                                                        <td>${r.movie.publish}</td>
-                                                        <td>${r.movie.address}</td>
-                                                        <td>${r.seat}</td>
-                                                        <td>${r.deposit}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <%
-                                                    }else{
-                                                    %>
-                                                    <tr align="center" class="d">
-                                                        <td><input type="checkbox" value="${r.id}"  class="ck" checked /></td>
-                                                        <td>${r.movie.name}</td>
-                                                        <td>${r.buyDate}</td>
-                                                        <td>${r.backDate}</td>
-                                                        <td>${r.movie.publish}</td>
-                                                        <td>${r.movie.address}</td>
-                                                        <td>${r.seat}</td>
-                                                        <td>${r.deposit}</td>
-                                                    </tr>
-                                                    <%
-                                                        }
-                                                    %>
 
-                                                </c:forEach>
-                                            </c:if>
-                                        </table>
-                                    </form>
+                                    <table width="100%"  class="cont tr_color">
+                                        <tr>
+                                            <th>编号</th>
+                                            <th>名称</th>
+                                            <th>类型</th>
+                                            <th>主演</th>
+                                            <th>导演</th>
+                                            <th>余票</th>
+                                            <th>上映日期</th>
+                                            <th>封面</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        <c:forEach items="${eRecords}" var="b">
+                                            <tr align="center" class="d">
+                                                <td><a href="movie.let?type=details&id=${b.id}">${b.id}</a></td>
+                                                <td>${b.name}</td>
+                                                <td>${b.type.name}</td>
+                                                <td>${b.author}</td>
+                                                <td>${b.publish}</td>
+                                                <td>${b.stock}</td>
+                                                <td>${b.date}</td>
+                                                <td><img src="${b.pic}" class="cover"/></td>
+                                                <td>
+                                                    <a href="movie.let?type=details&id=${b.id}">详情</a>
+                                                    <a onclick="return confirm('确认修改');" href="movie.let?type=modifypre&id=${b.id}">修改</a>&nbsp;&nbsp;
+                                                    <a onclick="return confirm('确认删除');" href="movie.let?type=remove&id=${b.id}">删除</a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+
+                                    </table>
+
                                 </td>
                             </tr>
                         </table>

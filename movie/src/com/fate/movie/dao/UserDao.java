@@ -113,8 +113,7 @@ public class UserDao {
     public long getidBysp() throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql="select `name` from sp where id=1";
-        int num = runner.query(conn,sql,new ScalarHandler<>());
-        long longNum =  num;
+        long longNum= runner.query(conn,sql,new ScalarHandler<>());
         DBHelper.close(conn);
         return longNum;
     }

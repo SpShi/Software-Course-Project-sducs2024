@@ -7,6 +7,15 @@
 --%><%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html >
+<script language="JavaScript">
+    let list = ${types} ;
+    for (let i = 0; i < list.length; i++) {
+        console.log(list[i]);
+    }
+    <%--let m =${userList};--%>
+    <%--console.log(m.id);--%>
+</script>
+
 <html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

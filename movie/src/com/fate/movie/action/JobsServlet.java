@@ -94,8 +94,8 @@ public class JobsServlet extends HttpServlet {
 
                 break;
             case "modifypre":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 //类型&会员的信息
@@ -112,8 +112,8 @@ public class JobsServlet extends HttpServlet {
                 }
                 break;
             case "remove":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 long jobsId = Long.parseLong(req.getParameter("id"));
@@ -136,8 +136,8 @@ public class JobsServlet extends HttpServlet {
                 details(req,resp,out);
                 break;
             case "search":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 long places=Long.parseLong(req.getParameter("place"));
@@ -154,14 +154,14 @@ public class JobsServlet extends HttpServlet {
 
                 break;
             case "exit":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 //1.清除session
                 session.invalidate();
                 //2.跳转到login.html(框架中需要回去)  top.jsp->parent->index.jsp
-                out.println("<script>alert('Success');parent.window.location.href='login.html';</script>");
+                out.println("<script>alert('Success');parent.window.location.href='login_new.html';</script>");
                 break;
             default:
                 resp.sendError(404,"请求的地址不存在");

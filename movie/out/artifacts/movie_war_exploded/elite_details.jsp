@@ -1,22 +1,15 @@
+
 <%--
   Created by IntelliJ IDEA.
-  User: Altair
-  Date: 2024/4/30
-  Time: 10:37
+  User: 电影
+  Date: 2022/12/21
+  Time: 11:58
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script language="JavaScript">
-        let list =[[ ${userList} ]];
-        for (let i = 0; i < list.length; i++) {
-            console.log(list[i]);
-    }
-    <%--let m =${userList};--%>
-    <%--console.log(m.id);--%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-</script>
+<!DOCTYPE html>
 <html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -52,7 +45,7 @@
                         <table>
                             <tr>
                                 <!-- <td width="100" align="center"><img src="./Images/mime.gif" /></td> -->
-                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 个人中心 > 账号信息</h3></td>
+                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 个人中心 > 个人信息</h3></td>
                             </tr>
                         </table>
                     </td>
@@ -66,6 +59,7 @@
                     </td>
                 </tr>
 
+
                 <!-- 产品列表开始 -->
                 <tr>
                     <td width="2%">&nbsp;</td>
@@ -73,19 +67,47 @@
                         <table width="100%">
                             <tr>
                                 <td colspan="2">
-                                    <form action="user.let?type=query" method="GET">
+                                    <form action="elite.let?type=query" method="POST">
                                         <table width="100%"  class="cont tr_color">
                                             <tr>
-                                                <th>用户ID</th>
-                                                <th>用户密码</th>
-                                                <th>操作</th>
+                                                <th>1</th>
+                                                <th>2</th>
+                                                <th>3</th>
+                                                <th>4</th>
+                                                <th>5</th>
+                                                <th>6</th>
+                                                <th>7</th>
+                                                <th>8</th>
+                                                <th>9</th>
+                                                <th>10</th>
+                                                <th>11</th>
+                                                <th>12</th>
+                                                <th>13</th>
+                                                <th>14</th>
+                                                <th>15</th>
+                                                <th>16</th>
                                             </tr>
-                                            <c:forEach items="${userList}" var="m">
+                                            <c:forEach items="${eliteList}" var="m">
                                                 <tr align="center" class="d">
-                                                    <td>${m.id}+111</td>
-                                                    <td>${m.pwd}+222</td>
+                                                    <td>${m.id}</td>
+                                                    <td>${m.name}</td>
+                                                    <td>${m.idNumber}</td>
+                                                    <td>${m.state}</td>
+                                                    <td>${m.resume}</td>
+                                                    <td>${m.gender}</td>
+                                                    <td>${m.age}</td>
+                                                    <td>${m.degrees}</td>
+                                                    <td>${m.tel}</td>
+                                                    <td>${m.major}</td>
+                                                    <td>${m.email}</td>
+                                                    <td>${m.certificate}</td>
+                                                    <td>${m.intention}</td>
+                                                    <td>${m.selfevaluation}</td>
+                                                    <td>${m.experience}</td>
+
                                                     <td>
-                                                        <a onclick="return confirm('确认用户信息');" href="login.html">修改</a>
+                                                        <a onclick="return confirm('确认修改');" href="member.let?type=modifypre&id=${m.id}">修改</a>&nbsp;&nbsp;
+                                                        <a onclick="return confirm('确认删除');" href="member.let?type=remove&id=${m.id}">删除</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -107,7 +129,7 @@
                         </table>
                     </td>
                 </tr>
-                <tr style="font-size: 12px;">
+                <tr>
                     <td width="2%">&nbsp;</td>
                     <td width="51%" class="left_txt">
                         <img src="./Images/icon_mail.gif" width="16" height="11"> 客户服务邮箱：356303328@qq.com<br />
@@ -118,7 +140,6 @@
         </td>
         <td background="./Images/mail_right_bg.gif">&nbsp;</td>
     </tr>
-    <!-- 底部部分 -->
     <!-- 底部部分 -->
     <!-- <tr>
         <td valign="bottom" background="./Images/mail_left_bg.gif">
@@ -144,4 +165,3 @@
 </table>
 </body>
 </html>
-

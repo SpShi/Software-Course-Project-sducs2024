@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -70,7 +71,7 @@ public class UserServlet extends HttpServlet {
                 //暂时去掉提高效率(1717)
 
 //                if(!code.equalsIgnoreCase(userCode)){
-//                    out.println("<script>alert('验证码输入错误');location.href = 'login.html';</script>");
+//                    out.println("<script>alert('验证码输入错误');location.href = 'login_new.html';</script>");
 //                    return;
 //                }
 
@@ -81,10 +82,11 @@ public class UserServlet extends HttpServlet {
                 // 4.判断用户对象是否为null: 
                 if(usernow==null){
                     //  4.1 如果是null表示用户名或密码不正确 ，提示错误，回到登录页面. 
-                    out.println("<script>alert('用户名或密码不存在');location.href = 'login.html';</script>");
+                    out.println("<script>alert('用户名或密码不存在');location.href = 'login_new.html';</script>");
                 }else {
                     //  4.2 非空：表示登录成功, 将用户对象保存到session中,提示登录成功后,将页面跳转到index.jsp
-                    session.setAttribute("user",usernow);//user-->Object
+                    session.setAttribute("user_now",usernow);//user-->Object
+                    session.setAttribute("user_type",usernow.getType());//user-->Object
                     if(usernow.getType()==0)
                     {
                         Elite elitenow=eliteBiz.getById(id1);
@@ -93,7 +95,7 @@ public class UserServlet extends HttpServlet {
                             out.println("<script>alert('请完善您的个人信息');location.href='elite_add.jsp';</script>");
                         }
                         else{
-                            out.println("<script>alert('登录成功');location.href='index_elite.jsp';</script>");
+                            out.println("<script>alert('登录成功');location.href='elite.let?type=query';</script>");
                         }
 
                     }
@@ -112,7 +114,7 @@ public class UserServlet extends HttpServlet {
                     else if(usernow.getType()==2){
                         out.println("<script>alert('登录成功');location.href='index_admin.jsp';</script>");
                     }
-                    else out.println("<script>alert('未知用户类型');location.href = 'login.html';</script>");
+                    else out.println("<script>alert('未知用户类型');location.href = 'login_new.html';</script>");
                 }
                 break;
             case "addpre":
@@ -130,48 +132,56 @@ public class UserServlet extends HttpServlet {
                     out.println("<script>alert('用户注册成功,请牢记您的ID:"+idtmp+"后重新登录'); location.href='user.let?type=query';</script>");
                 }else{
                     userBiz.modifysp(1,idtmp-1);
-                    out.println("<script>alert('用户注册失败'); location.href='user.let?type=query';</script>");
+                    out.println("<script>alert('用户注册失败'); location.href = 'login_new.html';</script>");
                 }
 
                 break;
             case "query":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
+                out.println(123);
                 List<User> userList = userBiz.getAll();
+                if(session.getAttribute("user_now")!=null){
+                    out.println(userList);
+                }
                 req.setAttribute("userList",userList);
                 HttpSession session3 = req.getSession();
+//                out.println(session3);
+//                out.println(userList);
+
+
                 req.getRequestDispatcher("user_list.jsp").forward(req,resp);
                 break;
             case "exit":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 //1.清除session
                 session.invalidate();
                 //2.跳转到login.html(框架中需要回去)  top.jsp->parent->index.jsp
-                out.println("<script>alert('Success');parent.window.location.href='login.html';</script>");
+                out.println("<script>alert('Success');parent.window.location.href='login_new.html';</script>");
                 break;
             case "modifyPwd":
-                if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                if(session.getAttribute("user_now")==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
                     return;
                 }
                 //修改密码
                 //1.获取用户输入的新的密码
                 String newPwd = req.getParameter("newpwd");
                 //2.获取用户的编号-session
-                long idm = ((User)session.getAttribute("user")).getId();
+                long idm = ((User)session.getAttribute("user_now")).getId();
 
                 //3.调用biz层方法
                 int countz = userBiz.modifyPwd(idm,newPwd);
                 //4.响应-参考exit
                 if(countz>0){
-                    out.println("<script>alert('密码修改成功');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('密码修改成功');parent.window.location.href='login_new.html';</script>");
                 }else{
-                    out.println("<script>alert('密码修改失败');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('密码修改失败');parent.window.location.href='login_new.html';</script>");
                 }
                 break;
             default:

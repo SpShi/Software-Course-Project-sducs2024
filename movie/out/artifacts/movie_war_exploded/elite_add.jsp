@@ -31,246 +31,189 @@
     </script>
 </head>
 <body>
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
-    <!-- 头部开始 -->
-    <tr>
-        <td width="17" valign="top" background="./Images/mail_left_bg.gif">
-            <img src="./Images/left_top_right.gif" width="17" height="29"/>
-        </td>
-        <td valign="top" background="./Images/content_bg.gif">
-        </td>
-        <td width="16" valign="top" background="./Images/mail_right_bg.gif"><img src="./Images/nav_right_bg.gif"
-                                                                                 width="16" height="29"/></td>
-    </tr>
-    <!-- 中间部分开始 -->
-    <tr>
-        <!--第一行左边框-->
-        <td valign="middle" background="./Images/mail_left_bg.gif">&nbsp;</td>
-        <!--第一行中间内容-->
-        <td valign="top" bgcolor="#F7F8F9">
-            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-                <!-- 空白行-->
-                <tr>
-                    <td colspan="2" valign="top">&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td valign="top">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="4">
-                        <table>
-                            <tr>
-                                <td width="100" align="center"><img src="./Images/mime.gif"/></td>
-                                <td valign="bottom"><h3 style="letter-spacing:1px;">添加个人信息 </h3></td>
-                            </tr>
-                        </table>
+<img class="body"></img>
+<div class="back">
+    <div class="reg">
+        <form action="elite.let?type=add" method="post">
+            <table valign="top" style=" text-align: center;margin-left: 120px;width: 100%;">
+                <h4 style="letter-spacing:1px;font-size:23px; color: rgb(119, 118, 118);">完善个人信息</h4>
+                <tr class="lab"><td>用户名：</td>
+                    <td><input class="input" placeholder="长度1~15个字符"  type="text" name="name" value="" required/></td>
+                    <td class="err">长度1~15个字符</td></tr>
+
+                <tr class="lab"><td>身份证号：</td>
+                    <td><input class="input" placeholder="长度17个字符"  type="text" name="idnum" value="" required/></td>
+                    <td class="err">长度17个字符</td></tr>
+
+                <tr class="lab"><td>性别：</td>
+                    <td>
+                        <c:forEach items="gender" var="mt">
+                            <c:if test="0">
+                                <input  type="radio" name="gender" value="0"
+                                        checked/> 其他&nbsp;&nbsp;
+                            </c:if>
+                            <c:if test="1">
+                                <input type="radio" name="gender" value="1"/> 女&nbsp;&nbsp;
+                            </c:if>
+                            <c:if test="2">
+                                <input type="radio" name="gender" value="2"/> 男
+                            </c:if>
+                        </c:forEach>
+                    </td></tr>
+
+                <tr class="lab"><td>年龄：</td>
+                    <td><input class="input" placeholder="您的年龄应在18岁到60岁之间"  id="balance" type="number" name="age" value="" required/></td>
+                    <td class="err">您的年龄应在18岁到60岁之间</td></tr>
+
+
+                <tr class="lab"><td>学历：</td>
+                    <td>
+                        <select class="input" id="education" name="degrees">
+                            <option value="0">无学历</option>
+                            <option value="1">小学毕业</option>
+                            <option value="2">初中毕业</option>
+                            <option value="3">高中毕业</option>
+                            <option value="4">专科</option>
+                            <option value="5">学士学位</option>
+                            <option value="6">硕士学位</option>
+                            <option value="7">博士学位</option>
+                        </select>
                     </td>
                 </tr>
-                <!-- 一条线 -->
-                <tr>
-                    <td height="40" colspan="4">
-                        <table width="100%" height="1" border="0" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
-                            <tr>
-                                <td></td>
-                            </tr>
-                        </table>
+
+                <tr class="lab"><td>电话号码：</td>
+                    <td><input class="input" placeholder="请输入11位电话号码"  type="tel" name="tel"  required/></td>
+                    <td class="err">请输入11位电话号码</td></tr>
+
+                <tr class="lab"><td >专业：</td>
+                    <td><input class="input"  type="text" name="major" value="" required/></td>
+                </tr>
+
+                <tr class="lab"><td width="80px">邮箱：</td>
+                    <td><input class="input" placeholder="请输入邮箱"  type="text" name="email" required/></td>
+                </tr>
+
+                <tr class="lab"><td>简历：</td>
+                    <td>
+                        <textarea class="tex"  type="text" name="resume"  rows="5" required></textarea>
+
+                        <!-- <input class="input"  type="text" name="age" value="" required/> -->
                     </td>
                 </tr>
-                <!-- 添加栏目开始 -->
-                <tr>
-                    <td width="2%">&nbsp;</td>
-                    <td width="96%">
-                        <table width="100%">
-                            <tr>
-                                <td colspan="2">
-                                    <form action="elite.let?type=add" method="post">
-                                        <table width="100%" class="cont">
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td width="10%">用户名：</td>
-                                                <td width="20%"><input class="text" type="text" name="name" value=""
-                                                                       required/></td>
-                                                <td class="err">长度6~15个字符</td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td width="10%">身份证号：</td>
-                                                <td width="20%"><input class="text" type="text" name="idnum" value=""
-                                                                       required/></td>
-                                                <td class="err">长度17个字符</td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>性别</td>
-                                                <td>
-                                                    <c:forEach items="gender" var="mt">
-                                                        <c:if test="0">
-                                                            <input type="radio" name="gender" value="0"
-                                                                   checked/> 其他&nbsp;&nbsp;
-                                                        </c:if>
-                                                        <c:if test="1">
-                                                            <input type="radio" name="gender" value="1"/> 女&nbsp;&nbsp;
-                                                        </c:if>
-                                                        <c:if test="2">
-                                                            <input type="radio" name="gender" value="2"/> 男
-                                                        </c:if>
-                                                    </c:forEach>
-                                                </td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>年龄</td>
-                                                <td>
-                                                    <input class="text" id="balance" type="number" name="age"
-                                                           value="" readonly/>
-                                                </td>
-                                                <td class="err">您的年龄应在18岁到60岁之间</td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>学历</td>
-                                                <td>
-                                                    <select id="education" name="degrees">
-                                                        <option value="0">无学历</option>
-                                                        <option value="1">小学毕业</option>
-                                                        <option value="2">初中毕业</option>
-                                                        <option value="3">高中毕业</option>
-                                                        <option value="4">专科</option>
-                                                        <option value="5">学士学位</option>
-                                                        <option value="6">硕士学位</option>
-                                                        <option value="7">博士学位</option>
-                                                    </select>
-                                                </td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>电话号码</td>
-                                                <td>
-                                                    <input class="text" type="tel" name="tel" required/>
-                                                </td>
-                                                <td class="err">请输入13位电话号码</td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>简历</td>
-                                                <td>
-                                                    <input class="text" type="text" name="resume" required/>
-                                                </td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>专业</td>
-                                                <td>
-                                                    <input class="text" type="text" name="major" required/>
-                                                </td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>邮箱</td>
-                                                <td>
-                                                    <input class="text" type="text" name="email" required/>
-                                                </td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>证书</td>
-                                                <td>
-                                                    <input class="text" type="text" name="ctfct" required/>
-                                                </td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>求职意向</td>
-                                                <td>
-                                                    <input class="text" type="text" name="intt" required/>
-                                                </td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>自我评估</td>
-                                                <td>
-                                                    <input class="text" type="text" name="slfe" required/>
-                                                </td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>工作经验</td>
-                                                <td>
-                                                    <input class="text" type="text" name="expe" required/>
-                                                </td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td></td>
-                                                <td><input class="btn" type="submit" value="提交"/></td>
-                                                <td></td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td width="2%">&nbsp;</td>
+
+
+                <tr class="lab"><td width="80px">证书：</td>
+                    <td>
+                        <textarea class="tex" name="ctfct"  rows="5" required></textarea></td>
+                    <!-- <input class="input" style="height:50px"  type="text" name="ctfct" value="" required/> -->
                 </tr>
-                <!-- 添加栏目结束 -->
-                <tr>
-                    <td height="40" colspan="4">
-                        <table width="100%" height="1" border="0" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
-                            <tr>
-                                <td></td>
-                            </tr>
-                        </table>
+
+                <tr class="lab"><td width="80px">求职意向：</td>
+                    <td>
+                        <textarea class="tex"  name="intt"  rows="5" required ></textarea></td>
+
+                    <!-- <input class="input" type="text" name="intt" value="" required/> -->
                     </td>
                 </tr>
-                <tr>
-                    <td width="2%">&nbsp;</td>
-                    <td width="51%" class="left_txt">
-                        <img src="./Images/icon_mail.gif" width="16" height="11"> 客户服务邮箱：356303328@qq.com<br/>
+
+                <tr class="lab"><td width="80px">自我评估：</td>
+                    <td>
+                        <textarea class="tex"  name="slfe"  rows="5" required></textarea></td>
+                    <!-- <input class="input"  type="text" name="slfe" value="" required/> -->
                     </td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
                 </tr>
+
+                <tr class="lab"><td width="80px">工作经验：</td>
+                    <td>
+                        <textarea class="tex" name="expe" rows="5" required></textarea></td>
+
+                    <!-- <input class="input"  type="text" name="expe" value="" required/> -->
+                    </td>
+                </tr>
+
             </table>
-        </td>
-        <td background="./Images/mail_right_bg.gif">&nbsp;</td>
-    </tr>
-    <!-- 底部部分 -->
-    <tr>
-        <td valign="bottom" background="./Images/mail_left_bg.gif">
-            <img src="./Images/buttom_left.gif" width="17" height="17"/>
-        </td>
-        <td background="./Images/buttom_bgs.gif">
-            <img src="./Images/buttom_bgs.gif" width="17" height="17">
-        </td>
-        <td valign="bottom" background="./Images/mail_right_bg.gif">
-            <img src="./Images/buttom_right.gif" width="16" height="17"/>
-        </td>
-    </tr>
-</table>
+            <div style=" background-color: #e0e8ef;">
+                <td><input class="btlg" type="submit" value="提交" /></td>
+            </div>
+
+        </form>
+    </div>
+</div>
 </body>
 </html>
+<style>
+    .body{
+        background: url("./Images/movie.jpeg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        opacity: 0.8;
+        filter: blur(5px);
+
+
+    }
+    .back{
+        text-align: center;
+        float:left;
+        margin-left: 450px;
+        width: 700px;
+        height:920px;
+        /*height: 100%;*/
+        background-color: rgba(255, 255, 255, 0.789);
+        backdrop-filter: blur(1px);
+    }
+    .reg{
+        /*float:left;*/
+        width: 700px;
+        height: 800px;
+        /* background-color: rgba(222, 146, 146, 0.789); */
+        /*margin-left: 500px;*/
+        margin-top: 7%;
+        text-align: center;
+        /*border-radius: 10px;*/
+        /*backdrop-filter: blur(1px);*/
+    }
+    .lab{
+        margin-top: 100px;
+        color: dimgray;
+        font-size: 14px;
+        width: 80%;
+        height: 50px;
+        margin-left: 30px;
+        /* background-color: aqua; */
+    }
+    .input{
+        width: 100%;
+        height: 30px;
+        border: none;
+        padding-left: 8px;
+        outline: none;
+    }
+    .tex{
+        width: 100%;
+        height: 64px;
+        border: none;
+        padding-left: 8px;
+        padding-top: 5px;
+        margin-top: 10px;
+        outline: none;
+    }
+    .con{
+        /* height: 400px; */
+        /* background-color: aquamarine; */
+    }
+    .btlg{
+        float:right;
+        margin-right: 100px;
+        margin-top: 10px;
+        width:75px;
+        height: 40px;
+        background-color: #409EFF;
+        border: none;
+        color: white;
+        font-size:16px;
+        border-radius: 5px;
+    }
+</style>
