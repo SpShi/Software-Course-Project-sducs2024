@@ -10,9 +10,11 @@ import java.util.Date;
 
 public class ERecord {
     private int id;
+    private int state;
     private long eliteid;
     private long jobid;
     private Date senddate;
+    private Date backdate;
     private String comment;
 
     //外键
@@ -72,13 +74,31 @@ public class ERecord {
         this.jobs = jobs;
     }
 
+    public Date getBackdate() {
+        return backdate;
+    }
+
+    public void setBackdate(Date backdate) {
+        this.backdate = backdate;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "ERecord{" +
                 "id=" + id +
+                "state=" + state +
                 ", eliteid=" + eliteid +
                 ", jobid=" + jobid +
                 ", senddate=" + senddate +
+                ", backdate=" + backdate +
                 ", comment=" + comment + '\'' +
                 ", elite=" + elite +
                 ", job=" + jobs +

@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 06/05/2024 21:45:09
+ Date: 13/05/2024 15:24:17
 */
 
 SET NAMES utf8mb4;
@@ -51,24 +51,10 @@ INSERT INTO `往世乐土` VALUES (13, 'Pardofelis', '2022-12-25 16:31:19', '空
 -- ----------------------------
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin`  (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` bigint(10) UNSIGNED NOT NULL,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `tel` int(12) NOT NULL,
+  `tel` bigint(12) NOT NULL,
   `state` int(1) UNSIGNED ZEROFILL NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for c2e_record
--- ----------------------------
-DROP TABLE IF EXISTS `c2e_record`;
-CREATE TABLE `c2e_record`  (
-  `id` int(8) NOT NULL,
-  `jobid` int(15) DEFAULT NULL,
-  `eliteid` int(15) DEFAULT NULL,
-  `senddate` datetime(0) DEFAULT NULL,
-  `fromid` int(8) DEFAULT NULL,
-  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -101,10 +87,12 @@ INSERT INTO `chamber` VALUES (7, '往世乐土', 'Images/cover/20221226204409882
 DROP TABLE IF EXISTS `e2c_record`;
 CREATE TABLE `e2c_record`  (
   `id` int(8) NOT NULL,
-  `eliteid` int(15) DEFAULT NULL,
-  `jobid` int(15) DEFAULT NULL,
+  `eliteid` bigint(15) DEFAULT NULL,
+  `jobid` bigint(15) DEFAULT NULL,
   `senddate` datetime(0) DEFAULT NULL,
+  `backdate` datetime(0) DEFAULT NULL,
   `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `state` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -119,16 +107,16 @@ CREATE TABLE `elite`  (
   `state` int(1) UNSIGNED ZEROFILL NOT NULL,
   `resume` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `gender` int(1) UNSIGNED ZEROFILL DEFAULT NULL,
-  `age` int(2) UNSIGNED DEFAULT NULL,
+  `age` int(2) UNSIGNED NOT NULL,
   `degrees` int(2) DEFAULT NULL,
-  `tel` int(14) DEFAULT NULL,
+  `tel` bigint(14) DEFAULT NULL,
   `major` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `certificate` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `intention` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `selfevaluation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `experience` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`, `age`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -136,11 +124,11 @@ CREATE TABLE `elite`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `enterprise`;
 CREATE TABLE `enterprise`  (
-  `id` int(10) NOT NULL,
+  `id` bigint(10) NOT NULL,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `idnumber` varchar(18) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `license` int(14) UNSIGNED NOT NULL COMMENT '注册号',
-  `tel` int(12) UNSIGNED NOT NULL,
+  `license` bigint(14) UNSIGNED NOT NULL COMMENT '注册号',
+  `tel` bigint(14) UNSIGNED NOT NULL,
   `ename` varchar(70) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '企业名称',
   `state` int(1) UNSIGNED ZEROFILL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -151,9 +139,9 @@ CREATE TABLE `enterprise`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `jobs`;
 CREATE TABLE `jobs`  (
-  `id` int(18) NOT NULL,
+  `id` bigint(18) NOT NULL,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '岗位名称',
-  `place` int(20) NOT NULL COMMENT '所属单位',
+  `place` bigint(20) NOT NULL COMMENT '所属单位',
   `age` int(3) UNSIGNED DEFAULT NULL,
   `gender` int(1) UNSIGNED ZEROFILL DEFAULT NULL COMMENT '0代表不设限,1表示限定男性,2表示限定女性',
   `degrees` int(2) UNSIGNED ZEROFILL NOT NULL,
@@ -299,8 +287,8 @@ INSERT INTO `record` VALUES (00000000007, 3, 1, '2022-12-27 14:55:07', NULL, 000
 -- ----------------------------
 DROP TABLE IF EXISTS `sp`;
 CREATE TABLE `sp`  (
-  `id` int(10) UNSIGNED ZEROFILL NOT NULL,
-  `name` int(15) DEFAULT NULL,
+  `id` bigint(10) UNSIGNED ZEROFILL NOT NULL,
+  `name` bigint(15) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -342,7 +330,7 @@ INSERT INTO `type` VALUES (18, '治愈', 0);
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id规格为id+1e9,比如你是17号id就是1000000017',
+  `id` bigint(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id规格为id+1e9,比如你是17号id就是1000000017',
   `pwd` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   `type` int(1) UNSIGNED ZEROFILL NOT NULL COMMENT '0是个人,1是公司,2是管理员',
   PRIMARY KEY (`id`) USING BTREE
@@ -360,26 +348,10 @@ INSERT INTO `user` VALUES (1000000005, '999', 1);
 INSERT INTO `user` VALUES (1000000006, '5217', 1);
 
 -- ----------------------------
--- Table structure for usertype
--- ----------------------------
-DROP TABLE IF EXISTS `usertype`;
-CREATE TABLE `usertype`  (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of usertype
--- ----------------------------
-INSERT INTO `usertype` VALUES (0, '用户');
-INSERT INTO `usertype` VALUES (1, '企业');
-
--- ----------------------------
 -- View structure for erecordview
 -- ----------------------------
 DROP VIEW IF EXISTS `erecordview`;
-CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY INVOKER VIEW `erecordview` AS select `r`.`id` AS `id`,`r`.`senddate` AS `senddate`,`r`.`comment` AS `message`,`e`.`name` AS `name`,`e`.`resume` AS `resume`,`e`.`gender` AS `gender`,`e`.`age` AS `age`,`e`.`degrees` AS `degrees`,`e`.`major` AS `major`,`e`.`certificate` AS `certificate`,`e`.`intention` AS `intention`,`e`.`selfevaluation` AS `selfevaluation`,`e`.`experience` AS `experience` from (`e2c_record` `r` join `elite` `e`) where (`r`.`eliteid` = `e`.`id`);
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY INVOKER VIEW `erecordview` AS select `r`.`id` AS `id`,`r`.`senddate` AS `senddate`,`r`.`comment` AS `message`,`e`.`name` AS `name`,`e`.`resume` AS `resume`,`e`.`gender` AS `gender`,`e`.`age` AS `age`,`e`.`degrees` AS `degrees`,`e`.`major` AS `major`,`e`.`certificate` AS `certificate`,`e`.`intention` AS `intention`,`e`.`selfevaluation` AS `selfevaluation`,`e`.`experience` AS `experience`,`e`.`id` AS `eliteid`,`j`.`place` AS `place` from ((`e2c_record` `r` join `elite` `e`) join `jobs` `j`) where ((`r`.`eliteid` = `e`.`id`) and (`r`.`jobid` = `j`.`id`));
 
 -- ----------------------------
 -- View structure for recordview

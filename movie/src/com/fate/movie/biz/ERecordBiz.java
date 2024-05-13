@@ -17,7 +17,7 @@ public class ERecordBiz {
     EliteBiz eliteBiz = new EliteBiz();
     JobsDao jobsDao = new JobsDao();
     JobsBiz jobsBiz = new JobsBiz();
-    public List<ERecord> etRecordsByEliteId(long eliteid){
+    public List<ERecord> getRecordsByEliteId(long eliteid){
         List<ERecord> records = null;
         try {
             records=eRecordDao.getRecordsByEliteId(eliteid);
@@ -151,7 +151,16 @@ public class ERecordBiz {
         return 1;
 
     }
-
+    public int getById(long eliteid,long jobid){
+        int id=0;
+        try {
+            ERecord eRecord=eRecordDao.getid(eliteid,jobid);
+            id=eRecord.getId();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return id;
+    }
     /**
      *
      * @param keyword
@@ -167,10 +176,20 @@ public class ERecordBiz {
         return rows;
 
     }
-    public List<Map<String,Object>> query_beta(String name,String keyword){
+    public List<Map<String,Object>> query_0(long id,String keyword){
         List<Map<String,Object>> rows = null;
         try {
-            rows = eRecordDao.query_beta(name,keyword);
+            rows = eRecordDao.query_0(id,keyword);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rows;
+
+    }
+    public List<Map<String,Object>> query_1(long id,String keyword){
+        List<Map<String,Object>> rows = null;
+        try {
+            rows = eRecordDao.query_1(id,keyword);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

@@ -2,6 +2,7 @@ package com.fate.movie.dao;
 
 import com.fate.movie.bean.Movie;
 import com.fate.movie.bean.ERecord;
+import com.fate.movie.bean.User;
 import com.fate.movie.util.DBHelper;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -94,7 +95,20 @@ public class ERecordDao {
         DBHelper.close(conn);
         return count;
     }
-
+    /**
+     *查询id
+     * @param eliteid
+     * @param jobid
+     * @return
+     * @throws SQLException
+     */
+    public ERecord getid(long eliteid,long jobid) throws SQLException {
+        String sql = "select * from e2c_record where eliteid=? and jobid= ?";
+        Connection conn = DBHelper.getConnection();
+        ERecord eRecord=runner.query(conn,sql,new BeanHandler<ERecord>(ERecord.class),eliteid,jobid);
+        DBHelper.close(conn);
+        return eRecord;
+    }
     /**
      *查询关键词
      * @param keyWork
@@ -116,19 +130,30 @@ public class ERecordDao {
 
     /**
      * 查询特定人物的关键词
-     * @param name
+     * @param id
      * @param keyWork
      * @return
      * @throws SQLException
      */
-    public  List<Map<String,Object>>  query_beta(String name,String keyWork) throws SQLException {
+    public  List<Map<String,Object>>  query_0(long id,String keyWork) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        StringBuilder sb = new StringBuilder("select * from erecordview where name=? ");
+        StringBuilder sb = new StringBuilder("select * from erecordview where eliteid=? ");
         if(keyWork!=null){
             sb.append(" and message like '%"+keyWork+"%' or major like '%"+keyWork+"%' or selfevaluation like '%"+keyWork+
                     "%' or intention like '%"+keyWork+"%' or experience like '%"+keyWork+"%' or certificate like '%"+keyWork+"%' ");
         }
-        List<Map<String,Object>> data =runner.query(conn,sb.toString(),new MapListHandler(),name);
+        List<Map<String,Object>> data =runner.query(conn,sb.toString(),new MapListHandler(),id);
+        DBHelper.close(conn);
+        return data;
+    }
+    public  List<Map<String,Object>>  query_1(long id,String keyWork) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        StringBuilder sb = new StringBuilder("select * from erecordview where place=? ");
+        if(keyWork!=null){
+            sb.append(" and message like '%"+keyWork+"%' or major like '%"+keyWork+"%' or selfevaluation like '%"+keyWork+
+                    "%' or intention like '%"+keyWork+"%' or experience like '%"+keyWork+"%' or certificate like '%"+keyWork+"%' ");
+        }
+        List<Map<String,Object>> data =runner.query(conn,sb.toString(),new MapListHandler(),id);
         DBHelper.close(conn);
         return data;
     }

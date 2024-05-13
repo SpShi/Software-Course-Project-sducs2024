@@ -96,7 +96,7 @@ public class EliteServlet extends HttpServlet{
                 req.getRequestDispatcher("elite_add.jsp").forward(req,resp);
                 break;
             case "add":
-                User usera=(User)session.getAttribute("id");
+                User usera=(User)session.getAttribute("user");
                 String namea =  req.getParameter("name");
                 String idnuma=req.getParameter("idnum");
                 long gendera=Long.parseLong(req.getParameter("gender"));
@@ -121,8 +121,8 @@ public class EliteServlet extends HttpServlet{
                     out.println("<script>alert('身份证号码不合法'); location.href='elite.let?type=query';</script>");
                     return;
                 }
-
-                int count = eliteBiz.add(usera.getId(),namea,idnuma,resumea,gendera, agea,degreesa,Long.parseLong(tela),
+                long telnum=Long.parseLong(tela);
+                int count = eliteBiz.add(usera.getId(),namea,idnuma,resumea,gendera, agea,degreesa,telnum,
                         majora, emaila, ctfcta, intta, slfea,expea);
                 if(count>0){
                     out.println("<script>alert('用户信息添加成功'); location.href='elite.let?type=query';</script>");
