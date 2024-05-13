@@ -79,7 +79,7 @@ public class CompServlet extends HttpServlet{
                 }else {
                     //  4.2 非空：表示登录成功, 将企业对象保存到session中,提示登录成功后,将页面跳转到index.jsp
                     session.setAttribute("user",usernow);//user-->Object
-                    session.setAttribute("type",usernow.getType());
+                    session.setAttribute("user_type",usernow.getType());
                     if(usernow.getType()==1)
                     {
                         out.println("<script>alert('登录成功');location.href='index_comp.jsp';</script>");
@@ -134,7 +134,7 @@ public class CompServlet extends HttpServlet{
                 req.setAttribute("enterprise", comp);
 
                 HttpSession session2 = req.getSession();
-                Long type1=(Long) session2.getAttribute("type");
+                Long type1=(Long) session2.getAttribute("user_type");
                 if(type1==1){
                     req.getRequestDispatcher("comp_modify.jsp").forward(req,resp);
                 }
@@ -196,7 +196,7 @@ public class CompServlet extends HttpServlet{
                 List<Comp> compList = compBiz.getAll();
                 req.setAttribute("compList",compList);
                 HttpSession session3 = req.getSession();
-                Long type3=(Long) session3.getAttribute("type");
+                Long type3=(Long) session3.getAttribute("user_type");
                 if(type3==1){
                     req.getRequestDispatcher("comp_list.jsp").forward(req,resp);
                 }

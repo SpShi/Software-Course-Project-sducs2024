@@ -80,7 +80,7 @@ public class EliteServlet extends HttpServlet{
                 }else {
                     //  4.2 非空：表示登录成功, 将用户对象保存到session中,提示登录成功后,将页面跳转到index.jsp
                     session.setAttribute("user",usernow);//user-->Object
-                    session.setAttribute("type",usernow.getType());
+                    session.setAttribute("user_type",usernow.getType());
                     if(usernow.getType()==0)
                     {
                         out.println("<script>alert('登录成功');location.href='index_elite.jsp';</script>");
@@ -143,7 +143,7 @@ public class EliteServlet extends HttpServlet{
                 req.setAttribute("elite",elite);
 
                 HttpSession session2 = req.getSession();
-                Long type1=(Long) session2.getAttribute("type");
+                Long type1=(Long) session2.getAttribute("user_type");
                 if(type1==0){
                     req.getRequestDispatcher("elite_modify.jsp").forward(req,resp);
                 }
@@ -214,7 +214,7 @@ public class EliteServlet extends HttpServlet{
                 List<Elite> eliteList = eliteBiz.getAll();
                 req.setAttribute("eliteList",eliteList);
                 HttpSession session3 = req.getSession();
-                Long type3=(Long) session3.getAttribute("type");
+                Long type3=(Long) session3.getAttribute("user_type");
                 if(type3==0){
                     req.getRequestDispatcher("elite_list.jsp").forward(req,resp);
                 }

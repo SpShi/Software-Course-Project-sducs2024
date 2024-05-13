@@ -80,7 +80,7 @@ public class AdminServlet extends HttpServlet{
                 }else {
                     //  4.2 非空：表示登录成功, 将管理员对象保存到session中,提示登录成功后,将页面跳转到index.jsp
                     session.setAttribute("user",usernow);//user-->Object
-                    session.setAttribute("type",usernow.getType());
+                    session.setAttribute("user_type",usernow.getType());
                     if(usernow.getType()==2)
                     {
                         out.println("<script>alert('登录成功');location.href='index_admin.jsp';</script>");
@@ -134,7 +134,7 @@ public class AdminServlet extends HttpServlet{
                 req.setAttribute("admin",admin);
 
                 HttpSession session2 = req.getSession();
-                Long type1=(Long) session2.getAttribute("type");
+                Long type1=(Long) session2.getAttribute("user_type");
                 if(type1==2){
                     req.getRequestDispatcher("admin_modify.jsp").forward(req,resp);
                 }
@@ -188,7 +188,7 @@ public class AdminServlet extends HttpServlet{
                 List<Admin> adminList = adminBiz.getAll();
                 req.setAttribute("adminList",adminList);
                 HttpSession session3 = req.getSession();
-                Long type3=(Long) session3.getAttribute("type");
+                Long type3=(Long) session3.getAttribute("user_type");
                 if(type3==2){
                     req.getRequestDispatcher("admin_list.jsp").forward(req,resp);
                 }
