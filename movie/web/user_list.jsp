@@ -85,7 +85,7 @@
                                                     <td>${m.id}+111</td>
                                                     <td>${m.pwd}+222</td>
                                                     <td>
-                                                        <a onclick="return confirm('确认用户信息');" href="login.html">修改</a>
+                                                        <a onclick="return confirm('确认用户信息');" href="login_new.html">修改</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

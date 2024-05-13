@@ -95,7 +95,7 @@ public class UserServlet extends HttpServlet {
                             out.println("<script>alert('请完善您的个人信息');location.href='elite_add.jsp';</script>");
                         }
                         else{
-                            out.println("<script>alert('登录成功');location.href='elite.let?type=query';</script>");
+                            out.println("<script>alert('登录成功');location.href='index_elite.jsp';</script>");
                         }
 
                     }
@@ -132,7 +132,7 @@ public class UserServlet extends HttpServlet {
                     out.println("<script>alert('用户注册成功,请牢记您的ID:"+idtmp+"后重新登录'); location.href='user.let?type=query';</script>");
                 }else{
                     userBiz.modifysp(1,idtmp-1);
-                    out.println("<script>alert('用户注册失败'); location.href = 'login_new.html';</script>");
+                    out.println("<script>alert('用户注册失败'); location.href = 'index_elite.jsp';</script>");
                 }
 
                 break;

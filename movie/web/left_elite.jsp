@@ -52,7 +52,7 @@
 <!-- *********** -->
                     <h1 class="type"><a href="javascript:void(0)">用户管理</a></h1>
                     <div class="content">
-                      
+
                         <ul class="RM">
                             <!-- <li><a href="./member.let?type=addpre" target="main">用户注册</a></li> -->
                             <li><a href="./member.let?type=query" target="main">用户管理</a></li>
@@ -75,7 +75,7 @@
 <!-- *********** -->
                     <h1 class="type"><a href="javascript:void(0)"> 影厅管理</a></h1>
                     <div class="content">
-                
+
                         <ul class="RM">
                             <li><a href="./chamber_add.jsp" target="main">添加影厅</a></li>
                             <li><a href="./chamber.let?type=query&pageIndex=1" target="main"> 影厅列表</a></li>
@@ -84,7 +84,7 @@
 <!-- *********** -->
                     <h1 class="type"><a href="javascript:void(0)"> 电影类型管理</a></h1>
                     <div class="content">
-                       
+
                         <ul class="RM">
                             <li><a href="type_add.jsp" target="main">添加类型</a></li>
                             <li><a href="type_list.jsp" target="main">类型列表</a></li>
