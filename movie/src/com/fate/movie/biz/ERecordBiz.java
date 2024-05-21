@@ -1,9 +1,7 @@
 package com.fate.movie.biz;
 
 import com.fate.movie.bean.*;
-import com.fate.movie.dao.JobsDao;
-import com.fate.movie.dao.EliteDao;
-import com.fate.movie.dao.ERecordDao;
+import com.fate.movie.dao.*;
 import com.fate.movie.util.DBHelper;
 
 import java.sql.SQLException;
@@ -17,6 +15,7 @@ public class ERecordBiz {
     EliteBiz eliteBiz = new EliteBiz();
     JobsDao jobsDao = new JobsDao();
     JobsBiz jobsBiz = new JobsBiz();
+    CompDao compDao=new CompDao();
     public List<ERecord> getRecordsByEliteId(long eliteid,int state){
         List<ERecord> records = null;
         try {
@@ -24,14 +23,53 @@ public class ERecordBiz {
             Elite elite = eliteBiz.getById(eliteid);
             for(ERecord record:records){
                 long jobId = record.getJobid();
-                Jobs jos=jobsBiz.getById(jobId);
-                record.setJobs(jos);
+                Jobs jobs=jobsBiz.getById(jobId);
+                record.setJobs(jobs);
+                Comp comp=compDao.getById(jobs.getPlace());
+                record.setComp(comp);
                 record.setElite(elite);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return records;
+    }
+    public List<ERecord>  getByPage(int pageIndex,int pageSize,long eliteid,int state) {
+        List<ERecord> records = null;
+        try {
+            records = eRecordDao.getByPage(pageIndex,pageSize,eliteid,state);
+            Elite elite=eliteDao.getById(eliteid);
+            //处理type对象的数据问题
+            for(ERecord record:records){
+                record.setElite(elite);
+                long jobid=record.getJobid();
+                Jobs jobs=jobsDao.getById(jobid);
+                //设置给movie.setType()
+                record.setJobs(jobs);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return records;
+
+    }
+    /**
+     * 由行数算页数
+     * @return
+     */
+    public int  getPageCount(int pageSize,long eliteid,int state) {
+        int pageCount = 0;
+        try {
+            //1.获取行数
+            int rowCount = eRecordDao.getCount(eliteid,state);
+            //2.根据行数得到页数,每页多少条
+            pageCount =  (rowCount-1)/pageSize+1;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return pageCount;
     }
     public List<ERecord> getRecordsByJobId(long jobId,boolean desc,int state){
         List<ERecord> records = null;

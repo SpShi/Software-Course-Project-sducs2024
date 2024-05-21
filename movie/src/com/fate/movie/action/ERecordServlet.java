@@ -88,13 +88,7 @@ public class ERecordServlet extends HttpServlet {
                 }
                 break;
             case "queryelite":
-                int statee = Integer.parseInt(req.getParameter("statee"));
-                Elite eliteq=eliteBiz.getById(user.getId());
-                List<ERecord> eRecords = eRecordBiz.getRecordsByEliteId(user.getId(),statee);
-                req.setAttribute("eRecords",eRecords);
-                //4.转发
-                req.getRequestDispatcher("myjobs_list.jsp").forward(req,resp);
-
+                queryelite(req,resp,out);
                 break;
             case "queryjob":
                 //1.获取岗位信息
@@ -139,6 +133,42 @@ public class ERecordServlet extends HttpServlet {
             default:
                 resp.sendError(404,"请求的地址不存在");
         }
+
+    }
+    /**
+     * 查询
+     * movie.let?type=query&pageIndex=1
+     * 页数: biz
+     * 当前页码:pageIndex = 1
+     * 存:request,转发
+     * @param req
+     * @param resp
+     * @param out
+     */
+    private void queryelite(HttpServletRequest req, HttpServletResponse resp, PrintWriter out) throws ServletException, IOException {
+        HttpSession session1 = req.getSession();
+        User user = (User)session1.getAttribute("user_now");
+        int statee = Integer.parseInt(req.getParameter("statee"));
+
+
+        //1.获取信息(页数，页码,信息)
+        int pageSize = 5;
+        int pageCount = eRecordBiz.getPageCount(pageSize,user.getId(),statee);
+        int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
+        if(pageIndex<1){
+            pageIndex = 1;
+        }
+        if(pageIndex>pageCount){
+            pageIndex = pageCount;
+        }
+        List<ERecord> eRecords = eRecordBiz.getByPage(pageIndex,pageSize,user.getId(),statee);
+
+        //2.存
+        req.setAttribute("pageCount",pageCount);
+        req.setAttribute("eRecords",eRecords);
+
+        //3. 转发到jsp页面
+        req.getRequestDispatcher("myjobs_list.jsp?pageIndex="+pageIndex).forward(req,resp);
 
     }
 }

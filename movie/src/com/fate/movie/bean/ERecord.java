@@ -20,6 +20,7 @@ public class ERecord {
     //外键
     private Elite elite;
     private Jobs jobs;
+    private Comp comp;
 
     public int getId() {
         return id;
@@ -90,6 +91,12 @@ public class ERecord {
         this.state = state;
     }
 
+    public Comp getComp(){return comp;}
+
+    public void setComp(Comp comp) {
+        this.comp = comp;
+    }
+
     @Override
     public String toString() {
         return "ERecord{" +
@@ -102,6 +109,7 @@ public class ERecord {
                 ", comment=" + comment + '\'' +
                 ", elite=" + elite +
                 ", job=" + jobs +
+                ", comp=" + comp +
                 '}';
     }
 }

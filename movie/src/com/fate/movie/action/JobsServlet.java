@@ -56,7 +56,7 @@ public class JobsServlet extends HttpServlet {
         //out
         PrintWriter out  = resp.getWriter();
         HttpSession session = req.getSession();
-
+        User user = (User)session.getAttribute("user_now");
 
         //请求类型
         String type = req.getParameter("type");
@@ -73,7 +73,7 @@ public class JobsServlet extends HttpServlet {
             case "add":
 
                 String namea =  req.getParameter("name");
-                long placea=Long.parseLong(req.getParameter("place"));
+                long placea=user.getId();
                 int agea=Integer.parseInt(req.getParameter("age"));
                 int gendera=Integer.parseInt(req.getParameter("gender"));
                 int salarya=Integer.parseInt(req.getParameter("salary"));

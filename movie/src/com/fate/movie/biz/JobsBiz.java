@@ -1,8 +1,10 @@
 package com.fate.movie.biz;
 
+import com.fate.movie.bean.Comp;
 import com.fate.movie.bean.Jobs;
 import com.fate.movie.bean.Movie;
 import com.fate.movie.bean.Type;
+import com.fate.movie.dao.CompDao;
 import com.fate.movie.dao.JobsDao;
 import com.fate.movie.dao.TypeDao;
 
@@ -11,6 +13,7 @@ import java.util.List;
 
 public class JobsBiz {
     JobsDao jobsDao = new JobsDao();
+    CompDao compDao=new CompDao();
     public int add(String name,long place,int age,int gender,int degrees,String major,String ctfct,
                    int salary,String email,String intro){
         int count = 0;
@@ -61,6 +64,12 @@ public class JobsBiz {
         List<Jobs> jobss = null;
         try {
             jobss =  jobsDao.getAll();
+            for(Jobs job:jobss)
+            {
+                Comp comp=compDao.getById(job.getPlace());
+                job.setComp(comp);
+            }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
@@ -72,6 +81,8 @@ public class JobsBiz {
         Jobs jobs = null;
         try {
             jobs = jobsDao.getById(id);
+            Comp comp=compDao.getById(jobs.getPlace());
+            jobs.setComp(comp);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -81,6 +92,12 @@ public class JobsBiz {
         List<Jobs> jobss = null;
         try {
             jobss =  jobsDao.getAllwithLimit(place,agel,ageh,gender,degrees,salary,intro,desc);
+            for(Jobs job:jobss)
+            {
+                Comp comp=compDao.getById(job.getPlace());
+                job.setComp(comp);
+            }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
@@ -110,7 +127,11 @@ public class JobsBiz {
         List<Jobs> jobs = null;
         try {
             jobs = jobsDao.getByPage(pageIndex,pageSize);
-
+            for(Jobs job:jobs)
+            {
+                Comp comp=compDao.getById(job.getPlace());
+                job.setComp(comp);
+            }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

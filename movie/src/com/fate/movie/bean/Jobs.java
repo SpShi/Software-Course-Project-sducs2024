@@ -12,6 +12,7 @@ public class Jobs {
     private int salary;
     private String email;
     private String intro;
+    private Comp comp;
 
     public long getId() {
         return id;
@@ -95,6 +96,14 @@ public class Jobs {
         this.intro = intro;
     }
 
+    public Comp getComp() {
+        return comp;
+    }
+
+    public void setComp(Comp comp) {
+        this.comp = comp;
+    }
+
     @Override
     public String toString() {
         return "Job{" +
@@ -109,6 +118,7 @@ public class Jobs {
                 ", salary='" + salary +
                 ", email='" + email + '\'' +
                 ", introduction='" + intro + '\'' +
+                ", comp=" + comp +
                 '}';
     }
 }

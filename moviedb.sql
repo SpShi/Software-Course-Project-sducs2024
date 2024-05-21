@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 13/05/2024 20:32:25
+ Date: 20/05/2024 17:56:42
 */
 
 SET NAMES utf8mb4;
@@ -59,6 +59,13 @@ CREATE TABLE `admin`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of admin
+-- ----------------------------
+INSERT INTO `admin` VALUES (1000000011, 'admin0', 15153312457, 1);
+INSERT INTO `admin` VALUES (1000000012, 'admin1', 15153312458, 1);
+INSERT INTO `admin` VALUES (1000000013, 'admin2', 15153312459, 1);
+
+-- ----------------------------
 -- Table structure for chamber
 -- ----------------------------
 DROP TABLE IF EXISTS `chamber`;
@@ -97,6 +104,19 @@ CREATE TABLE `e2c_record`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of e2c_record
+-- ----------------------------
+INSERT INTO `e2c_record` VALUES (1, 1000000000, 1, '2021-12-13 00:00:00', '2021-12-13 00:00:01', '求职', 0);
+INSERT INTO `e2c_record` VALUES (2, 1000000000, 1, '2021-12-13 00:01:00', '2021-12-13 00:00:21', '不录用', 1);
+INSERT INTO `e2c_record` VALUES (3, 1000000001, 2, '2021-12-15 00:00:00', '2021-12-13 00:00:11', '录用', 1);
+INSERT INTO `e2c_record` VALUES (4, 1000000002, 3, '2021-12-13 00:00:00', '2021-12-13 06:00:01', '求职', 0);
+INSERT INTO `e2c_record` VALUES (5, 1000000003, 5, '2021-12-13 00:01:00', '2021-12-13 05:00:21', '不录用', 1);
+INSERT INTO `e2c_record` VALUES (6, 1000000007, 4, '2021-12-15 00:00:00', '2021-12-13 00:11:11', '录用', 1);
+INSERT INTO `e2c_record` VALUES (7, 1000000008, 5, '2021-12-13 00:00:00', '2021-12-13 00:00:01', '你好', 0);
+INSERT INTO `e2c_record` VALUES (8, 1000000010, 4, '2021-12-13 00:01:00', '2021-12-13 00:01:21', '不录用', 1);
+INSERT INTO `e2c_record` VALUES (9, 1000000009, 3, '2021-12-15 00:00:00', '2021-12-13 00:02:11', '录用', 1);
+
+-- ----------------------------
 -- Table structure for elite
 -- ----------------------------
 DROP TABLE IF EXISTS `elite`;
@@ -122,7 +142,14 @@ CREATE TABLE `elite`  (
 -- ----------------------------
 -- Records of elite
 -- ----------------------------
+INSERT INTO `elite` VALUES (1000000000, 'name0', '370581200304176378', 0, '1', 1, 26, 0, 15153380272, 'major', '356303329@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000001, 'name1', '370681200304176378', 0, '1', 1, 27, 0, 15153380273, 'major', '356303339@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000002, 'name2', '370481200304176378', 0, '1', 1, 24, 0, 15153380275, 'major', '356303349@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000003, 'name3', '370381200304176378', 0, '1', 1, 29, 0, 15153380274, 'major', '356303529@qq.com', '1', '1', '1', '1');
 INSERT INTO `elite` VALUES (1000000007, '123456', '370781200304176378', 0, '1', 1, 25, 0, 15153380271, 'major', '356303328@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000008, 'name8', '370682200304176378', 0, '1', 1, 27, 0, 15154560273, 'major', '356243339@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000009, 'name9', '370483200304176378', 0, '1', 1, 24, 0, 15153346275, 'major', '356303114@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000010, 'name10', '370384200304176378', 0, '1', 1, 29, 0, 15153380894, 'major', '351203529@qq.com', '1', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for enterprise
@@ -138,6 +165,13 @@ CREATE TABLE `enterprise`  (
   `state` int(1) UNSIGNED ZEROFILL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of enterprise
+-- ----------------------------
+INSERT INTO `enterprise` VALUES (1000000004, '企业级1', '370581200304176378', 12345678900, 15788855666, 'name1', 0);
+INSERT INTO `enterprise` VALUES (1000000005, '企业级2', '370581200305176378', 12345678901, 15788855667, 'name2', 0);
+INSERT INTO `enterprise` VALUES (1000000006, '企业级2', '370581200306176378', 12345678902, 15788855668, 'name3', 0);
 
 -- ----------------------------
 -- Table structure for jobs
@@ -157,6 +191,15 @@ CREATE TABLE `jobs`  (
   `intro` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of jobs
+-- ----------------------------
+INSERT INTO `jobs` VALUES (1, '清洁工', 1000000004, 60, 0, 07, '1', '1', 1000, '123@qq.com', '清洁工');
+INSERT INTO `jobs` VALUES (2, '前台', 1000000004, 40, 1, 06, '1', '1', 1800, '124@qq.com', '前台');
+INSERT INTO `jobs` VALUES (3, '食堂阿姨', 1000000005, 60, 0, 05, '1', '1', 1600, '125@qq.com', '食堂阿姨');
+INSERT INTO `jobs` VALUES (4, '宿管阿姨', 1000000005, 55, 1, 07, '1', '1', 1200, '126@qq.com', '宿管阿姨');
+INSERT INTO `jobs` VALUES (5, '保安', 1000000006, 50, 2, 06, '1', '1', 1500, '127@qq.com', '保安');
 
 -- ----------------------------
 -- Table structure for member
@@ -300,7 +343,7 @@ CREATE TABLE `sp`  (
 -- ----------------------------
 -- Records of sp
 -- ----------------------------
-INSERT INTO `sp` VALUES (0000000001, 1000000011);
+INSERT INTO `sp` VALUES (0000000001, 1000000014);
 
 -- ----------------------------
 -- Table structure for type
@@ -339,7 +382,7 @@ CREATE TABLE `user`  (
   `pwd` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   `type` int(1) UNSIGNED ZEROFILL NOT NULL COMMENT '0是个人,1是公司,2是管理员',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1000000011 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1000000014 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -355,6 +398,9 @@ INSERT INTO `user` VALUES (1000000007, '123', 0);
 INSERT INTO `user` VALUES (1000000008, '123', 0);
 INSERT INTO `user` VALUES (1000000009, '123', 0);
 INSERT INTO `user` VALUES (1000000010, '123', 0);
+INSERT INTO `user` VALUES (1000000011, '123', 2);
+INSERT INTO `user` VALUES (1000000012, '123', 2);
+INSERT INTO `user` VALUES (1000000013, '123', 2);
 
 -- ----------------------------
 -- View structure for erecordview

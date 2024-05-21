@@ -1,8 +1,7 @@
 package com.fate.movie.dao;
 
-import com.fate.movie.bean.Movie;
+
 import com.fate.movie.bean.ERecord;
-import com.fate.movie.bean.User;
 import com.fate.movie.util.DBHelper;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -38,18 +37,58 @@ public class ERecordDao {
         return records;
     }
     /**
+     *页面查询(暂时不考虑排序问题)
+     * @param pageIndex 第几页,从1开始
+     * @param pageSize 每页多少行
+     * @return 当前页的信息
+     * @throws SQLException
+     */
+    public List<ERecord>  getByPage(int pageIndex,int pageSize,long eliteId,int state) throws SQLException {
+        Connection conn  = DBHelper.getConnection();
+        String sql = "select * from e2c_record where eliteid= ? limit ?,?";
+        int offset = (pageIndex-1)*pageSize;
+        List<ERecord> records ;
+        if(state <2) {
+            sql+=" and state=?";
+            records= runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),eliteId,state,offset,pageSize);
+        }
+        else records= runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),eliteId,offset,pageSize);
+        DBHelper.close(conn);
+        return  records;
+    }
+
+    /**
+     * 获取电影数量
+     * @return
+     * @throws SQLException
+     */
+    public int  getCount(long eliteId,int state) throws SQLException {
+        Connection conn  = DBHelper.getConnection();
+        String sql = "select count(id)from e2c_record where eliteid= ?";
+        Number data;
+        if(state <2) {
+            sql+=" and state=?";
+            data = runner.query(conn,sql,new ScalarHandler<>(),eliteId,state);
+        }
+        else data = runner.query(conn,sql,new ScalarHandler<>(),eliteId);
+
+        int count = data.intValue();
+        DBHelper.close(conn);
+        return count;
+    }
+    /**
      * 根据id查询
      * @param id
      * @return
      */
-    public List<ERecord> getRecordById(int id) throws SQLException {
-        Connection conn = DBHelper.getConnection();
-        String sql ="select * from e2c_record where id = ?";
-        List<ERecord> records = runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class), id);
-        DBHelper.close(conn);
-        return records;
-    }
 
+    public ERecord getById(long id) throws SQLException {
+        Connection conn  = DBHelper.getConnection();
+        String sql="select * from e2c_record where id=?";
+        ERecord record = runner.query(conn,sql,new BeanHandler<ERecord>(ERecord.class),id);
+        DBHelper.close(conn);
+        return record;
+    }
     /**
      * 查询特定工作的所有简历
      * @param jobid

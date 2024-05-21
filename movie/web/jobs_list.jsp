@@ -1,14 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: Altair
-  Date: 2024/5/7
-  Time: 16:35
+  Date: 2024/5/20
+  Time: 17:40
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"  import="java.util.*" %>
-<%@ page import="com.fate.movie.bean.Jobs" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.fate.movie.bean.ERecord" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -42,7 +41,7 @@
                         <table>
                             <tr>
                                 <td width="100" align="center"><img src="./Images/mime.gif" /></td>
-                                <td valign="bottom"><h3 style="letter-spacing:1px;">简历投递 > 结果查看</h3></td>
+                                <td valign="bottom"><h3 style="letter-spacing:1px;">岗位 > 岗位列表 </h3></td>
                             </tr>
                         </table>
                     </td>
@@ -66,27 +65,34 @@
                                     <table width="100%"  class="cont tr_color">
                                         <tr>
                                             <th>编号</th>
-                                            <th>岗位名称</th>
-                                            <th>发送日期</th>
-                                            <th>回复日期</th>
-                                            <th>留言</th>
-                                            <th>公司名称</th>
-                                            <th>简历</th>
+                                            <th>名称</th>
+                                            <th>所属公司</th>
+                                            <th>年龄要求</th>
+                                            <th>性别限制</th>
+                                            <th>学历要求</th>
+                                            <th>专业要求</th>
+                                            <th>证书</th>
+                                            <th>工资</th>
+                                            <th>邮箱</th>
+                                            <th>简介</th>
                                             <th>操作</th>
                                         </tr>
-                                        <c:forEach items="${eRecords}" var="b">
+                                        <c:forEach items="${movies}" var="b">
                                             <tr align="center" class="d">
-                                                <td><a href="erecord.let?type=details&id=${b.id}">${b.id}</a></td>
-                                                <td>${b.jobs.name}</td>
-                                                <td>${b.senddate}</td>
-                                                <td>${b.backdate}</td>
-                                                <td>${b.comment}</td>
+                                                <td><a href="movie.let?type=details&id=${b.id}">${b.id}</a></td>
+                                                <td>${b.name}</td>
                                                 <td>${b.comp.name}</td>
-                                                <td><img src="${b.elite.resume}" class="cover"/></td>
+                                                <td>${b.age}</td>
+                                                <td>${b.gender}</td>
+                                                <td>${b.degrees}</td>
+                                                <td>${b.certificates}</td>
+                                                <td>${b.salary}</td>
+                                                <td>${b.email}</td>
+                                                <td>${b.intro}</td>
                                                 <td>
-                                                    <a href="erecord.let?type=details&id=${b.id}">详情</a>
-                                                    <a onclick="return confirm('确认修改');" href="erecord.let?type=modifypre&id=${b.id}">修改</a>&nbsp;&nbsp;
-                                                    <a onclick="return confirm('确认删除');" href="erecord.let?type=remove&id=${b.id}">删除</a>
+                                                    <a href="jobs.let?type=details&id=${b.id}">详情</a>
+                                                    <a onclick="return confirm('确认修改');" href="jobs.let?type=modifypre&id=${b.id}">修改</a>&nbsp;&nbsp;
+                                                    <a onclick="return confirm('确认删除');" href="jobs.let?type=remove&id=${b.id}">删除</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -94,16 +100,16 @@
                                         <tr><td colspan="9" align="center">
                                             <div class="pager">
                                                 <ul class="clearfix">
-                                                    <li><a href="erecord.let?type=queryelite&pageIndex=${param.pageIndex-1}">上一页</a></li>
+                                                    <li><a href="jobs.let?type=query&pageIndex=${param.pageIndex-1}">上一页</a></li>
                                                     <c:forEach var="i" begin="1" end="${pageCount}" step="1">
                                                         <c:if test="${i==param.pageIndex}">
-                                                            <li class="current"><a href="erecord.let?type=queryelite&pageIndex=${i}">${i}</a></li>
+                                                            <li class="current"><a href="jobs.let?type=query&pageIndex=${i}">${i}</a></li>
                                                         </c:if>
                                                         <c:if test="${i!=param.pageIndex}">
-                                                            <li><a href="erecord.let?type=queryelite&pageIndex=${i}">${i}</a></li>
+                                                            <li><a href="jobs.let?type=query&pageIndex=${i}">${i}</a></li>
                                                         </c:if>
                                                     </c:forEach>
-                                                    <li><a href="erecord.let?type=queryelite&pageIndex=${param.pageIndex+1}">下一页</a></li>
+                                                    <li><a href="jobs.let?type=query&pageIndex=${param.pageIndex+1}">下一页</a></li>
                                                 </ul>
                                             </div>
                                         </td></tr>

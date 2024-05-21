@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  import="java.util.*" %>
-<%@ page import="com.fate.movie.bean.Record" %>
+<%@ page import="com.fate.movie.bean.ERecord" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html >
@@ -42,7 +42,7 @@
                         <table>
                             <tr>
                                 <td width="100" align="center"><img src="./Images/mime.gif" /></td>
-                                <td valign="bottom"><h3 style="letter-spacing:1px;">电影添加 > 简历投递情况查询</h3></td>
+                                <td valign="bottom"><h3 style="letter-spacing:1px;">简历投递 > 结果查看</h3></td>
                             </tr>
                         </table>
                     </td>
@@ -66,33 +66,48 @@
                                     <table width="100%"  class="cont tr_color">
                                         <tr>
                                             <th>编号</th>
-                                            <th>名称</th>
-                                            <th>类型</th>
-                                            <th>主演</th>
-                                            <th>导演</th>
-                                            <th>余票</th>
-                                            <th>上映日期</th>
-                                            <th>封面</th>
+                                            <th>岗位名称</th>
+                                            <th>发送日期</th>
+                                            <th>回复日期</th>
+                                            <th>留言</th>
+                                            <th>公司名称</th>
+                                            <th>简历</th>
                                             <th>操作</th>
                                         </tr>
                                         <c:forEach items="${eRecords}" var="b">
                                             <tr align="center" class="d">
-                                                <td><a href="movie.let?type=details&id=${b.id}">${b.id}</a></td>
+                                                <td><a href="erecord.let?type=details&id=${b.id}">${b.id}</a></td>
                                                 <td>${b.name}</td>
-                                                <td>${b.type.name}</td>
-                                                <td>${b.author}</td>
-                                                <td>${b.publish}</td>
-                                                <td>${b.stock}</td>
-                                                <td>${b.date}</td>
-                                                <td><img src="${b.pic}" class="cover"/></td>
+                                                <td>${b.jobs.name}</td>
+                                                <td>${b.senddate}</td>
+                                                <td>${b.backdate}</td>
+                                                <td>${b.comment}</td>
+                                                <td>${b.comp.name}</td>
+                                                <td><img src="${b.elite.resume}" class="cover"/></td>
                                                 <td>
-                                                    <a href="movie.let?type=details&id=${b.id}">详情</a>
-                                                    <a onclick="return confirm('确认修改');" href="movie.let?type=modifypre&id=${b.id}">修改</a>&nbsp;&nbsp;
-                                                    <a onclick="return confirm('确认删除');" href="movie.let?type=remove&id=${b.id}">删除</a>
+                                                    <a href="erecord.let?type=details&id=${b.id}">详情</a>
+                                                    <a onclick="return confirm('确认修改');" href="erecord.let?type=modifypre&id=${b.id}">修改</a>&nbsp;&nbsp;
+                                                    <a onclick="return confirm('确认删除');" href="erecord.let?type=remove&id=${b.id}">删除</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
 
+                                        <tr><td colspan="9" align="center">
+                                            <div class="pager">
+                                                <ul class="clearfix">
+                                                    <li><a href="erecord.let?type=queryelite&pageIndex=${param.pageIndex-1}">上一页</a></li>
+                                                    <c:forEach var="i" begin="1" end="${pageCount}" step="1">
+                                                        <c:if test="${i==param.pageIndex}">
+                                                            <li class="current"><a href="erecord.let?type=queryelite&pageIndex=${i}">${i}</a></li>
+                                                        </c:if>
+                                                        <c:if test="${i!=param.pageIndex}">
+                                                            <li><a href="erecord.let?type=queryelite&pageIndex=${i}">${i}</a></li>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                    <li><a href="erecord.let?type=queryelite&pageIndex=${param.pageIndex+1}">下一页</a></li>
+                                                </ul>
+                                            </div>
+                                        </td></tr>
                                     </table>
 
                                 </td>
