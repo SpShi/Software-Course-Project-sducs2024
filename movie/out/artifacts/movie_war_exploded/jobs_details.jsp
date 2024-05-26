@@ -64,13 +64,13 @@
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>编号：</td>
-                                                <td width="20%"><input class="text" type="text" name="movieId"  value="${job.id}" disabled="disabled"/></td>
+                                                <td width="20%"><input class="text" type="text" name="movieId"  value="${jobs.id}" disabled="disabled"/></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td width="15%">岗位名称：</td>
-                                                <td width="25%"><input class="text" type="text" name="name" value="${job.name}" disabled="disabled"/></td>
+                                                <td width="25%"><input class="text" type="text" name="name" value="${jobs.name}" disabled="disabled"/></td>
 
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
@@ -78,70 +78,69 @@
                                                 <td width="2%">&nbsp;</td>
                                                 <td>所属公司：</td>
                                                 <td width="20%">
-                                                    <input class="text" type="text" name="type" value="${job.comp.name}" disabled="disabled"/>
+                                                    <input class="text" type="text" name="type" value="${jobs.comp.name}" disabled="disabled"/>
                                                 </td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>年龄限制：</td>
-                                                <td width="20%"><input class="text" style="width:50px;" type="number" name="age" value="${job.age}"  disabled="disabled" /></td>
+                                                <td width="20%"><input class="text" style="width:50px;" type="number" name="age" value="${jobs.age}"  disabled="disabled" /></td>
 
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>性别限制：</td>
-                                                <td width="20%"><input class="text" style="width:100px;" type="text" name="gender" value="${job.gender}" disabled="disabled" /></td>
+                                                <td width="20%"><input class="text" style="width:100px;" type="text" name="gender" value="${jobs.gender}" disabled="disabled" /></td>
 
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>学历限制：</td>
-                                                <td width="20%"><input class="text"  type="text" name="degrees" value="${job.degrees}" disabled="disabled"/></td>
+                                                <td width="20%"><input class="text"  type="text" name="degrees" value="${jobs.degrees}" disabled="disabled"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>专业:</td>
-                                                <td width="20%"><input class="text"  type="text" name="major" value="${job.major}" disabled="disabled"/></td>
+                                                <td width="20%"><input class="text"  type="text" name="major" value="${jobs.major}" disabled="disabled"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>证书:</td>
-                                                <td width="20%"><input class="text"  type="text" name="certificates" value="${job.certificates}" disabled="disabled"/></td>
+                                                <td width="20%"><input class="text"  type="text" name="certificates" value="${jobs.certificates}" disabled="disabled"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>工资:</td>
-                                                <td width="20%"><input class="text"  type="text" name="salary" value="${job.salary}"disabled="disabled"/></td>
+                                                <td width="20%"><input class="text"  type="text" name="salary" value="${jobs.salary}"disabled="disabled"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>邮箱:</td>
-                                                <td width="20%"><input class="text"  type="text" name="email" value="${job.email}"disabled="disabled"/></td>
+                                                <td width="20%"><input class="text"  type="text" name="email" value="${jobs.email}"disabled="disabled"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
                                                 <td>简介：</td>
-                                                <td colspan="2"><textarea cols="150" rows="20" disabled="disabled">${job.intro}</textarea></td>
+                                                <td colspan="2"><textarea cols="150" rows="20" disabled="disabled">${jobs.intro}</textarea></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
                                                 <td></td>
-                                                <td colspan="3"><input class="btn" type="button" value="返回" onclick="window.location='job.let?type=query&pageIndex=1';" /></td>
-                                                <td colspan="3"><input class="btn" type="button" value="查看评论" onclick="window.location='minfo.let?type=query&mvin=${job.name}&pageIndex=1';" /></td>
+                                                <td colspan="3"><input class="btn" type="button" value="返回" onclick="window.location='jobs.let?type=query&pageIndex=1';" /></td>
                                             </tr>
                                         </table>
                                     </form>

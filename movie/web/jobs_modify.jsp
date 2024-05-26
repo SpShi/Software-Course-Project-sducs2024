@@ -1,13 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: Altair
-  Date: 2024/5/20
-  Time: 16:47
+  Date: 2024/5/21
+  Time: 11:24
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html >
+<html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="keywords"  content = " 电影 java jsp"/>
@@ -33,7 +34,7 @@
             }
         }
         $(function(){
-            $("#pic").change(function(){
+            $("#filePic").change(function(){
                 var path = getFullPath($(this)[0]);
                 console.log(path);
                 $("#imgPic").prop("src",path);
@@ -67,7 +68,7 @@
                         <table>
                             <tr>
                                 <td width="100" align="center"><img src="./Images/mime.gif" /></td>
-                                <td valign="bottom"><h3 style="letter-spacing:1px;">岗位管理 > 添加岗位</h3></td>
+                                <td valign="bottom"><h3 style="letter-spacing:1px;">岗位 > 岗位修改</h3></td>
                             </tr>
                         </table>
                     </td>
@@ -87,18 +88,33 @@
                         <table width="100%">
                             <tr>
                                 <td colspan="2">
-                                    <form action="jobs.let?type=add" method="post" enctype="multipart/form-data">
+                                    <form action="" method="">
                                         <table width="100%"class="cont">
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
-                                                <td width="15%">名称：</td>
-                                                <td width="25%"><input class="text" type="text" name="name" value="" /></td>
+                                                <td>编号：</td>
+                                                <td width="20%"><input class="text" type="text" name="movieId"  value="${jobs.id}" readonly/></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
-                                                <td>最大年龄要求：</td>
-                                                <td width="20%"><input class="text" style="width:50px;" type="number" name="age" value="60" /></td>
+                                                <td width="15%">岗位名称：</td>
+                                                <td width="25%"><input class="text" type="text" name="name" value="${jobs.name}" /></td>
+
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>所属公司：</td>
+                                                <td width="20%">
+                                                    <input class="text" type="text" name="type" value="${jobs.comp.name}" readonly/>
+                                                </td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>年龄限制：</td>
+                                                <td width="20%"><input class="text" style="width:50px;" type="number" name="age" value="${jobs.age}" /></td>
 
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
@@ -127,44 +143,42 @@
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
-                                                <td>专业要求：</td>
-                                                <td width="20%"><input class="text" style="width:100px;" type="text" name="major"  /></td>
-
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>证书要求：</td>
-                                                <td width="20%"><input class="text"  type="text" name="certificates"/></td>
+                                                <td>专业:</td>
+                                                <td width="20%"><input class="text"  type="text" name="major" value="${jobs.major}"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
-                                                <td>工资：</td>
-                                                <td width="20%"><input class="text"  type="text" name="salary"/></td>
+                                                <td>证书:</td>
+                                                <td width="20%"><input class="text"  type="text" name="certificates" value="${jobs.certificates}"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
-                                                <td>联系邮箱：</td>
-                                                <td width="20%"><input class="text"  type="text" name="email"/></td>
+                                                <td>工资:</td>
+                                                <td width="20%"><input class="text"  type="text" name="salary" value="${jobs.salary}" /></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
-                                                <td>简介：</td>
-                                                <td width="20%"><input class="text"  type="text" name="intro"/></td>
+                                                <td>邮箱:</td>
+                                                <td width="20%"><input class="text"  type="text" name="email" value="${jobs.email}" /></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
+                                                <td>简介：</td>
+                                                <td colspan="2"><textarea cols="150" rows="20">${jobs.intro}</textarea></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
                                                 <td></td>
                                                 <td colspan="3"><input class="btn" type="submit" value="提交" /></td>
-
                                             </tr>
                                         </table>
                                     </form>

@@ -48,20 +48,13 @@
 
                 <tr class="lab"><td>性别：</td>
                     <td>
-                        <c:forEach items="gender" var="mt">
-                            <c:if test="0">
-                                <input  type="radio" name="gender" value="0"
-                                        checked/> 其他&nbsp;&nbsp;
-                            </c:if>
-                            <c:if test="1">
-                                <input type="radio" name="gender" value="1"/> 女&nbsp;&nbsp;
-                            </c:if>
-                            <c:if test="2">
-                                <input type="radio" name="gender" value="2"/> 男
-                            </c:if>
-                        </c:forEach>
-                    </td></tr>
-
+                        <select class="input" id="gender" name="gender">
+                            <option value="0">其他</option>
+                            <option value="1">女</option>
+                            <option value="2">男</option>
+                        </select>
+                    </td>
+                </tr>
                 <tr class="lab"><td>年龄：</td>
                     <td><input class="input" placeholder="您的年龄应在18岁到60岁之间"  id="balance" type="number" name="age" value="" required/></td>
                     <td class="err">您的年龄应在18岁到60岁之间</td></tr>

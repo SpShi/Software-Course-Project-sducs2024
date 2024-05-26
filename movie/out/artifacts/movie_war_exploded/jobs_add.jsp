@@ -98,24 +98,17 @@
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>最大年龄要求：</td>
-                                                <td width="20%"><input class="text" style="width:50px;" type="number" name="age" value="100" /></td>
+                                                <td width="20%"><input class="text" style="width:50px;" type="number" name="age" value="60" /></td>
 
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr class="lab"><td>性别要求：</td>
                                                 <td>
-                                                    <c:forEach items="gender" var="mt">
-                                                        <c:if test="0">
-                                                            <input  type="radio" name="gender" value="0"
-                                                                    checked/> 全部&nbsp;&nbsp;
-                                                        </c:if>
-                                                        <c:if test="1">
-                                                            <input type="radio" name="gender" value="1"/> 女&nbsp;&nbsp;
-                                                        </c:if>
-                                                        <c:if test="2">
-                                                            <input type="radio" name="gender" value="2"/> 男
-                                                        </c:if>
-                                                    </c:forEach>
+                                                    <select class="input" id="gender" name="gender">
+                                                        <option value="0">全部</option>
+                                                        <option value="1">女</option>
+                                                        <option value="2">男</option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr class="lab"><td>学历要求：</td>

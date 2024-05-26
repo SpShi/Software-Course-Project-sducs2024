@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  import="java.util.*" %>
-<%@ page import="com.fate.movie.bean.ERecord" %>
+<%@ page import="com.fate.movie.bean.Jobs" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html >
@@ -77,7 +77,6 @@
                                         <c:forEach items="${eRecords}" var="b">
                                             <tr align="center" class="d">
                                                 <td><a href="erecord.let?type=details&id=${b.id}">${b.id}</a></td>
-                                                <td>${b.name}</td>
                                                 <td>${b.jobs.name}</td>
                                                 <td>${b.senddate}</td>
                                                 <td>${b.backdate}</td>
