@@ -1,6 +1,7 @@
 package com.fate.movie.action;
 
 import com.fate.movie.bean.Elite;
+import com.fate.movie.bean.Movie;
 import com.fate.movie.bean.User;
 import com.fate.movie.biz.EliteBiz;
 import com.fate.movie.biz.UserBiz;
@@ -233,6 +234,21 @@ public class EliteServlet extends HttpServlet{
                 Long type3=(Long) session3.getAttribute("user_type");
                 out.println(eliteList);
                 if(type3==0){
+                    req.getRequestDispatcher("elite_details.jsp").forward(req,resp);
+                }
+                break;
+            case "details":
+                User userd=(User)session.getAttribute("user_now");
+                if(userd==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    return;
+                }
+                Elite eliteinfo = eliteBiz.getById(userd.getId());
+                req.setAttribute("eliteinfo",eliteinfo);
+                HttpSession session4 = req.getSession();
+                Long type4=(Long) session4.getAttribute("user_type");
+                //out.println(eliteList);
+                if(type4==0){
                     req.getRequestDispatcher("elite_details.jsp").forward(req,resp);
                 }
                 break;

@@ -46,7 +46,7 @@
                         <ul class="RM">
                             <li><a href="./set_pwd.jsp" target="main">修改密码</a></li>
                             <li><a href="./user_list.jsp" target="main">账号信息</a></li>
-                            <li><a href="./elite_details.jsp" target="main">个人信息</a></li>
+                            <li><a href="./elite.let?type=details" target="main">个人信息</a></li>
                         </ul>
                     </div>
 <!-- *********** -->

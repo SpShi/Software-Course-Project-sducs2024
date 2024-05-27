@@ -7,9 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,15 +20,13 @@
     <!-- 头部开始 -->
     <tr>
         <td width="17" valign="top" background="./Images/mail_left_bg.gif">
-            <img src="./Images/image.png" width="0" height="39" />
+            <img src="./Images/left_top_right.gif" width="17" height="29" />
         </td>
-        <td valign="top" background="./Images/image.png">
+        <td valign="top" background="./Images/content_bg.gif">
 
         </td>
-        <td  width="17" valign="top" background="./Images/mail_right_bg.gif">
-            <img src="./Images/image.png" width="5" height="39" /></td>
+        <td width="16" valign="top" background="./Images/mail_right_bg.gif"><img src="./Images/nav_right_bg.gif" width="16" height="29" /></td>
     </tr>
-
     <!-- 中间部分开始 -->
     <tr>
         <!--第一行左边框-->
@@ -44,8 +40,8 @@
                     <td colspan="4">
                         <table>
                             <tr>
-                                <!-- <td width="100" align="center"><img src="./Images/mime.gif" /></td> -->
-                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 个人中心 > 个人信息</h3></td>
+                                <td width="100" align="center"><img src="./Images/mime.gif" /></td>
+                                <td valign="bottom"><h3 style="letter-spacing:1px;">电影添加 > 电影详情</h3></td>
                             </tr>
                         </table>
                     </td>
@@ -58,61 +54,123 @@
                         </table>
                     </td>
                 </tr>
-
-
-                <!-- 产品列表开始 -->
+                <!-- 添加产品开始 -->
                 <tr>
                     <td width="2%">&nbsp;</td>
                     <td width="96%">
                         <table width="100%">
                             <tr>
                                 <td colspan="2">
-                                    <form action="elite.let?type=query" method="POST">
-                                        <table width="100%"  class="cont tr_color">
+                                    <form action="" method="">
+                                        <table width="100%"class="cont">
                                             <tr>
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
-                                                <th>4</th>
-                                                <th>5</th>
-                                                <th>6</th>
-                                                <th>7</th>
-                                                <th>8</th>
-                                                <th>9</th>
-                                                <th>10</th>
-                                                <th>11</th>
-                                                <th>12</th>
-                                                <th>13</th>
-                                                <th>14</th>
-                                                <th>15</th>
-                                                <th>16</th>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>id：</td>
+                                                <td width="20%"><input class="text" type="text" name="eliteinfoId"  value="${eliteinfo.name}" disabled="disabled"/></td>
+                                                <td rowspan="9" valign="top" >
+                                                    <fieldset style="width: 220px; height: 360px;">
+                                                        <legend>简历</legend>
+                                                        <img src="${eliteinfo.resume}" width="200px"; height="350px"/>
+                                                    </fieldset>
+                                                </td>
+                                                <td width="2%">&nbsp;</td>
                                             </tr>
-                                            <c:forEach items="${eliteList}" var="m">
-                                                <tr align="center" class="d">
-                                                    <td>${m.id}</td>
-                                                    <td>${m.name}</td>
-                                                    <td>${m.idNumber}</td>
-                                                    <td>${m.state}</td>
-                                                    <td>${m.resume}</td>
-                                                    <td>${m.gender}</td>
-                                                    <td>${m.age}</td>
-                                                    <td>${m.degrees}</td>
-                                                    <td>${m.tel}</td>
-                                                    <td>${m.major}</td>
-                                                    <td>${m.email}</td>
-                                                    <td>${m.certificate}</td>
-                                                    <td>${m.intention}</td>
-                                                    <td>${m.selfevaluation}</td>
-                                                    <td>${m.experience}</td>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td width="15%">姓名：</td>
+                                                <td width="25%"><input class="text" type="text" name="name" value="${eliteinfo.name}" disabled="disabled"/></td>
 
-                                                    <td>
-                                                        <a onclick="return confirm('确认修改');" href="member.let?type=modifypre&id=${m.id}">修改</a>&nbsp;&nbsp;
-                                                        <a onclick="return confirm('确认删除');" href="member.let?type=remove&id=${m.id}">删除</a>
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>证件号：</td>
+                                                <td width="20%">
+                                                    <input class="text" type="text" name="type" value="${eliteinfo.idNumber}" disabled="disabled"/>
+                                                </td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>状态：</td>
+                                                <td width="20%"><input class="text" style="width:50px;" type="number" name="stock" value="${eliteinfo.state}"  disabled="disabled" /></td>
 
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>性别：</td>
+                                                <td width="20%"><input class="text" style="width:100px;" type="text" name="price" value="${eliteinfo.gender}" disabled="disabled" /></td>
 
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>年龄：</td>
+                                                <td width="20%"><input class="text"  type="text" name="publish" value="${eliteinfo.age}" disabled="disabled"/></td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>学历:</td>
+                                                <td width="20%"><input class="text"  type="text" name="author" value="${eliteinfo.degrees}" disabled="disabled"/></td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>电话:</td>
+                                                <td width="20%"><input class="text"  type="text" name="date" value="${eliteinfo.tel}" disabled="disabled"/></td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>专业:</td>
+                                                <td width="20%"><input class="text"  type="text" name="address" value="${eliteinfo.major}"disabled="disabled"/></td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>邮箱:</td>
+                                                <td width="20%"><input class="text"  type="text" name="address" value="${eliteinfo.email}"disabled="disabled"/></td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>证书:</td>
+                                                <td width="20%"><input class="text"  type="text" name="address" value="${eliteinfo.certificate}"disabled="disabled"/></td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="2%">&nbsp;</td>
+                                                <td>求职意向:</td>
+                                                <td width="20%"><input class="text"  type="text" name="address" value="${eliteinfo.intention}"disabled="disabled"/></td>
+                                                <td></td>
+                                                <td width="2%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>自我评价：</td>
+                                                <td colspan="2"><textarea cols="150" rows="20" disabled="disabled">${eliteinfo.selfevaluation}</textarea></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>工作经历：</td>
+                                                <td colspan="2"><textarea cols="150" rows="20" disabled="disabled">${eliteinfo.experience}</textarea></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td></td>
+                                                <td colspan="3"><input class="btn" type="button" value="修改" onclick="window.location='elite.let?type=modify';" /></td>
+                                            </tr>
                                         </table>
                                     </form>
                                 </td>
@@ -121,7 +179,7 @@
                     </td>
                     <td width="2%">&nbsp;</td>
                 </tr>
-                <!-- 产品列表结束 -->
+                <!-- 添加产品结束 -->
                 <tr>
                     <td height="40" colspan="4">
                         <table width="100%" height="1" border="0" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
@@ -141,7 +199,7 @@
         <td background="./Images/mail_right_bg.gif">&nbsp;</td>
     </tr>
     <!-- 底部部分 -->
-    <!-- <tr>
+    <tr>
         <td valign="bottom" background="./Images/mail_left_bg.gif">
             <img src="./Images/buttom_left.gif" width="17" height="17" />
         </td>
@@ -151,17 +209,56 @@
         <td valign="bottom" background="./Images/mail_right_bg.gif">
             <img src="./Images/buttom_right.gif" width="16" height="17" />
         </td>
-    </tr> -->
-    <tr>
-        <td width="17" valign="bottom" background="./Images/mail_left_bg.gif">
-            <img src="./Images/image.png" width="0" height="39" />
-        </td>
-        <td valign="top" background="./Images/image.png">
-
-        </td>
-        <td  width="17" valign="bottom" background="./Images/mail_right_bg.gif">
-            <img src="./Images/image.png" width="5" height="39" /></td>
     </tr>
 </table>
 </body>
 </html>
+<%--<style>--%>
+
+<%--    .lab{--%>
+<%--        margin-top: 100px;--%>
+<%--        color: dimgray;--%>
+<%--        font-size: 14px;--%>
+<%--        width: 40%;--%>
+<%--        height: 50px;--%>
+<%--        margin-left: 30px;--%>
+<%--        /* background-color: aqua; */--%>
+<%--    }--%>
+<%--    .input{--%>
+<%--        width: 70%;--%>
+<%--        height: 30px;--%>
+<%--        border: none;--%>
+<%--        /* border-color: skyblue; */--%>
+<%--        padding-left: 8px;--%>
+<%--        outline: none;--%>
+<%--        /* background-color: pink; */--%>
+<%--    }--%>
+<%--    .tex{--%>
+<%--        width: 90%;--%>
+<%--        height: 90px;--%>
+<%--        border: none;--%>
+<%--        padding-left: 8px;--%>
+<%--        padding-top: 5px;--%>
+<%--        margin-top: 10px;--%>
+<%--        outline: none;--%>
+<%--    }--%>
+<%--    .con{--%>
+<%--        /* height: 400px; */--%>
+<%--        /* background-color: aquamarine; */--%>
+<%--    }--%>
+<%--    .btlg{--%>
+<%--        float:right;--%>
+<%--        /* margin-right: 100px; */--%>
+<%--        /* margin-top: 20px; */--%>
+<%--        width:75px;--%>
+<%--        height: 40px;--%>
+<%--        background-color: #409EFF;--%>
+<%--        border: none;--%>
+<%--        color:white;--%>
+<%--        font-size:17px;--%>
+<%--        border-radius: 5px;--%>
+<%--        text-align:center; --%>
+<%--        vertical-align: middle;--%>
+<%--        line-height: 40px;--%>
+<%--    }--%>
+<%--</style>--%>
