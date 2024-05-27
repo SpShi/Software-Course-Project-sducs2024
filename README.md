@@ -14,6 +14,7 @@
 # Attention
 
 1.不要改完就提交,运行并登录一下账号:*super*密码:*123*
+  测试Comp请用账号*1* 密码*123*
 
 2.我们的数据库账号与密码都不同,在拉下来更新的代码时注意修改
 
@@ -64,6 +65,8 @@
 05131611 latest已更新,修复了登录错误的bug -L
 
 05261758 latest已更新,修改了sql文件,增加了jobs*页面
+
+05271015 latest已更新,修改了sql和Comp*,给Comp增加了addr属性,添加了Comp*.jsp
 
 
 ## 怎样提交修改后的代码
@@ -136,7 +139,6 @@ elite_modify.jsp
 elite_details.jsp
 comp_add.jsp
 comp_modify.jsp
-comp_details.jsp
 jobs_add.jsp
 jobs_details.jsp
 jobs_remove.jsp
