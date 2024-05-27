@@ -45,8 +45,8 @@ public class MemberServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //字符编码
-        req.setCharacterEncoding("utf-8");
-        resp.setContentType("text/html;charset=utf-8");
+         req.setCharacterEncoding("utf-8");
+         resp.setContentType("text/html;charset=utf-8");
         //out
         PrintWriter  out  = resp.getWriter();
         HttpSession session = req.getSession();
@@ -85,13 +85,12 @@ public class MemberServlet extends HttpServlet {
                     //  4.2 非空：表示登录成功, 将用户对象保存到session中,提示登录成功后,将页面跳转到index.jsp
                     session.setAttribute("user",member2);//user-->Object
                     session.setAttribute("state",member2.getState());
-                    session.setAttribute("id",member2.getId());
                     if(member2.getState()==0)
                     {
-                        out.println("<script>location.href='index.jsp';</script>");
+                        out.println("<script>alert('登录成功');location.href='index_beta.jsp';</script>");
                     }
                     else{
-                        out.println("<script>location.href='comp_index.jsp';</script>");
+                        out.println("<script>alert('登录成功');location.href='index.jsp';</script>");
                     }
 
                 }
@@ -195,11 +194,11 @@ public class MemberServlet extends HttpServlet {
                     return;
                 }
                 int count3 = memberBiz.modify(memberId,name2,pwd2,memberTypeId2,balance2,tel2,idNumber2);
-                if(count3>0){
-                    out.println("<script>alert('会员修改成功'); location.href='member.let?type=query';</script>");
-                }else{
-                    out.println("<script>alert('会员修改失败'); location.href='member.let?type=query';</script>");
-                }
+                 if(count3>0){
+                     out.println("<script>alert('会员修改成功'); location.href='member.let?type=query';</script>");
+                 }else{
+                     out.println("<script>alert('会员修改失败'); location.href='member.let?type=query';</script>");
+                 }
 
                 break;
             case "remove":
@@ -207,7 +206,7 @@ public class MemberServlet extends HttpServlet {
                     out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
-                long memId = Long.parseLong(req.getParameter("id"));
+                 long memId = Long.parseLong(req.getParameter("id"));
                 try {
                     int count2 = memberBiz.remove(memId);
                     if(count2>0){

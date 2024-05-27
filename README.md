@@ -68,6 +68,8 @@
 
 05271015 latest已更新,修改了sql和Comp*,给Comp增加了addr属性,添加了Comp*.jsp
 
+05271146 latest已更新,修改了sql文件的错误 -Pardo
+
 
 ## 怎样提交修改后的代码
 
