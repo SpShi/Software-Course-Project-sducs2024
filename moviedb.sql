@@ -163,15 +163,25 @@ CREATE TABLE `enterprise`  (
   `tel` bigint(14) UNSIGNED NOT NULL,
   `ename` varchar(70) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '企业名称',
   `state` int(1) UNSIGNED ZEROFILL DEFAULT NULL,
+<<<<<<< HEAD
+=======
+  `addr` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '地址',
+>>>>>>> 279b02d (修改了Comp*和sql,添加了addr属性，添加了Comp*.jsp)
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of enterprise
 -- ----------------------------
+<<<<<<< HEAD
 INSERT INTO `enterprise` VALUES (1000000004, '企业级1', '370581200304176378', 12345678900, 15788855666, 'name1', 0);
 INSERT INTO `enterprise` VALUES (1000000005, '企业级2', '370581200305176378', 12345678901, 15788855667, 'name2', 0);
 INSERT INTO `enterprise` VALUES (1000000006, '企业级2', '370581200306176378', 12345678902, 15788855668, 'name3', 0);
+=======
+INSERT INTO `enterprise` VALUES (1000000004, '企业级1', '370581200304176378', 12345678900, 15788855666, 'name1', 0,"即墨");
+INSERT INTO `enterprise` VALUES (1000000005, '企业级2', '370581200305176378', 12345678901, 15788855667, 'name2', 0,"即墨");
+INSERT INTO `enterprise` VALUES (1000000006, '企业级2', '370581200306176378', 12345678902, 15788855668, 'name3', 0,"即墨");
+>>>>>>> 279b02d (修改了Comp*和sql,添加了addr属性，添加了Comp*.jsp)
 
 -- ----------------------------
 -- Table structure for jobs
