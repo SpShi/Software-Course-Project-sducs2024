@@ -26,10 +26,10 @@ public class CompDao {
      * @return
      * @throws SQLException
      */
-    public int add(long id,String name,String idNumber,long license,long tel,String ename) throws SQLException {
+    public int add(long id,String name,String idNumber,long license,long tel,String ename,String addr) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="insert into enterprise(id,`name`,idNumber,state,license,tel,ename"+
-                " values(?,?,?,0,?,?,?)";
+        String sql="insert into enterprise(id,`name`,idNumber,state,license,tel,ename,addr"+
+                " values(?,?,?,0,?,?,?,?)";
         int count = runner.update(conn,sql,id,name,idNumber,license,tel,ename);
         DBHelper.close(conn);
         return count;
@@ -47,11 +47,11 @@ public class CompDao {
      * @throws SQLException
      */
 
-    public int modify(long id,String name,String idNumber,long license,long tel,String ename) throws SQLException {
+    public int modify(long id,String name,String idNumber,long license,long tel,String ename,String addr) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="update enterprise set `name` = ?, idNumber = ?,state = ?,license = ?,tel = ?, ename = ? " +
+        String sql="update enterprise set `name` = ?, idNumber = ?,state = ?,license = ?,tel = ?, ename = ? ,addr =?" +
                 "where id=?";
-        int count = runner.update(conn,sql,name,idNumber,license,tel,ename,id);
+        int count = runner.update(conn,sql,name,idNumber,license,tel,ename,id,addr);
         DBHelper.close(conn);
         return count;
     }
@@ -79,7 +79,7 @@ public class CompDao {
 
     public List<Comp> getAll() throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="select id,`name`,idNumber,state,license,tel,ename,state from  enterprise";
+        String sql="select id,`name`,idNumber,state,license,tel,ename,state,addr from  enterprise";
         List<Comp> enterprises = runner.query(conn,sql,new BeanListHandler<Comp>(Comp.class));
         DBHelper.close(conn);
         return  enterprises;
@@ -109,7 +109,7 @@ public class CompDao {
 
     public Comp getById(long id) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="select id,`name`,idNumber,state,license,tel,ename,state from  enterprise where id=?";
+        String sql="select id,`name`,idNumber,license,tel,ename,state,addr from  enterprise where id=?";
         Comp comp = runner.query(conn,sql,new BeanHandler<Comp>(Comp.class),id);
         DBHelper.close(conn);
         return comp;
@@ -123,7 +123,7 @@ public class CompDao {
      */
     public Comp getByLicense(long license) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="select id,`name`,idNumber,state,license,tel,ename,state from  enterprise where license=?";
+        String sql="select id,`name`,idNumber,state,license,tel,ename,state,addr from  enterprise where license=?";
         Comp comp = runner.query(conn,sql,new BeanHandler<Comp>(Comp.class),license);
         DBHelper.close(conn);
         return comp;

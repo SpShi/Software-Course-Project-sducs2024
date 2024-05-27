@@ -8,6 +8,7 @@ public class Comp {
     private String ename;
     private long tel;
     private int state;
+    private String addr;
 
     public long getId() {
         return id;
@@ -66,6 +67,14 @@ public class Comp {
         this.state=state;
     }
 
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+
     @Override
     public String toString() {
         return "Comp{" +
@@ -76,6 +85,7 @@ public class Comp {
                 ", ename='" + ename + '\'' +
                 ", tel='" + tel + '\'' +
                 ", state='" + state + '\'' +
+                ", addr='" + addr + '\'' +
                 '}';
     }
 }

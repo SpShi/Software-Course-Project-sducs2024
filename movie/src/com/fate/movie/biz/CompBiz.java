@@ -11,19 +11,19 @@ import java.util.regex.Pattern;
 
 public class CompBiz {
     CompDao compDao = new CompDao();
-    public int add(long id,String name,String idNumber,long license,long tel,String ename){
+    public int add(long id,String name,String idNumber,long license,long tel,String ename,String addr){
         int count = 0;
         try {
-            count = compDao.add(id,name,idNumber,license,tel,ename);
+            count = compDao.add(id,name,idNumber,license,tel,ename,addr);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return count;
     }
-    public int modify(long id,String name,String idNumber,long license,long tel,String ename){
+    public int modify(long id,String name,String idNumber,long license,long tel,String ename,String addr){
         int count = 0;
         try {
-            count = compDao.modify(id,name,idNumber,license,tel,ename);
+            count = compDao.modify(id,name,idNumber,license,tel,ename,addr);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
