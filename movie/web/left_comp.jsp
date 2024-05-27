@@ -36,9 +36,6 @@
 </head>
 
 <body>
-<%
-    long idx= (long) session.getAttribute("id");
-%>
 <table width="100%" height="200" border="0" cellpadding="0" cellspacing="0" class="le">
     <tr>
         <td width="182" valign="top">
@@ -47,23 +44,22 @@
                 <div class="content">
                     <ul class="RM">
                         <li><a href="./jobs.let?type=addpre" target="main">岗位发布</a></li>
-                        <li><a href="./jobs.let?type=query" target="main">在招岗位</a></li>
+                        <li><a href="./jobs.let?type=query&pageIndex=1" target="main">在招岗位</a></li>
                     </ul>
                 </div>
                 <h1 class="type"><a href="javascript:void(0)">人才管理</a></h1>
                 <div class="content">
                     <ul class="RM">
-                        <li><a href="./movie_add.jsp" target="main">收到的简历</a></li>
-                        <li><a href="./movie.let?type=query&pageIndex=1" target="main">人才查找</a></li>
+                        <li><a href="./erecord.let?type=queryjob" target="main">收到的简历</a></li>
+                        <li><a href="./elite.let?type=query" target="main">人才查找</a></li>
                     </ul>
                 </div>
 
                 <h1 class="type"><a href="javascript:void(0)">个人中心</a></h1>
                 <div class="content">
                     <ul class="RM">
-                        <li><a href="./comp.let?type=details&id=<%=idx%>&flag=de" target="main">我的信息</a></li>
-                        <li><a href="./set_pwd.jsp" target="main">密码修改</a></li>
-                        <li><a href="./comp.let?type=details&id=<%=idx%>" target="main">信息修改</a></li>
+                        <li><a href="./comp.let?type=details" target="main">我的信息</a></li>
+                        <li><a href="./set_pwd_new.jsp" target="main">密码修改</a></li>
                     </ul>
                 </div>
 

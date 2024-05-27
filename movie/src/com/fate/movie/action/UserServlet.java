@@ -107,7 +107,7 @@ public class UserServlet extends HttpServlet {
                         }
                         else
                         {
-                            out.println("<script>alert('登录成功');location.href='comp_index.jsp';</script>");
+                            out.println("<script>alert('登录成功');location.href='index_comp.jsp';</script>");
                         }
 
                     }

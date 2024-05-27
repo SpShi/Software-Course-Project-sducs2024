@@ -36,9 +36,6 @@
 </head>
 
 <body>
-<%
-    long idx= (long) session.getAttribute("id");
-%>
 <table width="100%" height="200" border="0" cellpadding="0" cellspacing="0" class="le">
     <tr>
         <td width="182" valign="top">
@@ -61,9 +58,9 @@
                 <h1 class="type"><a href="javascript:void(0)">个人中心</a></h1>
                 <div class="content">
                     <ul class="RM">
-                        <li><a href="./comp.let?type=details&id=<%=idx%>&flag=de" target="main">我的信息</a></li>
+                        <li><a href="./comp.let?type=details&flag=de" target="main">我的信息</a></li>
                         <li><a href="./set_pwd.jsp" target="main">密码修改</a></li>
-                        <li><a href="./comp.let?type=details&id=<%=idx%>" target="main">信息修改</a></li>
+                        <li><a href="./comp.let?type=details" target="main">信息修改</a></li>
                     </ul>
                 </div>
 

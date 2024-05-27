@@ -72,6 +72,9 @@
 
 05271445 latest已更新,修改了elite无返回值的错误 -Pardo
 
+05271445 latest已更新,修改了job相关与前端comp的框架 -Pardo
+
+
 
 ## 怎样提交修改后的代码
 

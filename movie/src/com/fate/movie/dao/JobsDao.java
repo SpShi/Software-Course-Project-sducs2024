@@ -105,21 +105,54 @@ public class JobsDao {
         DBHelper.close(conn);
         return  jobss;
     }
-
     /**
-     * 根据岗位编号查岗位信息
-     * @param id
-     * @return
+     *页面查询(暂时不考虑排序问题)
+     * @param pageIndex 第几页,从1开始
+     * @param pageSize 每页多少行
+     * @return 当前页的信息
      * @throws SQLException
      */
-    public Jobs getById(long id) throws SQLException {
-        Connection conn = DBHelper.getConnection();
-        String sql="select * from  jobs where id=?";
-        Jobs jobs = runner.query(conn,sql,new BeanHandler<Jobs>(Jobs.class),id);
+    public List<Jobs>  getByPage(int pageIndex, int pageSize,long place,int agel,int ageh,int gender,int degrees,
+                                 int salary,String key,boolean desc) throws SQLException {
+        Connection conn  = DBHelper.getConnection();
+        String sql = "select * from jobs";
+        if(place==0){
+            sql=sql+ "where age>=? AND age<=? AND gender=? AND degrees>? AND salary >=? ORDER BY salary ";
+        }
+        else{
+            sql=sql+"where place=? AND age>=? AND age<=? AND gender=? AND degrees>? AND salary >=? ";
+        }
+        if(key!="") sql+="and intro like '%"+key+"%'";
+        sql+="ORDER BY salary ";
+        if(desc) sql=sql+" desc ";
+        sql=sql+" limit ?,?";
+        int offset = (pageIndex-1)*pageSize;
+        List<Jobs> jobs ;
+        if(place==0) jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),agel,ageh,gender,degrees,salary,offset,pageSize);
+        else jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),place,agel,ageh,gender,degrees,salary,offset,pageSize);
         DBHelper.close(conn);
         return  jobs;
     }
-
+    public int  getCount(long place,int agel,int ageh,int gender,int degrees,
+                         int salary,String key,boolean desc) throws SQLException {
+        Connection conn  = DBHelper.getConnection();
+        String sql = "select count(id)from jobs";
+        if(place==0){
+            sql=sql+ "where age>=? AND age<=? AND gender=? AND degrees>? AND salary >=? ORDER BY salary ";
+        }
+        else{
+            sql=sql+"where place=? AND age>=? AND age<=? AND gender=? AND degrees>? AND salary >=? ";
+        }
+        if(key!="") sql+="and intro like '%"+key+"%'";
+        sql+="ORDER BY salary ";
+        if(desc) sql=sql+"desc";
+        Number data;
+        if(place==0) data= runner.query(conn,sql,new ScalarHandler<>(),agel,ageh,gender,degrees,salary);
+        else data= runner.query(conn,sql,new ScalarHandler<>(),place,agel,ageh,gender,degrees,salary);
+        int count = data.intValue();
+        DBHelper.close(conn);
+        return count;
+    }
     /**
      * 获得符合条件的岗位
      * @param place 所属公司
@@ -144,14 +177,29 @@ public class JobsDao {
             sql=sql+"where place=? AND age>=? AND age<=? AND gender=? AND degrees>? AND salary >=? ";
         }
         if(key!="") sql+="and intro like '%"+key+"%'";
-        if(desc) sql=sql+"desc";
         sql+="ORDER BY salary ";
+        if(desc) sql=sql+"desc";
         List<Jobs> jobs ;
         if(place==0) jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),agel,ageh,gender,degrees,salary);
         else jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),place,agel,ageh,gender,degrees,salary);
         DBHelper.close(conn);
         return  jobs;
     }
+
+    /**
+     * 根据岗位编号查岗位信息
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    public Jobs getById(long id) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        String sql="select * from  jobs where id=?";
+        Jobs jobs = runner.query(conn,sql,new BeanHandler<Jobs>(Jobs.class),id);
+        DBHelper.close(conn);
+        return  jobs;
+    }
+
 
     public boolean exits(long id) throws SQLException {
         Connection conn = DBHelper.getConnection();
@@ -172,29 +220,7 @@ public class JobsDao {
         DBHelper.close(conn);
         return number.intValue()>0?true:false;
     }
-    /**
-     *页面查询(暂时不考虑排序问题)
-     * @param pageIndex 第几页,从1开始
-     * @param pageSize 每页多少行
-     * @return 当前页的信息
-     * @throws SQLException
-     */
-    public List<Jobs>  getByPage(int pageIndex, int pageSize) throws SQLException {
-        Connection conn  = DBHelper.getConnection();
-        String sql = "select * from jobs limit ?,?";
-        int offset = (pageIndex-1)*pageSize;
-        List<Jobs> jobs = runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),offset,pageSize);
-        DBHelper.close(conn);
-        return  jobs;
-    }
-    public int  getCount() throws SQLException {
-        Connection conn  = DBHelper.getConnection();
-        String sql = "select count(id)from jobs";
-        Number data = runner.query(conn,sql,new ScalarHandler<>());
-        int count = data.intValue();
-        DBHelper.close(conn);
-        return count;
-    }
+
     public static void main(String[] args) {
         JobsDao jobsDao  = new JobsDao();
     }

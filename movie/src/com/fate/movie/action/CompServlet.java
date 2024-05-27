@@ -118,7 +118,7 @@ public class CompServlet extends HttpServlet{
                     out.println("<script>alert('身份证号码不合法'); location.href='comp.let?type=query';</script>");
                     return;
                 }
-                User usera=(User)session.getAttribute("id");
+                User usera=(User)session.getAttribute("user_now");
                 long idtmp=usera.getId();
                  int count = compBiz.add(idtmp,namea,idnuma,licensea,Long.parseLong(tela),enamea,addra);
                 if(count>0){
@@ -158,7 +158,7 @@ public class CompServlet extends HttpServlet{
 //                }
                 int count1 = compBiz.modify(id,name,idnumber, Long.parseLong(license), Long.parseLong(tel),ename,addr);
                 if(count1>0){
-                    out.println("<script>alert('信息修改成功'); location.href='comp_index.jsp';</script>");
+                    out.println("<script>alert('信息修改成功'); location.href='index_comp.jsp';</script>");
                 }else{
                     out.println("<script>alert('信息修改失败');</script>");
                 }
@@ -195,7 +195,7 @@ public class CompServlet extends HttpServlet{
                 long idm=userm.getId();
                 int countm = compBiz.modify(idm,namem,idnumm,licensem,Long.parseLong(telm),enamem,addrm);
                 if(countm>0){
-                    out.println("<script>alert('信息修改成功'); location.href='comp_index.jsp';</script>");
+                    out.println("<script>alert('信息修改成功'); location.href='index_comp.jsp';</script>");
                 }else{
                     out.println("<script>alert('信息修改失败');</script>");
                 }
@@ -233,12 +233,21 @@ public class CompServlet extends HttpServlet{
                 }
                 break;
             case "details":
-                long compId=Long.parseLong(req.getParameter("id"));
+                long compId;
+                User userd=(User)req.getAttribute("user_now");
+                if(((long)req.getAttribute("user_type"))==1)
+                {
+                    compId=userd.getId();
+                }
+                else compId=Long.parseLong(req.getParameter("id"));
                 Comp compx= compBiz.getById(compId);
-                if(compx==null) out.println("<script>alert('请登录');</script>");
+                if(userd==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    return;
+                }
                 req.setAttribute("compx",compx);
                 String ff=req.getParameter("flag");
-                if(Objects.equals(ff, "de")) req.getRequestDispatcher("comp_info.jsp").forward(req,resp);
+                if(Objects.equals(ff, "de")) req.getRequestDispatcher("comp_details.jsp").forward(req,resp);
                 else req.getRequestDispatcher("comp_modify.jsp").forward(req,resp);
                 break;
             case "exit":

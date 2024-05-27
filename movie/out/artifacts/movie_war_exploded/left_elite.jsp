@@ -44,7 +44,7 @@
                     <h1 class="type"><a href="javascript:void(0)">个人中心</a></h1>
                     <div class="content">
                         <ul class="RM">
-                            <li><a href="./set_pwd.jsp" target="main">修改密码</a></li>
+                            <li><a href="./set_pwd_new.jsp" target="main">修改密码</a></li>
                             <li><a href="./user_list.jsp" target="main">账号信息</a></li>
                             <li><a href="./elite.let?type=details" target="main">个人信息</a></li>
                         </ul>

@@ -19,7 +19,7 @@
 </head>
 <frameset rows="64,*"  frameborder="no" border="0" framespacing="0">
   <!--头部-->
-  <frame src="./top_elite.jsp" name="top" noresize="noresize" frameborder="0"  scrolling="no" marginwidth="0" marginheight="0" />
+  <frame src="top_new.jsp" name="top" noresize="noresize" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" />
   <!--主体部分-->
   <frameset cols="185,*">
     <!--主体左部分-->
