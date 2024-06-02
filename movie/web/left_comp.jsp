@@ -51,7 +51,7 @@
                 <div class="content">
                     <ul class="RM">
                         <li><a href="./erecord.let?type=queryjob" target="main">收到的简历</a></li>
-                        <li><a href="./elite.let?type=query" target="main">人才查找</a></li>
+                        <li><a href="./elite_list_read.jsp" target="main">人才查找</a></li>
                     </ul>
                 </div>
 

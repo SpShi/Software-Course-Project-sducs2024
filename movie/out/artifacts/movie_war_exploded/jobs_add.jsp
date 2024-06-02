@@ -23,7 +23,7 @@
                     obj.select();
                     return document.selection.createRange().text;
                 }else if (window.navigator.userAgent.indexOf("Firefox") >= 1){
-                    //firefox　
+                    //firefox 
                     return window.URL.createObjectURL(obj.files.item(0));
                 }else if(navigator.userAgent.indexOf("Chrome")>0){
                     //chrome
@@ -87,18 +87,18 @@
                         <table width="100%">
                             <tr>
                                 <td colspan="2">
-                                    <form action="jobs.let?type=add" method="post" enctype="multipart/form-data">
+                                    <form action="jobs.let?type=add" method="post">
                                         <table width="100%"class="cont">
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td width="15%">名称：</td>
-                                                <td width="25%"><input class="text" type="text" name="name" value="" /></td>
+                                                <td width="25%"><input class="input" type="text" name="name" value="" /></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>最大年龄要求：</td>
-                                                <td width="20%"><input class="text" style="width:50px;" type="number" name="age" value="60" /></td>
+                                                <td width="20%"><input class="input"  type="number" name="agea" value="" /></td>
 
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
@@ -128,35 +128,35 @@
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>专业要求：</td>
-                                                <td width="20%"><input class="text" style="width:100px;" type="text" name="major"  /></td>
+                                                <td width="20%"><input class="input" style="width:100px;" type="text" name="major"  /></td>
 
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>证书要求：</td>
-                                                <td width="20%"><input class="text"  type="text" name="certificates"/></td>
+                                                <td width="20%"><input class="input"  type="text" name="certificates"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>工资：</td>
-                                                <td width="20%"><input class="text"  type="text" name="salary"/></td>
+                                                <td width="20%"><input class="input"  type="text" name="salary"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>联系邮箱：</td>
-                                                <td width="20%"><input class="text"  type="text" name="email"/></td>
+                                                <td width="20%"><input class="input"  type="text" name="email"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>简介：</td>
-                                                <td width="20%"><input class="text"  type="text" name="intro"/></td>
+                                                <td width="20%"><input class="input"  type="text" name="intro"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>

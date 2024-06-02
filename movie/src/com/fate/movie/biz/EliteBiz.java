@@ -1,7 +1,6 @@
 package com.fate.movie.biz;
 
 import com.fate.movie.bean.Elite;
-
 import com.fate.movie.dao.EliteDao;
 
 import java.sql.SQLException;
@@ -119,7 +118,44 @@ public class EliteBiz {
         else return false;
 
     }
+    public List<Elite> getAllwithLimit( int agel, int ageh, int gender, int degrees,  String intro, boolean desc){
+        List<Elite> elites = null;
+        try {
+            elites =  eliteDao.getAllwithLimit(agel,ageh,gender,degrees,intro,desc);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
 
+        }
+        return elites;
+
+    }
+    /**
+     * 由行数算页数
+     * @return
+     */
+    public int  getPageCount(int pageSize,int agel,int ageh,int gender,int degrees,String intro,boolean desc) {
+        int pageCount = 0;
+        try {
+            //1.获取行数
+            int rowCount = eliteDao.getCount(agel,ageh,gender,degrees,intro,desc);
+            //2.根据行数得到页数,每页多少条
+            pageCount =  (rowCount-1)/pageSize+1;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return pageCount;
+    }
+    public List<Elite>  getByPage(int pageIndex,int pageSize,int agel,int ageh,int gender,int degrees,String intro,boolean desc) {
+        List<Elite> jobs = null;
+        try {
+            jobs = eliteDao.getByPage(pageIndex,pageSize,agel,ageh,gender,degrees,intro,desc);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return jobs;
+    }
     // 判断身份证号是否合法
     public static Boolean judgeId(String id)
     {

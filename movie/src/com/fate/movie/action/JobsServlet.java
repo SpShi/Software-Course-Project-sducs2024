@@ -1,12 +1,9 @@
 package com.fate.movie.action;
 
-import com.alibaba.fastjson.JSON;
 import com.fate.movie.bean.Jobs;
-import com.fate.movie.bean.Movie;
 import com.fate.movie.bean.User;
 import com.fate.movie.biz.JobsBiz;
 import com.fate.movie.biz.UserBiz;
-import com.fate.movie.util.DateHelper;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -20,10 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet("/jobs.let")
 public class JobsServlet extends HttpServlet {
@@ -67,14 +61,14 @@ public class JobsServlet extends HttpServlet {
                 //存request
                 //转发
 
-                HttpSession session1 = req.getSession();
+                //HttpSession session1 = req.getSession();
                 req.getRequestDispatcher("jobs_add.jsp").forward(req,resp);
                 break;
             case "add":
 
                 String namea =  req.getParameter("name");
                 long placea=user.getId();
-                int agea=Integer.parseInt(req.getParameter("age"));
+                int agea=Integer.parseInt(req.getParameter("agea"));
                 int gendera=Integer.parseInt(req.getParameter("gender"));
                 int salarya=Integer.parseInt(req.getParameter("salary"));
                 int degreesa=Integer.parseInt(req.getParameter("degrees"));
@@ -87,22 +81,23 @@ public class JobsServlet extends HttpServlet {
 
                 count = jobsBiz.add(namea,placea, agea,gendera,degreesa,majora,  certia, salarya, emaila,introa);
                 if(count>0){
-                    out.println("<script>alert('岗位添加成功'); location.href='jobs.let?type=query';</script>");
+                    out.println("<script>alert('岗位添加成功'); location.href='jobs.let?type=query&pageIndex=1';</script>");
                 }else{
-                    out.println("<script>alert('岗位添加失败'); location.href='jobs.let?type=query';</script>");
+                    out.println("<script>alert('岗位添加失败'); location.href='jobs.let?type=query&pageIndex=1';</script>");
                 }
 
                 break;
             case "modifypre":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 //类型&会员的信息
                 long id = Long.parseLong(req.getParameter("id"));
                 Jobs jobs = jobsBiz.getById(id);
 
-                req.setAttribute("jobs",jobs);
+                req.setAttribute("job",jobs);
+                req.getRequestDispatcher("jobs_modify.jsp").forward(req,resp);
                 break;
             case "modify":
                 try {
@@ -113,20 +108,20 @@ public class JobsServlet extends HttpServlet {
                 break;
             case "remove":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 long jobsId = Long.parseLong(req.getParameter("id"));
                 try {
                     int count2 = jobsBiz.remove(jobsId);
                     if(count2>0){
-                        out.println("<script>alert('岗位删除成功'); location.href='jobs.let?type=query';</script>");
+                        out.println("<script>alert('岗位删除成功'); location.href='jobs.let?type=query&pageIndex=1';</script>");
                     }else{
-                        out.println("<script>alert('岗位删除失败'); location.href='jobs.let?type=query';</script>");
+                        out.println("<script>alert('岗位删除失败'); location.href='jobs.let?type=query&pageIndex=1';</script>");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    out.println("<script>alert('"+e.getMessage()+"'); location.href='jobs.let?type=query';</script>");
+                    out.println("<script>alert('"+e.getMessage()+"'); location.href='jobs.let?type=query&pageIndex=1';</script>");
                 }
                 break;
             case "query":
@@ -137,7 +132,7 @@ public class JobsServlet extends HttpServlet {
                 break;
             case "search":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 long places=Long.parseLong(req.getParameter("place"));
@@ -155,13 +150,13 @@ public class JobsServlet extends HttpServlet {
                 break;
             case "exit":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 //1.清除session
                 session.invalidate();
                 //2.跳转到login.html(框架中需要回去)  top.jsp->parent->index.jsp
-                out.println("<script>alert('Success');parent.window.location.href='login_new.html';</script>");
+                out.println("<script>alert('Success');parent.window.location.href='login.html';</script>");
                 break;
             default:
                 resp.sendError(404,"请求的地址不存在");
@@ -211,14 +206,11 @@ public class JobsServlet extends HttpServlet {
                 String  name = item.getFieldName();
                 String value = item.getString("utf-8");//防止乱码
                 switch(name){
-                    case "id":
+                    case "id_n":
                         job.setId(Long.parseLong(value));
                         break;
-                    case "name":
+                    case "names":
                         job.setName(value);
-                        break;
-                    case "place":
-                        job.setPlace(Long.parseLong(value));
                         break;
                     case "age":
                         job.setAge(Integer.parseInt(value));
@@ -247,13 +239,23 @@ public class JobsServlet extends HttpServlet {
                 }
             }
         }
-
+        HttpSession session = req.getSession();
+        User user = (User)session.getAttribute("user_now");
+        if(user.getType()==2){
+            long places=Long.parseLong(req.getParameter("place"));
+        }
+        else if(user.getType()==1) job.setPlace(user.getId());
+        else{
+            out.println("<script>alert('岗位修改失败'); location.href='jobs.let?type=query&pageIndex=1';</script>");
+        }
+        //out.println(job);
         //5.将信息保存到数据库
         int countm = jobsBiz.modify(job);
+
         if(countm>0){
-            out.println("<script>alert('岗位修改成功'); location.href='jobs.let?type=query';</script>");
+            out.println("<script>alert('岗位修改成功'); location.href='jobs.let?type=query&pageIndex=1';</script>");
         }else{
-            out.println("<script>alert('岗位修改失败'); location.href='jobs.let?type=query';</script>");
+            out.println("<script>alert('岗位修改失败'); location.href='jobs.let?type=query&pageIndex=1';</script>");
         }
     }
 
@@ -273,7 +275,7 @@ public class JobsServlet extends HttpServlet {
         HttpSession session = req.getSession();
         session.setAttribute("jobin",job1.getName());
         //4.转发到 jsp页面
-        req.getRequestDispatcher("job_details.jsp").forward(req,resp);
+        req.getRequestDispatcher("jobs_details.jsp").forward(req,resp);
 
     }
 
@@ -290,7 +292,7 @@ public class JobsServlet extends HttpServlet {
     private void query(HttpServletRequest req, HttpServletResponse resp, PrintWriter out) throws ServletException, IOException {
         //1.获取信息(页数，页码,信息)
         int pageSize = 5;
-        int pageCount = jobsBiz.getPageCount( pageSize);
+        int pageCount = jobsBiz.getPageCount( pageSize,0,18,60,0,0,0,"",false);
         int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
         if(pageIndex<1){
             pageIndex = 1;
@@ -298,13 +300,13 @@ public class JobsServlet extends HttpServlet {
         if(pageIndex>pageCount){
             pageIndex = pageCount;
         }
-        List<Jobs> jobs = jobsBiz.getByPage(pageIndex,pageSize);
+        List<Jobs> jobs = jobsBiz.getByPage(pageIndex,pageSize,0,18,60,0,0,0,"",false);
 
         //2.存
         req.setAttribute("pageCount",pageCount);
         req.setAttribute("jobs",jobs);
 
         //3. 转发到jsp页面
-        req.getRequestDispatcher("job_list.jsp?pageIndex="+pageIndex).forward(req,resp);
+        req.getRequestDispatcher("jobs_list.jsp?pageIndex="+pageIndex).forward(req,resp);
     }
 }

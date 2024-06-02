@@ -71,7 +71,7 @@ public class UserServlet extends HttpServlet {
                 //暂时去掉提高效率(1717)
 
 //                if(!code.equalsIgnoreCase(userCode)){
-//                    out.println("<script>alert('验证码输入错误');location.href = 'login_new.html';</script>");
+//                    out.println("<script>alert('验证码输入错误');location.href = 'login.html';</script>");
 //                    return;
 //                }
 
@@ -82,7 +82,7 @@ public class UserServlet extends HttpServlet {
                 // 4.判断用户对象是否为null: 
                 if(usernow==null){
                     //  4.1 如果是null表示用户名或密码不正确 ，提示错误，回到登录页面. 
-                    out.println("<script>alert('用户名或密码不存在');location.href = 'login_new.html';</script>");
+                    out.println("<script>alert('用户名或密码不存在');location.href = 'login.html';</script>");
                 }else {
                     //  4.2 非空：表示登录成功, 将用户对象保存到session中,提示登录成功后,将页面跳转到index.jsp
                     session.setAttribute("user_now",usernow);//user-->Object
@@ -114,7 +114,7 @@ public class UserServlet extends HttpServlet {
                     else if(usernow.getType()==2){
                         out.println("<script>alert('登录成功');location.href='index_admin.jsp';</script>");
                     }
-                    else out.println("<script>alert('未知用户类型');location.href = 'login_new.html';</script>");
+                    else out.println("<script>alert('未知用户类型');location.href = 'login.html';</script>");
                 }
                 break;
             case "addpre":
@@ -138,7 +138,7 @@ public class UserServlet extends HttpServlet {
                 break;
             case "query":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 out.println(123);
@@ -156,17 +156,17 @@ public class UserServlet extends HttpServlet {
                 break;
             case "exit":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 //1.清除session
                 session.invalidate();
                 //2.跳转到login.html(框架中需要回去)  top.jsp->parent->index.jsp
-                out.println("<script>alert('Success');parent.window.location.href='login_new.html';</script>");
+                out.println("<script>alert('Success');parent.window.location.href='login.html';</script>");
                 break;
             case "modifyPwd":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 //修改密码
@@ -179,9 +179,9 @@ public class UserServlet extends HttpServlet {
                 int countz = userBiz.modifyPwd(idm,newPwd);
                 //4.响应-参考exit
                 if(countz>0){
-                    out.println("<script>alert('密码修改成功');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('密码修改成功');parent.window.location.href='login.html';</script>");
                 }else{
-                    out.println("<script>alert('密码修改失败');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('密码修改失败');parent.window.location.href='login.html';</script>");
                 }
                 break;
             default:

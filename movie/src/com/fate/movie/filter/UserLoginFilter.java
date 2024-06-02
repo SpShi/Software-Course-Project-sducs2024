@@ -29,7 +29,7 @@ public class UserLoginFilter implements Filter {
         if(session.getAttribute("user")!=null||session.getAttribute("user_now")!=null){
             filterChain.doFilter(req,resp);
         }else{
-             out.println("<script>alert('请登录');location.href = 'login.html';</script>");
+             out.println("<script>alert('请登录');location.href = 'login_old.html';</script>");
         }
 
     }

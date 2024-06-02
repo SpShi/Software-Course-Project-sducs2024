@@ -2,8 +2,6 @@ package com.fate.movie.biz;
 
 import com.fate.movie.bean.Comp;
 import com.fate.movie.bean.Jobs;
-import com.fate.movie.bean.Movie;
-import com.fate.movie.bean.Type;
 import com.fate.movie.dao.CompDao;
 import com.fate.movie.dao.JobsDao;
 import com.fate.movie.dao.TypeDao;
@@ -24,11 +22,11 @@ public class JobsBiz {
         }
         return count;
     }
-    public int modify(long id,String name,long place,int age,int gender,int degrees,String major,String ctfct,
+    public int modify(long id,String name,int age,int gender,int degrees,String major,String ctfct,
                       int salary,String email,String intro){
         int count = 0;
         try {
-            count = jobsDao.modify(id,name,place,age,gender,degrees,major,ctfct,salary,email,intro);
+            count = jobsDao.modify(id,name,age,gender,degrees,major,ctfct,salary,email,intro);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -39,7 +37,7 @@ public class JobsBiz {
                 job.getDegrees(),job.getMajor(),job.getCertificates(),job.getSalary(),job.getEmail(),job.getIntro());
     }
     public int modify(Jobs job){
-        return modify(job.getId(),job.getName(),job.getPlace(),job.getAge(),job.getGender(),
+        return modify(job.getId(),job.getName(),job.getAge(),job.getGender(),
                 job.getDegrees(),job.getMajor(),job.getCertificates(),job.getSalary(),job.getEmail(),job.getIntro());
     }
     public int remove(long id) throws Exception {
@@ -64,6 +62,23 @@ public class JobsBiz {
         List<Jobs> jobss = null;
         try {
             jobss =  jobsDao.getAll();
+            for(Jobs job:jobss)
+            {
+                Comp comp=compDao.getById(job.getPlace());
+                job.setComp(comp);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }
+        return jobss;
+
+    }
+    public List<Jobs> getbyplace(long place){
+        List<Jobs> jobss = null;
+        try {
+            jobss =  jobsDao.getbyPalce(place);
             for(Jobs job:jobss)
             {
                 Comp comp=compDao.getById(job.getPlace());
@@ -109,11 +124,11 @@ public class JobsBiz {
      * 由行数算页数
      * @return
      */
-    public int  getPageCount(int pageSize) {
+    public int  getPageCount(int pageSize,long place,int agel,int ageh,int gender,int degrees,int salary,String intro,boolean desc) {
         int pageCount = 0;
         try {
             //1.获取行数
-            int rowCount = jobsDao.getCount();
+            int rowCount = jobsDao.getCount(place,agel,ageh,gender,degrees,salary,intro,desc);
             //2.根据行数得到页数,每页多少条
             pageCount =  (rowCount-1)/pageSize+1;
 
@@ -122,11 +137,11 @@ public class JobsBiz {
         }
         return pageCount;
     }
-    public List<Jobs>  getByPage(int pageIndex,int pageSize) {
+    public List<Jobs>  getByPage(int pageIndex,int pageSize,long place,int agel,int ageh,int gender,int degrees,int salary,String intro,boolean desc) {
         TypeDao typeDao = new TypeDao();
         List<Jobs> jobs = null;
         try {
-            jobs = jobsDao.getByPage(pageIndex,pageSize);
+            jobs = jobsDao.getByPage(pageIndex,pageSize,place,agel,ageh,gender,degrees,salary,intro,desc);
             for(Jobs job:jobs)
             {
                 Comp comp=compDao.getById(job.getPlace());

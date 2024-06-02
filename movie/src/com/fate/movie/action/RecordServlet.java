@@ -48,7 +48,7 @@ public class RecordServlet extends HttpServlet {
         Member member = (Member)session.getAttribute("user");
 
         if(member==null){
-            out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+            out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
             return;
         }
 
@@ -158,7 +158,6 @@ public class RecordServlet extends HttpServlet {
                 out.print(JSON.toJSONString(rows));
             }
             else {
-
                 //获取数据
                 List<Map<String,Object>> rows  = recordBiz.query(typeId,keyword);
                 //转成json

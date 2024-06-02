@@ -69,7 +69,7 @@ public class MemberServlet extends HttpServlet {
                 //暂时去掉提高效率(1717)
 
 //                if(!code.equalsIgnoreCase(memberCode)){
-//                    out.println("<script>alert('验证码输入错误');location.href = 'login.html';</script>");
+//                    out.println("<script>alert('验证码输入错误');location.href = 'login_old.html';</script>");
 //                    return;
 //                }
 
@@ -80,7 +80,7 @@ public class MemberServlet extends HttpServlet {
                 // 4.判断用户对象是否为null: 
                 if(member2==null){
                     //  4.1 如果是null表示用户名或密码不正确 ，提示错误，回到登录页面. 
-                    out.println("<script>alert('用户名或密码不存在');location.href = 'login.html';</script>");
+                    out.println("<script>alert('用户名或密码不存在');location.href = 'login_old.html';</script>");
                 }else {
                     //  4.2 非空：表示登录成功, 将用户对象保存到session中,提示登录成功后,将页面跳转到index.jsp
                     session.setAttribute("user",member2);//user-->Object
@@ -97,7 +97,7 @@ public class MemberServlet extends HttpServlet {
                 break;
             case "addpre":
                 if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 //获取所有的会员类型
@@ -118,7 +118,7 @@ public class MemberServlet extends HttpServlet {
                 break;
             case "add":
                 if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 String name =  req.getParameter("name");
@@ -147,7 +147,7 @@ public class MemberServlet extends HttpServlet {
                 break;
             case "modifypre":
                 if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 //类型&会员的信息
@@ -173,7 +173,7 @@ public class MemberServlet extends HttpServlet {
                 break;
             case "modify":
                 if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 long memberId = Long.parseLong( req.getParameter("id"));
@@ -203,7 +203,7 @@ public class MemberServlet extends HttpServlet {
                 break;
             case "remove":
                 if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                  long memId = Long.parseLong(req.getParameter("id"));
@@ -221,7 +221,7 @@ public class MemberServlet extends HttpServlet {
                 break;
             case "query":
                 if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 List<Member> memberList = memberBiz.getAll();
@@ -238,7 +238,7 @@ public class MemberServlet extends HttpServlet {
                 break;
             case "modifyrecharge":
                 if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 //获取身份证号和金额
@@ -253,7 +253,7 @@ public class MemberServlet extends HttpServlet {
                 break;
             case "doajax":
                 if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 //1.获取身份证号
@@ -273,17 +273,17 @@ public class MemberServlet extends HttpServlet {
                 break;
             case "exit":
                 if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 //1.清除session
                 session.invalidate();
                 //2.跳转到login.html(框架中需要回去)  top.jsp->parent->index.jsp
-                out.println("<script>alert('Success');parent.window.location.href='login.html';</script>");
+                out.println("<script>alert('Success');parent.window.location.href='login_old.html';</script>");
                 break;
             case "modifyPwd":
                 if(session.getAttribute("user")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 //修改密码
@@ -296,9 +296,9 @@ public class MemberServlet extends HttpServlet {
                 int countz = memberBiz.modifyPwd(id1,newPwd);
                 //4.响应-参考exit
                 if(countz>0){
-                    out.println("<script>alert('密码修改成功');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('密码修改成功');parent.window.location.href='login_old.html';</script>");
                 }else{
-                    out.println("<script>alert('密码修改失败');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('密码修改失败');parent.window.location.href='login_old.html';</script>");
                 }
                 break;
             default:

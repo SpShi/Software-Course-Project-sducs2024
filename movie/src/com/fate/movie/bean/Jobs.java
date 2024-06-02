@@ -109,13 +109,13 @@ public class Jobs {
         return "Job{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", place='" + place +
-                ", age='" + age +
-                ", gender='" + gender +
-                ", degrees='" + degrees +
+                ", place=" + place +
+                ", age=" + age +
+                ", gender=" + gender +
+                ", degrees=" + degrees +
                 ", major='" + major + '\'' +
                 ", certificates='" + certificates + '\'' +
-                ", salary='" + salary +
+                ", salary=" + salary +
                 ", email='" + email + '\'' +
                 ", introduction='" + intro + '\'' +
                 ", comp=" + comp +

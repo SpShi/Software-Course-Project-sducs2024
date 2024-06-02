@@ -8,7 +8,6 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="lib" />
-          <element id="library" level="project" name="mchange-commons-java-0.2.19" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="movie/web/Web" />

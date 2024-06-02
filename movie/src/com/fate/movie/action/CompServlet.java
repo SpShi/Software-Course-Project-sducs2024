@@ -1,9 +1,10 @@
 package com.fate.movie.action;
 
 
-import com.fate.movie.bean.*;
-import com.fate.movie.biz.*;
-import com.fate.movie.dao.CompDao;
+import com.fate.movie.bean.Comp;
+import com.fate.movie.bean.User;
+import com.fate.movie.biz.CompBiz;
+import com.fate.movie.biz.UserBiz;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,11 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Objects;
 
@@ -69,7 +67,7 @@ public class CompServlet extends HttpServlet{
                 //暂时去掉提高效率(1717)
 
 //                if(!code.equalsIgnoreCase(valCode)){
-//                    out.println("<script>alert('验证码输入错误');location.href = 'login_new.html';</script>");
+//                    out.println("<script>alert('验证码输入错误');location.href = 'login.html';</script>");
 //                    return;
 //                }
 
@@ -80,7 +78,7 @@ public class CompServlet extends HttpServlet{
                 // 4.判断企业对象是否为null: 
                 if(usernow==null){
                     //  4.1 如果是null表示企业名或密码不正确 ，提示错误，回到登录页面. 
-                    out.println("<script>alert('企业名或密码不存在');location.href = 'login_new.html';</script>");
+                    out.println("<script>alert('企业名或密码不存在');location.href = 'login.html';</script>");
                 }else {
                     //  4.2 非空：表示登录成功, 将企业对象保存到session中,提示登录成功后,将页面跳转到index.jsp
                     session.setAttribute("user_now",usernow);//user-->Object
@@ -89,7 +87,7 @@ public class CompServlet extends HttpServlet{
                     {
                         out.println("<script>alert('登录成功');location.href='index_comp.jsp';</script>");
                     }
-                    else out.println("<script>alert('未知企业类型');location.href = 'login_new.html';</script>");
+                    else out.println("<script>alert('未知企业类型');location.href = 'login.html';</script>");
                 }
                 break;
             case "addpre":
@@ -171,7 +169,7 @@ public class CompServlet extends HttpServlet{
                 break;
             case "modify":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 String namem =  req.getParameter("name");
@@ -203,7 +201,7 @@ public class CompServlet extends HttpServlet{
                 break;
             case "remove":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 long memId = Long.parseLong(req.getParameter("id"));
@@ -221,7 +219,7 @@ public class CompServlet extends HttpServlet{
                 break;
             case "query":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 List<Comp> compList = compBiz.getAll();
@@ -234,15 +232,15 @@ public class CompServlet extends HttpServlet{
                 break;
             case "details":
                 long compId;
-                User userd=(User)req.getAttribute("user_now");
-                if(((long)req.getAttribute("user_type"))==1)
+                User userd=(User)session.getAttribute("user_now");
+                if(userd.getType()==1)
                 {
                     compId=userd.getId();
                 }
                 else compId=Long.parseLong(req.getParameter("id"));
                 Comp compx= compBiz.getById(compId);
                 if(userd==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 req.setAttribute("compx",compx);
@@ -252,17 +250,17 @@ public class CompServlet extends HttpServlet{
                 break;
             case "exit":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 //1.清除session
                 session.invalidate();
                 //2.跳转到login.html(框架中需要回去)  top.jsp->parent->index.jsp
-                out.println("<script>alert('Success');parent.window.location.href='login_new.html';</script>");
+                out.println("<script>alert('Success');parent.window.location.href='login.html';</script>");
                 break;
             case "modifyPwd":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
                 //修改密码
@@ -275,9 +273,9 @@ public class CompServlet extends HttpServlet{
                 int countz = userBiz.modifyPwd(idmp,newPwd);
                 //4.响应-参考exit
                 if(countz>0){
-                    out.println("<script>alert('密码修改成功');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('密码修改成功');parent.window.location.href='login.html';</script>");
                 }else{
-                    out.println("<script>alert('密码修改失败');parent.window.location.href='login_new.html';</script>");
+                    out.println("<script>alert('密码修改失败');parent.window.location.href='login.html';</script>");
                 }
                 break;
             default:

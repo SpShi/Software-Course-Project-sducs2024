@@ -70,7 +70,7 @@ public class EliteDao {
         String sql="update elite set `name` = ?, idNumber = ?,state = ?,resume = ?,gender = ?,age = ?,degrees = ?,"+
                 "tel = ?,major = ?,email = ?,certificate = ?,intention = ?,selfevaluation = ?,experience = ? " +
                 "where id=?";
-        int count = runner.update(conn,sql,name,idNumber,resume,gender,age,degrees,tel,major,email,ctfct,
+        int count = runner.update(conn,sql,name,idNumber,0,resume,gender,age,degrees,tel,major,email,ctfct,
                 intt,slfe,expe,id);
         DBHelper.close(conn);
         return count;
@@ -136,28 +136,82 @@ public class EliteDao {
     }
 
     /**
-     *带条件的查询
-     * @param agel
-     * @param ageh
-     * @param gender
-     * @param degrees
-     * @param salary
-     * @param key
-     * @param desc
+     *页面查询(暂时不考虑排序问题)
+     * @param pageIndex 第几页,从1开始
+     * @param pageSize 每页多少行
+     * @return 当前页的信息
+     * @throws SQLException
+     */
+    public List<Elite>  getByPage(int pageIndex, int pageSize, int agel, int ageh, int gender, int degrees,
+                                  String key, boolean desc) throws SQLException {
+        Connection conn  = DBHelper.getConnection();
+        String sql = "select * from  (select * from elite ";
+        sql=sql+ "where age>=? AND age<=?";
+        if(gender>0)  sql+=" AND gender="+gender;
+        sql+=" AND degrees>=? ";
+        sql+=" ORDER BY degrees ";
+        if(desc) sql=sql+"desc";
+        sql+=" ) as b ";
+        if(key!=null) {
+            sql+="where b.major like '%"+key+"%' or b.certificate like '%"+key+"%' " +
+                    "or b.intention like '%"+key+"%' " +
+                    "or b.selfevaluation like '%"+key+"%' or b.experience like '%"+key+"%' ";
+        }
+        sql=sql+" limit ?,?";
+        int offset = (pageIndex-1)*pageSize;
+        List<Elite> elite= runner.query(conn,sql,new BeanListHandler<Elite>(Elite.class),agel,ageh,degrees,offset,pageSize);
+        DBHelper.close(conn);
+        return  elite;
+    }
+    public int  getCount(int agel,int ageh,int gender,int degrees,
+                         String key,boolean desc) throws SQLException {
+        Connection conn  = DBHelper.getConnection();
+        String sql = "select count(id) from  (select * from elite ";
+        sql=sql+ "where age>=? AND age<=?";
+        if(gender>0)  sql+=" AND gender="+gender;
+        sql+=" AND degrees>=? ";
+        sql+=" ORDER BY degrees ";
+        if(desc) sql=sql+"desc";
+        sql+=" ) as b ";
+        if(key!=null) {
+            sql+="where b.major like '%"+key+"%' or b.certificate like '%"+key+"%' " +
+                    "or b.intention like '%"+key+"%' " +
+                    "or b.selfevaluation like '%"+key+"%' or b.experience like '%"+key+"%' ";
+        }
+        Number data= runner.query(conn,sql,new ScalarHandler<>(),agel,ageh,degrees);
+        int count = data.intValue();
+        DBHelper.close(conn);
+        return count;
+    }
+    /**
+     * 获得符合条件的岗位
+     * @param agel 最低年龄
+     * @param ageh 最高年龄
+     * @param gender 性别限制
+     * @param degrees 最低学历
+     * @param key 关键词
+     * @param desc 是否按照逆序薪资排序
      * @return
      * @throws SQLException
      */
-    public List<Elite> getAllwithLimit(int agel, int ageh, int gender, int degrees,
-                                      int salary, String key, boolean desc) throws SQLException {
+    public List<Elite> getAllwithLimit(int agel,int ageh,int gender,int degrees,
+                                      String key,boolean desc) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="select * from  jobs ";
-        sql=sql+ "where age>=? AND age<=? AND gender=? AND degrees>? AND salary <=? ORDER BY salary ";
-        if(key!="") sql+="and intro like '%"+key+"%'";
+        String sql="select * from  (select * from elite ";
+        sql=sql+ "where age>=? AND age<=?";
+        if(gender>0)  sql+=" AND gender="+gender;
+        sql+=" AND degrees>=? ";
+        sql+=" ORDER BY degrees ";
         if(desc) sql=sql+"desc";
-        sql+="ORDER BY salary ";
-        List<Elite> jobs = runner.query(conn,sql,new BeanListHandler<Elite>(Elite.class),agel,ageh,gender,degrees,salary);
+        sql+=" ) as b ";
+        if(key!=null) {
+            sql+="where b.major like '%"+key+"%' or b.certificate like '%"+key+"%' " +
+                "or b.intention like '%"+key+"%' " +
+                "or b.selfevaluation like '%"+key+"%' or b.experience like '%"+key+"%' ";
+        }
+        List<Elite> elite= runner.query(conn,sql,new BeanListHandler<Elite>(Elite.class),agel,ageh,degrees);
         DBHelper.close(conn);
-        return  jobs;
+        return  elite;
     }
     /**
      * 根据人才编号查人才信息
@@ -165,9 +219,6 @@ public class EliteDao {
      * @return
      * @throws SQLException
      */
-
-
-
     public Elite getById(long id) throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql="select id,`name`,idNumber,state,resume,gender,age,degrees,tel,major,email," +

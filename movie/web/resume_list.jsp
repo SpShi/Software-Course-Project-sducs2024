@@ -74,7 +74,7 @@
                                             <th>简历</th>
                                             <th>操作</th>
                                         </tr>
-                                        <c:forEach items="${eRecords}" var="b">
+                                        <c:forEach items="${jRecords}" var="b">
                                             <tr align="center" class="d">
                                                 <td><a href="erecord.let?type=details&id=${b.id}">${b.id}</a></td>
                                                 <td>${b.jobs.name}</td>

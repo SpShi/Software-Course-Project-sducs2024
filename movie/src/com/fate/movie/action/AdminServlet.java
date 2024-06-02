@@ -65,7 +65,7 @@ public class AdminServlet extends HttpServlet{
                 //暂时去掉提高效率(1717)
 
 //                if(!code.equalsIgnoreCase(valCode)){
-//                    out.println("<script>alert('验证码输入错误');location.href = 'login.html';</script>");
+//                    out.println("<script>alert('验证码输入错误');location.href = 'login_old.html';</script>");
 //                    return;
 //                }
 
@@ -76,7 +76,7 @@ public class AdminServlet extends HttpServlet{
                 // 4.判断管理员对象是否为null: 
                 if(usernow==null){
                     //  4.1 如果是null表示管理员名或密码不正确 ，提示错误，回到登录页面. 
-                    out.println("<script>alert('管理员名或密码不存在');location.href = 'login.html';</script>");
+                    out.println("<script>alert('管理员名或密码不存在');location.href = 'login_old.html';</script>");
                 }else {
                     //  4.2 非空：表示登录成功, 将管理员对象保存到session中,提示登录成功后,将页面跳转到index.jsp
                     session.setAttribute("user_now",usernow);//user-->Object
@@ -85,7 +85,7 @@ public class AdminServlet extends HttpServlet{
                     {
                         out.println("<script>alert('登录成功');location.href='index_admin.jsp';</script>");
                     }
-                    else out.println("<script>alert('未知管理员类型');location.href = 'login.html';</script>");
+                    else out.println("<script>alert('未知管理员类型');location.href = 'login_old.html';</script>");
                 }
                 break;
             case "addpre":
@@ -124,7 +124,7 @@ public class AdminServlet extends HttpServlet{
                 break;
             case "modifypre":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 //类型&会员的信息
@@ -142,7 +142,7 @@ public class AdminServlet extends HttpServlet{
                 break;
             case "modify":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 String namem =  req.getParameter("name");
@@ -164,7 +164,7 @@ public class AdminServlet extends HttpServlet{
                 break;
             case "remove":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 long adminId = Long.parseLong(req.getParameter("id"));
@@ -182,7 +182,7 @@ public class AdminServlet extends HttpServlet{
                 break;
             case "query":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 List<Admin> adminList = adminBiz.getAll();
@@ -195,17 +195,17 @@ public class AdminServlet extends HttpServlet{
                 break;
             case "exit":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 //1.清除session
                 session.invalidate();
                 //2.跳转到login.html(框架中需要回去)  top.jsp->parent->index.jsp
-                out.println("<script>alert('Success');parent.window.location.href='login.html';</script>");
+                out.println("<script>alert('Success');parent.window.location.href='login_old.html';</script>");
                 break;
             case "modifyPwd":
                 if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('请登录');parent.window.location.href='login_old.html';</script>");
                     return;
                 }
                 //修改密码
@@ -218,9 +218,9 @@ public class AdminServlet extends HttpServlet{
                 int countz = userBiz.modifyPwd(idmp,newPwd);
                 //4.响应-参考exit
                 if(countz>0){
-                    out.println("<script>alert('密码修改成功');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('密码修改成功');parent.window.location.href='login_old.html';</script>");
                 }else{
-                    out.println("<script>alert('密码修改失败');parent.window.location.href='login.html';</script>");
+                    out.println("<script>alert('密码修改失败');parent.window.location.href='login_old.html';</script>");
                 }
                 break;
             default:

@@ -24,7 +24,7 @@
                     obj.select();
                     return document.selection.createRange().text;
                 }else if (window.navigator.userAgent.indexOf("Firefox") >= 1){
-                    //firefox　
+                    //firefox 
                     return window.URL.createObjectURL(obj.files.item(0));
                 }else if(navigator.userAgent.indexOf("Chrome")>0){
                     //chrome

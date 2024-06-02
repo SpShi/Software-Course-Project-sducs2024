@@ -1,11 +1,16 @@
 package com.fate.movie.biz;
 
-import com.fate.movie.bean.*;
-import com.fate.movie.dao.*;
+import com.fate.movie.bean.Comp;
+import com.fate.movie.bean.ERecord;
+import com.fate.movie.bean.Elite;
+import com.fate.movie.bean.Jobs;
+import com.fate.movie.dao.CompDao;
+import com.fate.movie.dao.ERecordDao;
+import com.fate.movie.dao.EliteDao;
+import com.fate.movie.dao.JobsDao;
 import com.fate.movie.util.DBHelper;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -71,21 +76,23 @@ public class ERecordBiz {
         }
         return pageCount;
     }
-    public List<ERecord> getRecordsByJobId(long jobId,boolean desc,int state){
+    public List<ERecord> getRecordsByJobId(long[] jobsId,boolean desc,int state){
         List<ERecord> records = null;
         try {
-            records=eRecordDao.getRecordsByJobId(jobId,desc,state);
-            //1.外键信息
-            //1.1 获取会员对象
-            // Jobs jobs = jobsDao.getById(jobsId);//拿不到外键对象
-            Jobs jobs = jobsBiz.getById(jobId);
-            for(ERecord record:records){
-                long eliteId = record.getEliteid();
-                Elite elite = eliteBiz.getById(eliteId);
-                record.setElite(elite);
-                record.setJobs(jobs);
+            for(long jobId:jobsId)
+            {
+                records=eRecordDao.getRecordsByJobId(jobId,desc,state);
+                //1.外键信息
+                //1.1 获取会员对象
+                // Jobs jobs = jobsDao.getById(jobsId);//拿不到外键对象
+                Jobs jobs = jobsBiz.getById(jobId);
+                for(ERecord record:records){
+                    long eliteId = record.getEliteid();
+                    Elite elite = eliteBiz.getById(eliteId);
+                    record.setElite(elite);
+                    record.setJobs(jobs);
+                }
             }
-
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

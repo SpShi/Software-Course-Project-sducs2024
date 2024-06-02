@@ -1,7 +1,6 @@
 package com.fate.movie.dao;
 
 import com.fate.movie.bean.Jobs;
-import com.fate.movie.bean.Movie;
 import com.fate.movie.util.DBHelper;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -44,7 +43,6 @@ public class JobsDao {
      * 修改岗位详细信息
      * @param id
      * @param name
-     * @param place
      * @param age
      * @param gender
      * @param degrees
@@ -56,12 +54,12 @@ public class JobsDao {
      * @return
      * @throws SQLException
      */
-    public int modify(long id,String name,long place,int age,int gender,int degrees,String major,String ctfct,
+    public int modify(long id,String name,int age,int gender,int degrees,String major,String ctfct,
                       int salary,String email,String intro) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="update jobs set `name` = ?, place=?,age=?,gender=?,degrees=?,major=?,certificates=?, " +
+        String sql="update jobs set `name` = ?,age=?,gender=?,degrees=?,major=?,certificates=?, " +
                 "salary=?,email=?,intro=? where id=?";
-        int count = runner.update(conn,sql,name,place,age,gender,degrees,major,ctfct,salary,email,intro,id);
+        int count = runner.update(conn,sql,name,age,gender,degrees,major,ctfct,salary,email,intro,id);
         DBHelper.close(conn);
         return count;
     }
@@ -105,6 +103,14 @@ public class JobsDao {
         DBHelper.close(conn);
         return  jobss;
     }
+
+    public List<Jobs> getbyPalce(long place) throws SQLException {
+        Connection conn = DBHelper.getConnection();
+        String sql="select * from  jobs where place=?";
+        List<Jobs> jobss = runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),place);
+        DBHelper.close(conn);
+        return  jobss;
+    }
     /**
      *页面查询(暂时不考虑排序问题)
      * @param pageIndex 第几页,从1开始
@@ -115,40 +121,44 @@ public class JobsDao {
     public List<Jobs>  getByPage(int pageIndex, int pageSize,long place,int agel,int ageh,int gender,int degrees,
                                  int salary,String key,boolean desc) throws SQLException {
         Connection conn  = DBHelper.getConnection();
-        String sql = "select * from jobs";
+        String sql = "select * from jobs ";
         if(place==0){
-            sql=sql+ "where age>=? AND age<=? AND gender=? AND degrees>? AND salary >=? ORDER BY salary ";
+            sql=sql+ "where age>=? AND age<=?";
         }
         else{
-            sql=sql+"where place=? AND age>=? AND age<=? AND gender=? AND degrees>? AND salary >=? ";
+            sql=sql+"where place=? AND age>=? AND age<=?";
         }
+        if(gender>0)  sql+=" AND gender="+gender;
+        sql+=" AND degrees>=? AND salary >=?";
         if(key!="") sql+="and intro like '%"+key+"%'";
-        sql+="ORDER BY salary ";
+        sql+=" ORDER BY salary ";
         if(desc) sql=sql+" desc ";
         sql=sql+" limit ?,?";
         int offset = (pageIndex-1)*pageSize;
         List<Jobs> jobs ;
-        if(place==0) jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),agel,ageh,gender,degrees,salary,offset,pageSize);
-        else jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),place,agel,ageh,gender,degrees,salary,offset,pageSize);
+        if(place==0) jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),agel,ageh,degrees,salary,offset,pageSize);
+        else jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),place,agel,ageh,degrees,salary,offset,pageSize);
         DBHelper.close(conn);
         return  jobs;
     }
     public int  getCount(long place,int agel,int ageh,int gender,int degrees,
                          int salary,String key,boolean desc) throws SQLException {
         Connection conn  = DBHelper.getConnection();
-        String sql = "select count(id)from jobs";
+        String sql = "select count(id) from jobs ";
         if(place==0){
-            sql=sql+ "where age>=? AND age<=? AND gender=? AND degrees>? AND salary >=? ORDER BY salary ";
+            sql=sql+ "where age>=? AND age<=?";
         }
         else{
-            sql=sql+"where place=? AND age>=? AND age<=? AND gender=? AND degrees>? AND salary >=? ";
+            sql=sql+"where place=? AND age>=? AND age<=?";
         }
-        if(key!="") sql+="and intro like '%"+key+"%'";
-        sql+="ORDER BY salary ";
+        if(gender>0)  sql+=" AND gender="+gender;
+        sql+=" AND degrees>=? AND salary >=?";
+        if(key!="") sql+=" AND intro like '%"+key+"%'";
+        sql+=" ORDER BY salary ";
         if(desc) sql=sql+"desc";
         Number data;
-        if(place==0) data= runner.query(conn,sql,new ScalarHandler<>(),agel,ageh,gender,degrees,salary);
-        else data= runner.query(conn,sql,new ScalarHandler<>(),place,agel,ageh,gender,degrees,salary);
+        if(place==0) data= runner.query(conn,sql,new ScalarHandler<>(),agel,ageh,degrees,salary);
+        else data= runner.query(conn,sql,new ScalarHandler<>(),place,agel,ageh,degrees,salary);
         int count = data.intValue();
         DBHelper.close(conn);
         return count;
@@ -171,17 +181,19 @@ public class JobsDao {
         Connection conn = DBHelper.getConnection();
         String sql="select * from  jobs ";
         if(place==0){
-            sql=sql+ "where age>=? AND age<=? AND gender=? AND degrees>? AND salary >=? ORDER BY salary ";
+            sql=sql+ "where age>=? AND age<=?";
         }
         else{
-            sql=sql+"where place=? AND age>=? AND age<=? AND gender=? AND degrees>? AND salary >=? ";
+            sql=sql+"where place=? AND age>=? AND age<=?";
         }
+        if(gender>0)  sql+=" AND gender="+gender;
+        sql+=" AND degrees>=? AND salary >=?";
         if(key!="") sql+="and intro like '%"+key+"%'";
-        sql+="ORDER BY salary ";
+        sql+=" ORDER BY salary ";
         if(desc) sql=sql+"desc";
         List<Jobs> jobs ;
-        if(place==0) jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),agel,ageh,gender,degrees,salary);
-        else jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),place,agel,ageh,gender,degrees,salary);
+        if(place==0) jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),agel,ageh,degrees,salary);
+        else jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),place,agel,ageh,degrees,salary);
         DBHelper.close(conn);
         return  jobs;
     }
@@ -215,7 +227,7 @@ public class JobsDao {
      */
     public boolean exits_e(long id) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="select count(id) from e2c_record where jobsId = ?";
+        String sql="select count(id) from e2c_record where jobid = ?";
         Number number= runner.query(conn,sql,new ScalarHandler<>(),id);
         DBHelper.close(conn);
         return number.intValue()>0?true:false;

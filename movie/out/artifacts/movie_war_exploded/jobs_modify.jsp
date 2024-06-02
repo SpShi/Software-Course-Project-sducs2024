@@ -24,7 +24,7 @@
                     obj.select();
                     return document.selection.createRange().text;
                 }else if (window.navigator.userAgent.indexOf("Firefox") >= 1){
-                    //firefox　
+                    //firefox 
                     return window.URL.createObjectURL(obj.files.item(0));
                 }else if(navigator.userAgent.indexOf("Chrome")>0){
                     //chrome
@@ -88,18 +88,18 @@
                         <table width="100%">
                             <tr>
                                 <td colspan="2">
-                                    <form action="" method="">
+                                    <form action="jobs.let?type=modify" method="post" enctype="multipart/form-data">
                                         <table width="100%"class="cont">
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>编号：</td>
-                                                <td width="20%"><input class="text" type="text" name="movieId"  value="${jobs.id}" readonly/></td>
+                                                <td width="20%"><input class="text" type="text" name="id_n"  value="${job.id}" readonly/></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td width="15%">岗位名称：</td>
-                                                <td width="25%"><input class="text" type="text" name="name" value="${jobs.name}" /></td>
+                                                <td width="25%"><input class="text" type="text" name="names" value="${job.name}" /></td>
 
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
@@ -107,14 +107,14 @@
                                                 <td width="2%">&nbsp;</td>
                                                 <td>所属公司：</td>
                                                 <td width="20%">
-                                                    <input class="text" type="text" name="type" value="${jobs.comp.name}" readonly/>
+                                                    <input class="text" type="text" name="type" value="${job.comp.name}" readonly/>
                                                 </td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>年龄限制：</td>
-                                                <td width="20%"><input class="text" style="width:50px;" type="number" name="age" value="${jobs.age}" /></td>
+                                                <td width="20%"><input class="text" style="width:50px;" type="number" name="age" value="${job.age}" /></td>
 
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
@@ -144,35 +144,35 @@
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>专业:</td>
-                                                <td width="20%"><input class="text"  type="text" name="major" value="${jobs.major}"/></td>
+                                                <td width="20%"><input class="text"  type="text" name="major" value="${job.major}"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>证书:</td>
-                                                <td width="20%"><input class="text"  type="text" name="certificates" value="${jobs.certificates}"/></td>
+                                                <td width="20%"><input class="text"  type="text" name="certificates" value="${job.certificates}"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>工资:</td>
-                                                <td width="20%"><input class="text"  type="text" name="salary" value="${jobs.salary}" /></td>
+                                                <td width="20%"><input class="text"  type="text" name="salary" value="${job.salary}" /></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>邮箱:</td>
-                                                <td width="20%"><input class="text"  type="text" name="email" value="${jobs.email}" /></td>
+                                                <td width="20%"><input class="text"  type="text" name="email" value="${job.email}" /></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
                                                 <td>简介：</td>
-                                                <td colspan="2"><textarea cols="150" rows="20">${jobs.intro}</textarea></td>
+                                                <td colspan="2"><textarea cols="150" rows="20">${job.intro}</textarea></td>
                                                 <td></td>
                                             </tr>
                                             <tr>

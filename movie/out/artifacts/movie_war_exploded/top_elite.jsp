@@ -15,7 +15,7 @@
     <script type="text/javascript">
         function logout() {
             if(window.confirm('您确定要退出吗？')) {
-                top.location = 'login_new.html';
+                top.location = 'login.html';
             }
         }       
     </script>

@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html >
 <html >
 <head>
@@ -20,13 +21,15 @@
     <!-- 头部开始 -->
     <tr>
         <td width="17" valign="top" background="./Images/mail_left_bg.gif">
-            <img src="./Images/left_top_right.gif" width="17" height="29" />
+            <img src="./Images/image.png" width="0" height="39" />
         </td>
-        <td valign="top" background="./Images/content_bg.gif">
+        <td valign="top" background="./Images/image.png">
 
         </td>
-        <td width="16" valign="top" background="./Images/mail_right_bg.gif"><img src="./Images/nav_right_bg.gif" width="16" height="29" /></td>
+        <td  width="17" valign="top" background="./Images/mail_right_bg.gif">
+            <img src="./Images/image.png" width="5" height="39" /></td>
     </tr>
+
     <!-- 中间部分开始 -->
     <tr>
         <!--第一行左边框-->
@@ -40,8 +43,8 @@
                     <td colspan="4">
                         <table>
                             <tr>
-                                <td width="100" align="center"><img src="./Images/mime.gif" /></td>
-                                <td valign="bottom"><h3 style="letter-spacing:1px;">电影添加 > 电影详情</h3></td>
+                                <!-- <td width="100" align="center"><img src="./Images/mime.gif" /></td> -->
+                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 个人中心 > 个人信息</h3></td>
                             </tr>
                         </table>
                     </td>
@@ -54,131 +57,136 @@
                         </table>
                     </td>
                 </tr>
-                <!-- 添加产品开始 -->
-                <tr>
+                    <tr>
+                        <td width="2%">&nbsp;</td>
+                        <td width="96%">
+                            <table width="100%" style="margin-left: 30px;">
+
+                                <tr class="lab">
+                                    <th>
+                                    <td width="80px">姓名：</td>
+                                    <td>${eliteinfo.name}</td>
+                                        <%--                                    <td ><input class="input" placeholder="长度6~15个字符"  type="text" name="name" value="${m.name}" required/></td>--%>
+                                    <!-- <td class="err">长度1~15个字符</td> -->
+                                    </th>
+                                    <th>
+                                    <td width="80px">身份证号：</td>
+                                        <%--                                    <td><input class="input" placeholder="长度17个字符"  type="text" name="idnum" value="${m.idNumber}" required/></td>--%>
+                                    <!-- <td class="err">长度17个字符</td> -->
+
+                                    <td>${eliteinfo.idNumber}</td>
+                                    </th>
+                                </tr>
+                                <tr class="lab">
+                                    <th>
+                                    <td width="80px">性别：</td>
+
+                                    <td >
+                                        <c:if test="${eliteinfo.gender==0}">其他</c:if>
+                                        <c:if test="${eliteinfo.gender==1}">女</c:if>
+                                        <c:if test="${eliteinfo.gender==2}">男</c:if>
+                                    </td>
+
+                                    </th>
+                                    <th>
+                                    <td width="80px">年龄：</td>
+                                        <%--                                    <td><input class="input" placeholder="您的年龄应在18岁到60岁之间"  id="balance" type="number" name="age" value="${m.age}" required/></td>--%>
+                                        <%--                                    <td class="err">您的年龄应在18岁到60岁之间</td>--%>
+                                    <td>${eliteinfo.age}</td>
+
+                                    </th>
+                                </tr>
+                                <tr class="lab">
+                                    <th>
+                                    <td width="80px">学历：</td>
+                                    <td>
+                                        <c:if test="${eliteinfo.degrees==0}">无学历</c:if>
+                                        <c:if test="${eliteinfo.degrees==1}">小学毕业</c:if>
+                                        <c:if test="${eliteinfo.degrees==2}">初中毕业</c:if>
+                                        <c:if test="${eliteinfo.degrees==3}">高中毕业</c:if>
+                                        <c:if test="${eliteinfo.degrees==4}">专科</c:if>
+                                        <c:if test="${eliteinfo.degrees==5}">本科</c:if>
+                                        <c:if test="${eliteinfo.degrees==6}">硕士学位</c:if>
+                                        <c:if test="${eliteinfo.degrees==7}">博士学位</c:if>
+                                    </td>
+
+                                    </th>
+                                    <th>
+                                    <td width="80px">电话号码：</td>
+                                    <td>${eliteinfo.tel}</td>
+                                        <%--                                    <td><input class="input" placeholder="请输入11位电话号码"  type="tel" name="tel" value="${m.tel}" required/></td>--%>
+                                        <%--                                    <td class="err">请输入11位电话号码</td>--%>
+
+                                    </th>
+                                </tr>
+
+                                <tr class="lab">
+                                    <th>
+                                    <td width="80px">专业：</td>
+                                    <td>${eliteinfo.major}</td>
+                                        <%--                                    <td><input class="input"  type="text" name="major" value="${m.major}" required/></td>--%>
+
+                                    </th>
+                                    <th>
+                                    <td width="80px">邮箱：</td>
+                                    <td>${eliteinfo.email}</td>
+                                        <%--                                    <td><input class="input" placeholder="请输入邮箱"  type="text" name="email" value="${m.email}" required/></td>--%>
+
+                                    </th>
+                                </tr>
+                                <tr class="lab">
+                                    <th >
+
+                                    <td width="80px">简历：</td>
+<%--                                    <td>${eliteinfo.resume}</td>--%>
+                                     <td><textarea class="tex"  type="text"   rows="6"  disabled>${eliteinfo.resume}</textarea></td>
+                                    </th>
+                                    <th>
+                                    <td width="80px">证书：</td>
+<%--                                    <td>${eliteinfo.certificate}</td>--%>
+                                    <td><textarea class="tex"  type="text"   rows="6"  disabled>${eliteinfo.certificate}</textarea></td>
+                                        <%--                                    <td><textarea class="tex" name="ctfct"  rows="6"required>${m.certificate}</textarea></td>--%>
+
+                                    </th>
+                                </tr>
+
+                                <tr class="lab">
+                                    <th>
+                                    <td width="80px">求职意向：</td>
+<%--                                    <td>${eliteinfo.intention}</td>--%>
+                                    <td><textarea class="tex"  type="text"   rows="6"  disabled>${eliteinfo.intention}</textarea></td>
+
+                                <%--                                    <td><textarea class="tex"  name="intt" rows="6" required >${m.intention}</textarea></td>--%>
+
+                                    </th>
+                                    <th>
+                                    <td width="80px">自我评估：</td>
+<%--                                    <td>${eliteinfo.selfevaluation}</td>--%>
+                                    <td><textarea class="tex"  type="text"   rows="6"  disabled>${eliteinfo.selfevaluation}</textarea></td>
+
+                                <%--                                    <td><textarea class="tex"  name="slfe" rows="6" required>${m.selfevaluation}</textarea></td>--%>
+
+                                    </th>
+                                </tr>
+                                <tr class="lab">
+                                    <th>
+                                    <td width="80px">工作经验：</td>
+<%--                                    <td>${eliteinfo.experience}</td>--%>
+                                    <td><textarea class="tex"  type="text"   rows="6"  disabled>${eliteinfo.experience}</textarea></td>
+
+                                <%--                                    <td><textarea class="tex" name="expe"rows="6" required>${m.experience}</textarea></td>--%>
+
+                                    </th>
+                                </tr>
+
+                            </table>
+                        </td>
+                        <td width="2%">&nbsp;</td>
+                    </tr>
                     <td width="2%">&nbsp;</td>
-                    <td width="96%">
-                        <table width="100%">
-                            <tr>
-                                <td colspan="2">
-                                    <form action="" method="">
-                                        <table width="100%"class="cont">
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>id：</td>
-                                                <td width="20%"><input class="text" type="text" name="eliteinfoId"  value="${eliteinfo.name}" disabled="disabled"/></td>
-                                                <td rowspan="9" valign="top" >
-                                                    <fieldset style="width: 220px; height: 360px;">
-                                                        <legend>简历</legend>
-                                                        <img src="${eliteinfo.resume}" width="200px"; height="350px"/>
-                                                    </fieldset>
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td width="15%">姓名：</td>
-                                                <td width="25%"><input class="text" type="text" name="name" value="${eliteinfo.name}" disabled="disabled"/></td>
+                    <td ><a class="btlg"  onclick="return confirm('确认修改');" href="elite.let?type=modifypre&id=${eliteinfo.id}">修改</a></td>
 
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>证件号：</td>
-                                                <td width="20%">
-                                                    <input class="text" type="text" name="type" value="${eliteinfo.idNumber}" disabled="disabled"/>
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>状态：</td>
-                                                <td width="20%"><input class="text" style="width:50px;" type="number" name="stock" value="${eliteinfo.state}"  disabled="disabled" /></td>
 
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>性别：</td>
-                                                <td width="20%"><input class="text" style="width:100px;" type="text" name="price" value="${eliteinfo.gender}" disabled="disabled" /></td>
-
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>年龄：</td>
-                                                <td width="20%"><input class="text"  type="text" name="publish" value="${eliteinfo.age}" disabled="disabled"/></td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>学历:</td>
-                                                <td width="20%"><input class="text"  type="text" name="author" value="${eliteinfo.degrees}" disabled="disabled"/></td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>电话:</td>
-                                                <td width="20%"><input class="text"  type="text" name="date" value="${eliteinfo.tel}" disabled="disabled"/></td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>专业:</td>
-                                                <td width="20%"><input class="text"  type="text" name="address" value="${eliteinfo.major}"disabled="disabled"/></td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>邮箱:</td>
-                                                <td width="20%"><input class="text"  type="text" name="address" value="${eliteinfo.email}"disabled="disabled"/></td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>证书:</td>
-                                                <td width="20%"><input class="text"  type="text" name="address" value="${eliteinfo.certificate}"disabled="disabled"/></td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>求职意向:</td>
-                                                <td width="20%"><input class="text"  type="text" name="address" value="${eliteinfo.intention}"disabled="disabled"/></td>
-                                                <td></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>自我评价：</td>
-                                                <td colspan="2"><textarea cols="150" rows="20" disabled="disabled">${eliteinfo.selfevaluation}</textarea></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>工作经历：</td>
-                                                <td colspan="2"><textarea cols="150" rows="20" disabled="disabled">${eliteinfo.experience}</textarea></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td></td>
-                                                <td colspan="3"><input class="btn" type="button" value="修改" onclick="window.location='elite.let?type=modify';" /></td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td width="2%">&nbsp;</td>
-                </tr>
                 <!-- 添加产品结束 -->
                 <tr>
                     <td height="40" colspan="4">
@@ -213,52 +221,52 @@
 </table>
 </body>
 </html>
-<%--<style>--%>
+<style>
 
-<%--    .lab{--%>
-<%--        margin-top: 100px;--%>
-<%--        color: dimgray;--%>
-<%--        font-size: 14px;--%>
-<%--        width: 40%;--%>
-<%--        height: 50px;--%>
-<%--        margin-left: 30px;--%>
-<%--        /* background-color: aqua; */--%>
-<%--    }--%>
-<%--    .input{--%>
-<%--        width: 70%;--%>
-<%--        height: 30px;--%>
-<%--        border: none;--%>
-<%--        /* border-color: skyblue; */--%>
-<%--        padding-left: 8px;--%>
-<%--        outline: none;--%>
-<%--        /* background-color: pink; */--%>
-<%--    }--%>
-<%--    .tex{--%>
-<%--        width: 90%;--%>
-<%--        height: 90px;--%>
-<%--        border: none;--%>
-<%--        padding-left: 8px;--%>
-<%--        padding-top: 5px;--%>
-<%--        margin-top: 10px;--%>
-<%--        outline: none;--%>
-<%--    }--%>
-<%--    .con{--%>
-<%--        /* height: 400px; */--%>
-<%--        /* background-color: aquamarine; */--%>
-<%--    }--%>
-<%--    .btlg{--%>
-<%--        float:right;--%>
-<%--        /* margin-right: 100px; */--%>
-<%--        /* margin-top: 20px; */--%>
-<%--        width:75px;--%>
-<%--        height: 40px;--%>
-<%--        background-color: #409EFF;--%>
-<%--        border: none;--%>
-<%--        color:white;--%>
-<%--        font-size:17px;--%>
-<%--        border-radius: 5px;--%>
-<%--        text-align:center; --%>
-<%--        vertical-align: middle;--%>
-<%--        line-height: 40px;--%>
-<%--    }--%>
-<%--</style>--%>
+    .lab{
+        margin-top: 100px;
+        color: dimgray;
+        font-size: 14px;
+        width: 40%;
+        height: 50px;
+        margin-left: 30px;
+        /* background-color: aqua; */
+    }
+    .input{
+        width: 70%;
+        height: 30px;
+        border: none;
+        /* border-color: skyblue; */
+        padding-left: 8px;
+        outline: none;
+        /* background-color: pink; */
+    }
+    .tex{
+        width: 90%;
+        height: 90px;
+        border: none;
+        padding-left: 8px;
+        padding-top: 5px;
+        margin-top: 10px;
+        outline: none;
+    }
+    .con{
+        /* height: 400px; */
+        /* background-color: aquamarine; */
+    }
+    .btlg{
+        float:right;
+        /* margin-right: 100px; */
+        /* margin-top: 20px; */
+        width:75px;
+        height: 40px;
+        background-color: #409EFF;
+        border: none;
+        color:white;
+        font-size:17px;
+        border-radius: 5px;
+        text-align:center;
+        vertical-align: middle;
+        line-height: 40px;
+    }
+</style>

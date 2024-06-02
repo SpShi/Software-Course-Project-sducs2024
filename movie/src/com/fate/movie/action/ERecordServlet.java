@@ -1,8 +1,14 @@
 package com.fate.movie.action;
 
 import com.alibaba.fastjson.JSON;
-import com.fate.movie.bean.*;
-import com.fate.movie.biz.*;
+import com.fate.movie.bean.Comp;
+import com.fate.movie.bean.ERecord;
+import com.fate.movie.bean.Jobs;
+import com.fate.movie.bean.User;
+import com.fate.movie.biz.CompBiz;
+import com.fate.movie.biz.ERecordBiz;
+import com.fate.movie.biz.EliteBiz;
+import com.fate.movie.biz.JobsBiz;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +25,7 @@ import java.util.Map;
 @WebServlet("/erecord.let")
 public class ERecordServlet extends HttpServlet {
     ERecordBiz eRecordBiz = new ERecordBiz();
+    JobsBiz jobsBiz=new JobsBiz();
     EliteBiz eliteBiz=new EliteBiz();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,7 +52,7 @@ public class ERecordServlet extends HttpServlet {
         User user = (User)session.getAttribute("user_now");
 
         if(user==null){
-            out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+            out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
             return;
         }
 
@@ -92,11 +99,24 @@ public class ERecordServlet extends HttpServlet {
                 break;
             case "queryjob":
                 //1.获取岗位信息
-                long jobid=Long.parseLong(req.getParameter("jobid"));
-                boolean desc=Boolean.parseBoolean(req.getParameter("desc"));
-                int statej=Integer.parseInt(req.getParameter("statej"));
+//                String s=req.getParameter("jobid");
+//                if(s==null)  {
+//                    out.println("<script>alert('简历查询失败');location.href='main_new.jsp';</script>");
+//                }
+//                long jobid=Long.parseLong(s);
+//                boolean desc=Boolean.parseBoolean(req.getParameter("desc"));
+//                int statej=Integer.parseInt(req.getParameter("statej"));
                 //2.获取会员对象和所有的未还的记录
-                List<ERecord> jRecords = eRecordBiz.getRecordsByJobId(jobid,desc,statej);
+                List<Jobs> jobs=jobsBiz.getbyplace(user.getId());
+                out.println(jobs);
+                long[] jobsid=new long[jobs.size()];
+                Integer i=0;
+                for(Jobs job:jobs)
+                {
+                    jobsid[i]=job.getId();
+                    i++;
+                }
+                List<ERecord> jRecords = eRecordBiz.getRecordsByJobId(jobsid,false,2);
                 //3.存request
                 req.setAttribute("jRecords",jRecords);
                 //4.转发
