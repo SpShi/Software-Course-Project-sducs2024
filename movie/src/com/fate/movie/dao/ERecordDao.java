@@ -98,7 +98,7 @@ public class ERecordDao {
      */
     public List<ERecord> getRecordsByJobId(long jobid,boolean desc,int state) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql ="select * from e2c_record where jobid= ? ";
+        String sql ="select * from e2c_record where jobid in (select id from jobs where place= ?) ";
 
         List<ERecord> records;
         if(state <2) {

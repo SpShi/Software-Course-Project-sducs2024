@@ -21,6 +21,7 @@ public class ERecordBiz {
     JobsDao jobsDao = new JobsDao();
     JobsBiz jobsBiz = new JobsBiz();
     CompDao compDao=new CompDao();
+    CompBiz compBiz=new CompBiz();
     public List<ERecord> getRecordsByEliteId(long eliteid,int state){
         List<ERecord> records = null;
         try {
@@ -76,22 +77,23 @@ public class ERecordBiz {
         }
         return pageCount;
     }
-    public List<ERecord> getRecordsByJobId(long[] jobsId,boolean desc,int state){
+    public List<ERecord> getRecordsByJobId(long Id,boolean desc,int state){
         List<ERecord> records = null;
         try {
-            for(long jobId:jobsId)
-            {
-                records=eRecordDao.getRecordsByJobId(jobId,desc,state);
-                //1.外键信息
-                //1.1 获取会员对象
-                // Jobs jobs = jobsDao.getById(jobsId);//拿不到外键对象
+            records=eRecordDao.getRecordsByJobId(Id,desc,state);
+            //1.外键信息
+            //1.1 获取会员对象
+            // Jobs jobs = jobsDao.getById(jobsId);//拿不到外键对象
+
+            for(ERecord record:records){
+                long eliteId = record.getEliteid();
+                long jobId = record.getJobid();
+                Elite elite = eliteBiz.getById(eliteId);
                 Jobs jobs = jobsBiz.getById(jobId);
-                for(ERecord record:records){
-                    long eliteId = record.getEliteid();
-                    Elite elite = eliteBiz.getById(eliteId);
-                    record.setElite(elite);
-                    record.setJobs(jobs);
-                }
+                Comp comp=compBiz.getById(jobs.getPlace());
+                record.setElite(elite);
+                record.setJobs(jobs);
+                record.setComp(comp);
             }
 
         } catch (SQLException throwables) {

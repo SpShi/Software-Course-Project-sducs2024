@@ -3,7 +3,6 @@ package com.fate.movie.action;
 import com.alibaba.fastjson.JSON;
 import com.fate.movie.bean.Comp;
 import com.fate.movie.bean.ERecord;
-import com.fate.movie.bean.Jobs;
 import com.fate.movie.bean.User;
 import com.fate.movie.biz.CompBiz;
 import com.fate.movie.biz.ERecordBiz;
@@ -107,16 +106,8 @@ public class ERecordServlet extends HttpServlet {
 //                boolean desc=Boolean.parseBoolean(req.getParameter("desc"));
 //                int statej=Integer.parseInt(req.getParameter("statej"));
                 //2.获取会员对象和所有的未还的记录
-                List<Jobs> jobs=jobsBiz.getbyplace(user.getId());
-                out.println(jobs);
-                long[] jobsid=new long[jobs.size()];
-                Integer i=0;
-                for(Jobs job:jobs)
-                {
-                    jobsid[i]=job.getId();
-                    i++;
-                }
-                List<ERecord> jRecords = eRecordBiz.getRecordsByJobId(jobsid,false,2);
+
+                List<ERecord> jRecords = eRecordBiz.getRecordsByJobId(user.getId(),false,2);
                 //3.存request
                 req.setAttribute("jRecords",jRecords);
                 //4.转发
