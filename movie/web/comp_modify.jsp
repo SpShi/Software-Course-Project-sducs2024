@@ -44,7 +44,7 @@
                         <table>
                             <tr>
                                 <!-- <td width="100" align="center"><img src="./Images/mime.gif" /></td> -->
-                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 个人中心 > 个人信息</h3></td>
+                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 个人中心 > 个人信息xiugai</h3></td>
                             </tr>
                         </table>
                     </td>
@@ -61,73 +61,67 @@
                 <tr>
                     <td width="2%">&nbsp</td>
                     <td width="96%">
-                        <table width="100%">
-                            <tr>
-                                <td colspan="2">
-                                    <form action="comp.let?type=modifypre" method="post" enctype="multipart/form-data">
-                                        <table width="100%" class="cont">
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>账号：</td>
-                                                <td width="20%"><input class="text" type="text" name="id" value="${compx.id}" readonly/></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td width="15%">用户名：</td>
-                                                <td width="25%"><input class="text" type="text" name="name" value="${compx.name}" /></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>企业名：</td>
-                                                <td width="20%">
-                                                    <input class="text" type="text" name="ename" value="${compx.ename}" />
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>身份证号：</td>
-                                                <td width="20%">
-                                                    <input class="text" type="text" name="idnumber" value="${compx.idnumber}"/>
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>经营许可证编号：</td>
-                                                <td width="20%">
-                                                    <input class="text" type="text" name="license" value="${compx.license}"/>
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>联系方式：</td>
-                                                <td width="20%">
-                                                    <input class="text" type="text" name="tel" value="${compx.tel}"  />
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>地址：</td>
-                                                <td width="20%">
-                                                    <input class="text" type="text" name="addr" value="${compx.addr}"/>
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td></td>
-                                                <td colspan="3"><input class="btn" type="submit" value="提交" /></td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
+                        <form action="comp.let?type=modify" method="post" enctype="multipart/form-data">
+                            <table width="100%" class="cont">
+                                <tr>
+                                    <td width="2%">&nbsp;</td>
+                                    <td>账号：</td>
+                                    <td width="20%"><input class="text" type="text" name="id" value="${compx.id}" readonly/></td>
+                                    <td width="2%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="2%">&nbsp;</td>
+                                    <td width="15%">用户名：</td>
+                                    <td width="25%"><input class="text" type="text" name="name" value="${compx.name}" /></td>
+                                    <td width="2%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="2%">&nbsp;</td>
+                                    <td>企业名：</td>
+                                    <td width="20%">
+                                        <input class="text" type="text" name="ename" value="${compx.ename}" />
+                                    </td>
+                                    <td width="2%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="2%">&nbsp;</td>
+                                    <td>身份证号：</td>
+                                    <td width="20%">
+                                        <input class="text" type="text" name="idnumber" value="${compx.idnumber}"/>
+                                    </td>
+                                    <td width="2%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="2%">&nbsp;</td>
+                                    <td>经营许可证编号：</td>
+                                    <td width="20%">
+                                        <input class="text" type="text" name="license" value="${compx.license}"/>
+                                    </td>
+                                    <td width="2%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="2%">&nbsp;</td>
+                                    <td>联系方式：</td>
+                                    <td width="20%">
+                                        <input class="text" type="text" name="tel" value="${compx.tel}"  />
+                                    </td>
+                                    <td width="2%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="2%">&nbsp;</td>
+                                    <td>地址：</td>
+                                    <td width="20%">
+                                        <input class="text" type="text" name="addr" value="${compx.addr}"/>
+                                    </td>
+                                    <td width="2%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td></td>
+                                    <td colspan="3"><input class="btlg" type="submit" value="提交" /></td>
+                                </tr>
+                            </table>
+
                     </td>
                     <td width="2%">&nbsp;</td>
                 </tr>

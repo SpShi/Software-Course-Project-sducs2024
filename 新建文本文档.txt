@@ -1,0 +1,6 @@
+admin
+0-elite
+1-公司
+job用place连接公司id
+e2c eliteid和elite关联 jobid和job关联 date和record格式相同
+state=0 comment是个人说的 1是公司说的

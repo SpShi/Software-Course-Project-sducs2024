@@ -72,6 +72,7 @@
                         tr.append(id);
                         tr.append(na);
                         tr.append(idn);
+                        tr.append(st);
                         tr.append(re);
                         tr.append(ge);
                         tr.append(ag);
@@ -117,7 +118,7 @@
                         <table>
                             <tr>
                                 <td width="100" align="center"><img src="./Images/mime.gif" /></td>
-                                <td valign="bottom"><h3 style="letter-spacing:1px;">电影添加 > 人才列表 </h3></td>
+                                <td valign="bottom"><h3 style="letter-spacing:1px;">rencaichaxun > 人才列表 </h3></td>
                             </tr>
                         </table>
                     </td>

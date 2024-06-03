@@ -128,27 +128,29 @@ public class CompServlet extends HttpServlet{
 
                 break;
             case "modifypre":
+
                 //类型&会员的信息
                 User user=(User) session.getAttribute("user_now");
+                if(user==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+                    return;
+                }
                 //类型&会员的信息
                 long id = user.getId();
-                Elite elite = eliteBiz.getById(id);
+                Comp comp = compBiz.getById(id);
 
-                req.setAttribute("elite",elite);
-
+                req.setAttribute("compx",comp);
                 HttpSession session2 = req.getSession();
                 Long type1=(Long) session2.getAttribute("user_type");
-                if(type1==0){
-                    req.getRequestDispatcher("elite_modify.jsp").forward(req,resp);
+                if(type1==1){
+                    req.getRequestDispatcher("comp_modify.jsp").forward(req,resp);
                 }
 
                 break;
             case "modify":
-                if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
-                    return;
-                }
+
                 String namem =  req.getParameter("name");
+                out.println(namem);
                 String idnumm=req.getParameter("idnum");
                 String telm =  req.getParameter("tel");
                 Long licensem=Long.parseLong(req.getParameter("license"));
@@ -165,13 +167,13 @@ public class CompServlet extends HttpServlet{
                     out.println("<script>alert('身份证号码不合法'); location.href='comp.let?type=query';</script>");
                     return;
                 }
-                User userm=(User)session.getAttribute("id");
+                User userm=(User)session.getAttribute("user_now");
                 long idm=userm.getId();
                 int countm = compBiz.modify(idm,namem,idnumm,licensem,Long.parseLong(telm),enamem,addrm);
                 if(countm>0){
-                    out.println("<script>alert('信息修改成功'); location.href='index_comp.jsp';</script>");
+                    out.println("<script>alert('信息修改成功'); location.href='comp.let?type=details';</script>");
                 }else{
-                    out.println("<script>alert('信息修改失败');</script>");
+                    out.println("<script>alert('信息修改失败');location.href='comp.let?type=details';</script>");
                 }
 
                 break;
@@ -221,8 +223,7 @@ public class CompServlet extends HttpServlet{
                 }
                 req.setAttribute("compx",compx);
                 String ff=req.getParameter("flag");
-                if(Objects.equals(ff, "de")) req.getRequestDispatcher("comp_details.jsp").forward(req,resp);
-                else req.getRequestDispatcher("comp_modify.jsp").forward(req,resp);
+                req.getRequestDispatcher("comp_details.jsp").forward(req,resp);
                 break;
             case "exit":
                 if(session.getAttribute("user_now")==null){

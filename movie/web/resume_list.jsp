@@ -78,8 +78,8 @@
                                             <tr align="center" class="d">
                                                 <td><a href="erecord.let?type=details&id=${b.id}">${b.id}</a></td>
                                                 <td>${b.jobs.name}</td>
-                                                <td>${b.senddate}</td>
                                                 <td>${b.backdate}</td>
+                                                <td>${b.senddate}</td>
                                                 <td>${b.comment}</td>
                                                 <td>${b.comp.name}</td>
                                                 <td><img src="${b.elite.resume}" class="cover"/></td>

@@ -73,20 +73,20 @@
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>账号：</td>
-                                                <td width="20%"><input class="text" type="text" name="id"  value="${compx.id}" disabled="disabled"/></td>
+                                                <td width="20%"><input class="text" type="text" name="id"  value="${compx.id}" readonly/></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td width="15%">用户名：</td>
-                                                <td width="25%"><input class="text" type="text" name="ename" value="${compx.ename}" disabled="disabled"/></td>
+                                                <td width="25%"><input class="text" type="text" name="ename" value="${compx.ename}" readonly/></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>企业名称：</td>
                                                 <td width="20%">
-                                                    <input class="text" type="text" name="name" value="${compx.name}" disabled="disabled"/>
+                                                    <input class="text" type="text" name="name" value="${compx.name}" readonly/>
                                                 </td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
@@ -94,7 +94,7 @@
                                                 <td width="2%">&nbsp;</td>
                                                 <td>身份证号：</td>
                                                 <td width="20%">
-                                                    <input class="text" type="text" name="idnumber" value="${compx.idnumber}"  disabled="disabled" />
+                                                    <input class="text" type="text" name="idnumber" value="${compx.idnumber}"  readonly />
                                                 </td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
@@ -102,7 +102,7 @@
                                                 <td width="2%">&nbsp;</td>
                                                 <td>经营许可证编号：</td>
                                                 <td width="20%">
-                                                    <input class="text" type="number" name="license" value="${compx.license}"  disabled="disabled" />
+                                                    <input class="text" type="number" name="license" value="${compx.license}"  readonly />
                                                 </td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
@@ -110,7 +110,7 @@
                                                 <td width="2%">&nbsp;</td>
                                                 <td>联系方式：</td>
                                                 <td width="20%">
-                                                    <input class="text" type="text" name="tel" value="${compx.tel}" disabled="disabled" />
+                                                    <input class="text" type="text" name="tel" value="${compx.tel}" readonly />
                                                 </td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
@@ -118,14 +118,14 @@
                                                 <td width="2%">&nbsp;</td>
                                                 <td>地址：</td>
                                                 <td width="20%">
-                                                    <input class="text" type="text" name="addr" value="${compx.addr}" disabled="disabled"/>
+                                                    <input class="text" type="text" name="addr" value="${compx.addr}" readonly/>
                                                 </td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
                                                 <td></td>
-                                                <td colspan="3"><input class="btn" type="button" value="修改" onclick="window.location='comp.let?type=modify';" /></td>
+                                                <td colspan="3"><input class="btn" type="button" value="修改" onclick="window.location='comp.let?type=modifypre';" /></td>
                                             </tr>
                                         </table>
                                     </form>

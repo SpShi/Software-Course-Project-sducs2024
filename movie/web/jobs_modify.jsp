@@ -172,7 +172,7 @@
                                             <tr>
                                                 <td>&nbsp;</td>
                                                 <td>简介：</td>
-                                                <td colspan="2"><textarea cols="150" rows="20">${job.intro}</textarea></td>
+                                                <td colspan="2"><input class="text"  type="text" name="intro" value="${job.intro}"/></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
