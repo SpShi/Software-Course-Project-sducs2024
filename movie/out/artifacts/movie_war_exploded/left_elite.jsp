@@ -45,59 +45,15 @@
                     <div class="content">
                         <ul class="RM">
                             <li><a href="./set_pwd_new.jsp" target="main">修改密码</a></li>
-                            <li><a href="./user_list.jsp" target="main">账号信息</a></li>
                             <li><a href="./elite.let?type=details" target="main">个人信息</a></li>
                         </ul>
                     </div>
-<!-- *********** -->
-                    <h1 class="type"><a href="javascript:void(0)">用户管理</a></h1>
-                    <div class="content">
-
-                        <ul class="RM">
-                            <!-- <li><a href="./member.let?type=addpre" target="main">用户注册</a></li> -->
-                            <li><a href="./member.let?type=query" target="main">用户管理</a></li>
-                            <li><a href="./mem_recharge.jsp" target="main">用户充值</a></li>
-                        </ul>
-                    </div>
-<!-- *********** -->
-                    <h1 class="type"><a href="javascript:void(0)"> 电影管理</a></h1>
-                    <div class="content">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td><img src="./Images/menu_top_line.gif" width="182" height="5" /></td>
-                            </tr>
-                        </table>
-                        <ul class="RM">
-                            <li><a href="./movie_add.jsp" target="main">添加电影</a></li>
-                            <li><a href="./movie.let?type=query&pageIndex=1" target="main"> 电影列表</a></li>
-                        </ul>
-                    </div>
-<!-- *********** -->
-                    <h1 class="type"><a href="javascript:void(0)"> 影厅管理</a></h1>
-                    <div class="content">
-
-                        <ul class="RM">
-                            <li><a href="./chamber_add.jsp" target="main">添加影厅</a></li>
-                            <li><a href="./chamber.let?type=query&pageIndex=1" target="main"> 影厅列表</a></li>
-                        </ul>
-                    </div>
-<!-- *********** -->
-                    <h1 class="type"><a href="javascript:void(0)"> 电影类型管理</a></h1>
-                    <div class="content">
-
-                        <ul class="RM">
-                            <li><a href="type_add.jsp" target="main">添加类型</a></li>
-                            <li><a href="type_list.jsp" target="main">类型列表</a></li>
-                        </ul>
-                    </div>
                     <!-- *********** -->
-                    <h1 class="type"><a href="javascript:void(0)">常用操作</a></h1>
+                    <h1 class="type"><a href="javascript:void(0)">个人中心</a></h1>
                     <div class="content">
-
                         <ul class="RM">
-                            <li><a href="./movie_rent.jsp" target="main"> 电影购票</a></li>
-                            <li><a href="./return_list.jsp" target="main"> 退票</a></li>
-                            <li><a href="./rent_list.jsp" target="main">查看购票历史信息</a></li>
+                            <li><a href="./set_pwd_new.jsp" target="main">修改密码</a></li>
+                            <li><a href="./elite.let?type=details" target="main">个人信息</a></li>
                         </ul>
                     </div>
 

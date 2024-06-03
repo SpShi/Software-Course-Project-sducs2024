@@ -69,7 +69,7 @@
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
                                                 <td>账号：</td>
-                                                <td width="20%"><input class="text" type="text" name="id" value="${compx.id}" disabled="disabled"/></td>
+                                                <td width="20%"><input class="text" type="text" name="id" value="${compx.id}" readonly/></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
                                             <tr>

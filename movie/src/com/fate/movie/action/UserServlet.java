@@ -1,10 +1,12 @@
 package com.fate.movie.action;
 
 
-import com.fate.movie.bean.*;
+import com.fate.movie.bean.Comp;
+import com.fate.movie.bean.Elite;
+import com.fate.movie.bean.User;
 import com.fate.movie.biz.AdminBiz;
-import com.fate.movie.biz.EliteBiz;
 import com.fate.movie.biz.CompBiz;
+import com.fate.movie.biz.EliteBiz;
 import com.fate.movie.biz.UserBiz;
 
 import javax.servlet.ServletException;
@@ -13,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -150,9 +151,17 @@ public class UserServlet extends HttpServlet {
                 HttpSession session3 = req.getSession();
 //                out.println(session3);
 //                out.println(userList);
-
-
                 req.getRequestDispatcher("user_list.jsp").forward(req,resp);
+                break;
+            case "getid":
+                User userd=(User)session.getAttribute("user_now");
+                if(userd==null){
+                    out.println("<script>alert('请登录');parent.window.location.href='login_new.html';</script>");
+                    return;
+                }
+                out.println(userd);
+                req.setAttribute("userid",userd.getId());
+                req.getRequestDispatcher("top_user.jsp").forward(req,resp);
                 break;
             case "exit":
                 if(session.getAttribute("user_now")==null){

@@ -78,6 +78,9 @@
 
 06022350 latest已更新,修改了前端显示不全的bug -Pardo
 
+06031654 latest已更新,merge了Admin,但是有bug -L
+
+
 
 
 ## 怎样提交修改后的代码

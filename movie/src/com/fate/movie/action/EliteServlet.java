@@ -161,7 +161,7 @@ public class EliteServlet extends HttpServlet{
 
                 HttpSession session2 = req.getSession();
                 Long type1=(Long) session2.getAttribute("user_type");
-                if(type1==0){
+                if(type1==0||type1==2){
                     req.getRequestDispatcher("elite_modify.jsp").forward(req,resp);
                 }
 
@@ -249,7 +249,7 @@ public class EliteServlet extends HttpServlet{
                 HttpSession session3 = req.getSession();
                 Long type3=(Long) session3.getAttribute("user_type");
                 //out.println(eliteList);
-                if(type3==0){
+                if(type3==2){
                     req.getRequestDispatcher("elite_list.jsp").forward(req,resp);
                 }
                 break;

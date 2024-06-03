@@ -40,39 +40,28 @@
         <tr>
             <td width="182" valign="top">
                 <div id="container">
- <!-- *********** -->
-                    <h1 class="type"><a href="javascript:void(0)">个人中心</a></h1>
+                    <h1 class="type"><a href="javascript:void(0)">岗位管理</a></h1>
                     <div class="content">
                         <ul class="RM">
-                            <li><a href="./set_pwd_new.jsp" target="main">修改密码</a></li>
-                            <li><a href="./elite.let?type=details" target="main">个人信息</a></li>
+                            <li><a href="./jobs.let?type=addpre" target="main">岗位发布</a></li>
+                            <li><a href="./jobs.let?type=query" target="main">在招岗位</a></li>
                         </ul>
                     </div>
-                    <!-- *********** -->
-                    <h1 class="type"><a href="javascript:void(0)">个人中心</a></h1>
+                    <h1 class="type"><a href="javascript:void(0)">用户管理</a></h1>
                     <div class="content">
                         <ul class="RM">
-                            <li><a href="./set_pwd_new.jsp" target="main">修改密码</a></li>
-                            <li><a href="./elite.let?type=details" target="main">个人信息</a></li>
+                            <li><a href="./elite.let?type=query" target="main">人才管理</a></li>
+                            <li><a href="./comp.let?type=query" target="main">企业管理</a></li>
                         </ul>
                     </div>
 
-                    <!-- *********** --
+                    <h1 class="type"><a href="javascript:void(0)">个人中心</a></h1>
                     <div class="content">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td><img src="./Images/menu_top_line.gif" width="182" height="5" /></td>
-                            </tr>
-                        </table>
                         <ul class="RM">
-                            <li><a href="javascript:void(0)" target="main">友情连接</a></li>
-                            <li><a href="javascript:void(0)" target="main">在线留言</a></li>
-                            <li><a href="javascript:void(0)" target="main">网站投票</a></li>
-                            <li><a href="javascript:void(0)" target="main">邮箱设置</a></li>
-                            <li><a href="javascript:void(0)" target="main">图片上传</a></li>
+                            <li><a href="./admin.let?type=details" target="main">我的信息</a></li>
+                            <li><a href="./set_pwd.jsp" target="main">密码修改</a></li>
                         </ul>
                     </div>
-                    <!-- *********** -->
                 </div>
             </td>
         </tr>

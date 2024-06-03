@@ -10,7 +10,7 @@
 <!DOCTYPE html >
 <html >
 <head>
-  <title>天命科技 - 网站后台订票中心</title>
+  <title>人才招聘系统</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="description" content="天命科技专业的网站 " />
   <meta name="keywords" content="天命,网站订票系统,企业网站" />
@@ -23,8 +23,8 @@
   <!--主体部分-->
   <frameset cols="185,*">
     <!--主体左部分-->
-    <frame src="./left_elite.jsp" name="left" noresize="noresize" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" background-color="#ffffff" />
+    <frame src="./left_admin.jsp" name="left" noresize="noresize" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" background-color="#ffffff" />
     <!--主体右部分-->
-    <frame src="./elite.let?type=details" name="main" frameborder="0" scrolling="auto" marginwidth="0" marginheight="0" />
+    <frame src="./admin.let?type=details" name="main" frameborder="0" scrolling="auto" marginwidth="0" marginheight="0" />
   </frameset>
 </html>

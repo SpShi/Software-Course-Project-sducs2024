@@ -70,7 +70,7 @@
                         <table>
                             <tr>
                                 <!-- <td width="100" align="center"><img src="./Images/mime.gif" /></td> -->
-                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 用户管理 > 人才管理</h3></td>
+                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 用户管理 > 企业管理</h3></td>
                             </tr>
                         </table>
                     </td>
@@ -91,61 +91,30 @@
                         <table width="100%">
                             <tr>
                                 <td colspan="2">
-                                    <form action="elite.let?type=query" method="GET">
+                                    <form action="comp.let?type=query" method="GET">
                                         <table width="100%"  class="cont tr_color"  >
                                             <tr>
                                                 <th>账号</th>
-                                                <th>姓名</th>
-                                                <th>身份证号</th>
-<%--                                                <th>4</th>--%>
-                                                <th  >性别</th>
-                                                <th >年龄</th>
-                                                <th >学历</th>
-                                                <th >电话</th>
-                                                <th >电子邮件</th>
-                                                <th>专业</th>
-                                                <th  colspan="10"  style="word-break: break-word">证书</th>
-                                                <th  colspan="10"  style="word-break: break-word">简历</th>
-                                                <th  colspan="10"  style="word-break: break-word">求职倾向</th>
-                                                <th  colspan="10"  style="word-break: break-word">自我评估</th>
-                                                <th colspan="10"  style="word-break: break-word">经验</th>
-                                                <th>操作</th>
-<%--                                                <th>16</th>--%>
+                                                <th>企业注册人</th>
+                                                <th>工商联络员证件号</th>                          
+                                                <th >企业注册号</th>
+                                                <th >企业名称</th>
+                                                <th >联系电话</th>
+                                                <th colspan="10"  style="word-break: break-word">地址</th>
+                                                <th >操作</th>
                                             </tr>
-                                            <c:forEach items="${eliteList}" var="m">
+                                            <c:forEach items="${compList}" var="m">
                                                 <tr align="center" class="d">
                                                     <td>${m.id}</td>
                                                     <td>${m.name}</td>
-                                                    <td>${m.idNumber}</td>
-<%--                                                    <td>${m.state}</td>--%>
-
-                                                    <td>
-                                                        <c:if test="${m.gender==0}">其他</c:if>
-                                                        <c:if test="${m.gender==1}">女</c:if>
-                                                        <c:if test="${m.gender==2}">男</c:if>
-                                                    </td>
-                                                    <td>${m.age}</td>
-                                                    <td> <c:if test="${m.degrees==0}">无学历</c:if>
-                                                        <c:if test="${m.degrees==1}">小学毕业</c:if>
-                                                        <c:if test="${m.degrees==2}">初中毕业</c:if>
-                                                        <c:if test="${m.degrees==3}">高中毕业</c:if>
-                                                        <c:if test="${m.degrees==4}">专科</c:if>
-                                                        <c:if test="${m.degrees==5}">本科</c:if>
-                                                        <c:if test="${m.degrees==6}">硕士学位</c:if>
-                                                        <c:if test="${m.degrees==7}">博士学位</c:if>
-                                                    </td>
+                                                    <td>${m.idnumber}</td>
+                                                    <td>${m.license}</td>
+                                                    <td>${m.ename}</td>
                                                     <td >${m.tel}</td>
-                                                   
-                                                    <td>${m.email}</td>
-                                                    <td>${m.major}</td>
-                                                    <td colspan="10"  style="word-break: break-word">${m.certificate}</td>
-                                                    <td colspan="10"  style="word-break: break-word">${m.resume}</td>
-                                                    <td colspan="10"  style="word-break: break-word">${m.intention}</td>
-                                                    <td colspan="10"  style="word-break: break-word">${m.selfevaluation}</td>
-                                                    <td colspan="10"  style="word-break: break-word">${m.experience}</td>
+                                                    <td colspan="10"  style="word-break: break-word">${m.addr}</td>
                                                     <td >
-                                                        <a onclick="return confirm('确认修改');" href="elite.let?type=modifypre&id=${m.id}">修改</a> &nbsp;&nbsp;
-                                                        <a onclick="return confirm('确认删除');" href="elite.let?type=remove&id=${m.id}">删除</a>
+                                                        <a onclick="return confirm('确认修改');" href="comp.let?type=modifypre&id=${m.id}">修改</a> &nbsp;&nbsp;
+                                                        <a onclick="return confirm('确认删除');" href="comp.let?type=remove&id=${m.id}">删除</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

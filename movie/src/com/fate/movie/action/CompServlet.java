@@ -2,6 +2,7 @@ package com.fate.movie.action;
 
 
 import com.fate.movie.bean.Comp;
+import com.fate.movie.bean.Elite;
 import com.fate.movie.bean.User;
 import com.fate.movie.biz.CompBiz;
 import com.fate.movie.biz.UserBiz;
@@ -128,44 +129,19 @@ public class CompServlet extends HttpServlet{
                 break;
             case "modifypre":
                 //类型&会员的信息
-                long id= (long) session.getAttribute("id");
-                Comp comp= compBiz.getById(id);
-                if(comp==null) out.println("<script>alert('请登录');</script>");
-                //req.setAttribute("enterprise",comp);
-                //req.getRequestDispatcher("comp_modify.jsp").forward(req,resp);
+                User user=(User) session.getAttribute("user_now");
+                //类型&会员的信息
+                long id = user.getId();
+                Elite elite = eliteBiz.getById(id);
 
-                String ename=req.getParameter("ename");
-                String name=req.getParameter("name");
-                String idnumber=req.getParameter("idnumber");
-                String tel= req.getParameter("tel");
-                String license= req.getParameter("license");
-                String addr = req.getParameter("addr");
-                if(addr==null&&ename==null&&name==null&&idnumber==null&&tel==null&&license==null){
-                    out.println("<script>alert('tt');</script>");
-                }
-                //out.println("<script>alert('tt');</script>");
+                req.setAttribute("elite",elite);
 
-
-//                if(!compBiz.checktel(String.valueOf(tel))) {
-//                    out.println("<script>alert('电话号码不合法'); location.href='comp.let?type=query';</script>");
-//                    return;
-//                }
-//                if(!compBiz.checkiN(idnumber)) {
-//                    out.println("<script>alert('身份证号码不合法'); location.href='comp.let?type=query';</script>");
-//                    return;
-//                }
-                int count1 = compBiz.modify(id,name,idnumber, Long.parseLong(license), Long.parseLong(tel),ename,addr);
-                if(count1>0){
-                    out.println("<script>alert('信息修改成功'); location.href='index_comp.jsp';</script>");
-                }else{
-                    out.println("<script>alert('信息修改失败');</script>");
+                HttpSession session2 = req.getSession();
+                Long type1=(Long) session2.getAttribute("user_type");
+                if(type1==0){
+                    req.getRequestDispatcher("elite_modify.jsp").forward(req,resp);
                 }
 
-                //HttpSession session2 = req.getSession();
-                //Long type1=(Long) session2.getAttribute("user_type");
-                //if(type1==1){
-                //    req.getRequestDispatcher("comp_modify.jsp").forward(req,resp);
-                //}
                 break;
             case "modify":
                 if(session.getAttribute("user_now")==null){

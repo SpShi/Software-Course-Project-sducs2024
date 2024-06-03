@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 27/05/2024 11:40:01
+ Date: 03/06/2024 16:52:02
 */
 
 SET NAMES utf8mb4;
@@ -146,7 +146,7 @@ INSERT INTO `elite` VALUES (1000000000, 'name0', '370581200304176378', 0, '1', 1
 INSERT INTO `elite` VALUES (1000000001, 'name1', '370681200304176378', 0, '1', 1, 27, 0, 15153380273, 'major', '356303339@qq.com', '1', '1', '1', '1');
 INSERT INTO `elite` VALUES (1000000002, 'name2', '370481200304176378', 0, '1', 1, 24, 0, 15153380275, 'major', '356303349@qq.com', '1', '1', '1', '1');
 INSERT INTO `elite` VALUES (1000000003, 'name3', '370381200304176378', 0, '1', 1, 29, 0, 15153380274, 'major', '356303529@qq.com', '1', '1', '1', '1');
-INSERT INTO `elite` VALUES (1000000007, '123456', '370781200304176378', 0, '1', 1, 25, 0, 15153380271, 'major', '356303328@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000007, '123456', '370781200304176379', 0, '1', 0, 25, 0, 15153380271, 'major', '356303328@qq.com', '1', '1', '1', '1');
 INSERT INTO `elite` VALUES (1000000008, 'name8', '370682200304176378', 0, '1', 1, 27, 0, 15154560273, 'major', '356243339@qq.com', '1', '1', '1', '1');
 INSERT INTO `elite` VALUES (1000000009, 'name9', '370483200304176378', 0, '1', 1, 24, 0, 15153346275, 'major', '356303114@qq.com', '1', '1', '1', '1');
 INSERT INTO `elite` VALUES (1000000010, 'name10', '370384200304176378', 0, '1', 1, 29, 0, 15153380894, 'major', '351203529@qq.com', '1', '1', '1', '1');
@@ -179,7 +179,7 @@ INSERT INTO `enterprise` VALUES (1000000006, '企业级2', '370581200306176378',
 -- ----------------------------
 DROP TABLE IF EXISTS `jobs`;
 CREATE TABLE `jobs`  (
-  `id` bigint(18) NOT NULL,
+  `id` bigint(18) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '岗位名称',
   `place` bigint(20) NOT NULL COMMENT '所属单位',
   `age` int(3) UNSIGNED DEFAULT NULL,
@@ -191,7 +191,7 @@ CREATE TABLE `jobs`  (
   `email` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `intro` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of jobs
@@ -201,6 +201,7 @@ INSERT INTO `jobs` VALUES (2, '前台', 1000000004, 40, 1, 06, '1', '1', 1800, '
 INSERT INTO `jobs` VALUES (3, '食堂阿姨', 1000000005, 60, 0, 05, '1', '1', 1600, '125@qq.com', '食堂阿姨');
 INSERT INTO `jobs` VALUES (4, '宿管阿姨', 1000000005, 55, 1, 07, '1', '1', 1200, '126@qq.com', '宿管阿姨');
 INSERT INTO `jobs` VALUES (5, '保安', 1000000006, 50, 2, 06, '1', '1', 1500, '127@qq.com', '保安');
+INSERT INTO `jobs` VALUES (13, '2121', 1000000005, 21, 0, 00, '1', '1', 1, '1', NULL);
 
 -- ----------------------------
 -- Table structure for member
@@ -272,7 +273,7 @@ CREATE TABLE `movie`  (
 -- ----------------------------
 -- Records of movie
 -- ----------------------------
-INSERT INTO `movie` VALUES (1, 6, '罗小黑战记', 39.90, '雨夜，一只流落街头的小黑猫被少女罗小白带回家，起名罗小黑。\r\n\r\n  罗小黑不是一只普通的猫咪，它极通人性，会蹲马桶，不吃猫粮，长长的尾巴甚至能分裂成多个名为“黑咻”的生物体。与此同时，名为“谛听”的神秘人物，发动手下三匹长着翅膀的狼，搜寻着罗小黑的下落。\r\n\r\n  不久，罗小白带着小黑到乡下探望堂哥阿根和爷爷，由此发生了种种离奇玄幻事件……', 'Images/cover/20221226160654955.jpg', 'MTJJ', '山新、刘明月、郝祥海、皇贞季、杨凝', 99, 3, '2022-12-28 10:54:33');
+INSERT INTO `movie` VALUES (1, 6, '罗小黑战记', 39.90, '雨夜，一只流落街头的小黑猫被少女罗小白带回家，起名罗小黑。\r\n\r\n　　罗小黑不是一只普通的猫咪，它极通人性，会蹲马桶，不吃猫粮，长长的尾巴甚至能分裂成多个名为“黑咻”的生物体。与此同时，名为“谛听”的神秘人物，发动手下三匹长着翅膀的狼，搜寻着罗小黑的下落。\r\n\r\n　　不久，罗小白带着小黑到乡下探望堂哥阿根和爷爷，由此发生了种种离奇玄幻事件……', 'Images/cover/20221226160654955.jpg', 'MTJJ', '山新、刘明月、郝祥海、皇贞季、杨凝', 99, 3, '2022-12-28 10:54:33');
 INSERT INTO `movie` VALUES (2, 16, '暴力之夜', 36.80, '该片讲述一群雇佣兵袭击一个富裕家庭的庄园，圣诞老人挺身而出，拯救他们和圣诞节和故事。', 'Images/cover/20221226160730446.jpg', '托米·维尔科拉', '大卫·哈伯', 22, 4, '2022-12-27 10:54:36');
 INSERT INTO `movie` VALUES (3, 17, '独行月球', 39.60, '该片改编自韩国漫画家赵石创作的同名漫画，讲述了人类为抵御小行星的撞击，拯救地球而部署的“月盾计划”因陨石提前来袭而失败后，独孤月成为了“宇宙最后的人类”，开始了他在月球上破罐子破摔的生活的故事', 'Images/cover/2022122620391818.png', '张迟昱', '沈腾、马丽', 122, 5, '2022-12-28 10:54:43');
 INSERT INTO `movie` VALUES (4, 2, '人生大事', 38.00, '该片讲述刑满释放的殡葬师三哥在一次出殡中遇见了孤儿武小文，意外地改变了三哥对职业和生活态度的故事。', 'Images/cover/20221226160813764.jpg', '韩延', '朱一龙', 12, 4, '2022-12-29 10:54:47');
