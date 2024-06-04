@@ -80,9 +80,9 @@
 
 06031654 latest已更新,merge了Admin,但是有bug -L
 
-06041415 latest已更新,修改了comp端的不过 -Pardo
+06041415 latest已更新,修改了comp端的bug -Pardo
 
-
+06041422 latest已更新,完成了admin端的基础功能 -L
 
 ## 怎样提交修改后的代码
 
@@ -149,13 +149,7 @@ _beta不用管这是当时为了区分管理员与非管理员设定的,现在�
 
 
 ### 现在需要完成的前端
-user_details.jsp
-elite_modify.jsp
-elite_details.jsp
+
 comp_add.jsp
-comp_modify.jsp
-jobs_add.jsp
-jobs_details.jsp
-jobs_remove.jsp
-jobs_modify.jsp
+
 

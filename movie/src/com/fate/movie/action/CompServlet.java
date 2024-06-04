@@ -179,7 +179,7 @@ public class CompServlet extends HttpServlet{
                 req.setAttribute("compList",compList);
                 HttpSession session3 = req.getSession();
                 Long type3=(Long) session3.getAttribute("user_type");
-                if(type3==1){
+                if(type3==2){
                     req.getRequestDispatcher("comp_list.jsp").forward(req,resp);
                 }
                 break;

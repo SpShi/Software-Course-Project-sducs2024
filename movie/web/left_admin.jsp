@@ -44,14 +44,14 @@
                     <div class="content">
                         <ul class="RM">
                             <li><a href="./jobs.let?type=addpre" target="main">岗位发布</a></li>
-                            <li><a href="./jobs.let?type=query" target="main">在招岗位</a></li>
+                            <li><a href="./jobs.let?type=query&pageIndex=1" target="main">在招岗位</a></li>
                         </ul>
                     </div>
                     <h1 class="type"><a href="javascript:void(0)">用户管理</a></h1>
                     <div class="content">
                         <ul class="RM">
                             <li><a href="./elite.let?type=query" target="main">人才管理</a></li>
-                            <li><a href="./comp.let?type=query" target="main">企业管理</a></li>
+                            <li><a href="./comp.let?type=query&pageIndex=1" target="main">企业管理</a></li>
                         </ul>
                     </div>
 
