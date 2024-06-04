@@ -292,7 +292,11 @@ public class JobsServlet extends HttpServlet {
     private void query(HttpServletRequest req, HttpServletResponse resp, PrintWriter out) throws ServletException, IOException {
         //1.获取信息(页数，页码,信息)
         int pageSize = 5;
-        int pageCount = jobsBiz.getPageCount( pageSize,0,18,60,0,0,0,"",false);
+        HttpSession session = req.getSession();
+        User user=(User)session.getAttribute("user_now");
+        long place=user.getId();
+        if(user.getType()==2) place=0;
+        int pageCount = jobsBiz.getPageCount( pageSize,place,18,60,0,0,0,"",false);
         int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
         if(pageIndex<1){
             pageIndex = 1;
@@ -300,7 +304,7 @@ public class JobsServlet extends HttpServlet {
         if(pageIndex>pageCount){
             pageIndex = pageCount;
         }
-        List<Jobs> jobs = jobsBiz.getByPage(pageIndex,pageSize,0,18,60,0,0,0,"",false);
+        List<Jobs> jobs = jobsBiz.getByPage(pageIndex,pageSize,place,18,60,0,0,0,"",false);
 
         //2.存
         req.setAttribute("pageCount",pageCount);

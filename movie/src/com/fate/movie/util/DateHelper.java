@@ -10,7 +10,7 @@ public class DateHelper {
      * @return
      */
     public static String getImageName(){
-        SimpleDateFormat  sdf= new SimpleDateFormat("yyyyMMddHHmmssS");
+        SimpleDateFormat  sdf= new SimpleDateFormat("yyyyMMddHHmmss");
         return sdf.format(new Date());
     }
 

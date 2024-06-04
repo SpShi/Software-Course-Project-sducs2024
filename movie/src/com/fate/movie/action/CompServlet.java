@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Objects;
 
 @WebServlet("/comp.let")
 public class CompServlet extends HttpServlet{
@@ -135,46 +134,23 @@ public class CompServlet extends HttpServlet{
                     return;
                 }
                 //类型&会员的信息
-                long id = user.getId();
+                long id = Long.parseLong(req.getParameter("id"));
                 Comp comp = compBiz.getById(id);
 
                 req.setAttribute("compx",comp);
                 HttpSession session2 = req.getSession();
                 Long type1=(Long) session2.getAttribute("user_type");
-                if(type1==1){
+                if(type1==1||type1==2){
                     req.getRequestDispatcher("comp_modify.jsp").forward(req,resp);
                 }
 
                 break;
             case "modify":
-
-                String namem =  req.getParameter("name");
-                out.println(namem);
-                String idnumm=req.getParameter("idnum");
-                String telm =  req.getParameter("tel");
-                Long licensem=Long.parseLong(req.getParameter("license"));
-                String enamem=req.getParameter("ename");
-                String addrm=req.getParameter("addr");
-
-                if(!compBiz.checktel(telm))
-                {
-                    out.println("<script>alert('电话号码不合法'); location.href='comp.let?type=query';</script>");
-                    return;
+                try {
+                    modify(req,resp,out);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                if(!compBiz.checkiN(idnumm))
-                {
-                    out.println("<script>alert('身份证号码不合法'); location.href='comp.let?type=query';</script>");
-                    return;
-                }
-                User userm=(User)session.getAttribute("user_now");
-                long idm=userm.getId();
-                int countm = compBiz.modify(idm,namem,idnumm,licensem,Long.parseLong(telm),enamem,addrm);
-                if(countm>0){
-                    out.println("<script>alert('信息修改成功'); location.href='comp.let?type=details';</script>");
-                }else{
-                    out.println("<script>alert('信息修改失败');location.href='comp.let?type=details';</script>");
-                }
-
                 break;
             case "remove":
                 if(session.getAttribute("user_now")==null){
@@ -257,6 +233,37 @@ public class CompServlet extends HttpServlet{
             default:
                 resp.sendError(404,"请求的地址不存在");
         }
+
+    }
+    private void modify(HttpServletRequest req, HttpServletResponse resp, PrintWriter out) throws Exception
+    {
+        String namem =  req.getParameter("name");
+        //out.println(namem);
+        String idnumm=req.getParameter("idnumber");
+        String telm =  req.getParameter("tel");
+        Long licensem=Long.parseLong(req.getParameter("license"));
+        String enamem=req.getParameter("ename");
+        String addrm=req.getParameter("addr");
+
+        if(!compBiz.checktel(telm))
+        {
+            out.println("<script>alert('电话号码不合法'); location.href='comp.let?type=details';</script>");
+            return;
+        }
+        if(!compBiz.checkiN(idnumm))
+        {
+            out.println("<script>alert('身份证号码不合法'); location.href='comp.let?type=details';</script>");
+            return;
+        }
+        HttpSession session = req.getSession();
+        long idm=Long.parseLong(req.getParameter("id"));
+        int countm = compBiz.modify(idm,namem,idnumm,licensem,Long.parseLong(telm),enamem,addrm);
+        if(countm>0){
+            out.println("<script>alert('信息修改成功'); location.href='comp.let?type=details';</script>");
+        }else{
+            out.println("<script>alert('信息修改失败');location.href='comp.let?type=details';</script>");
+        }
+
 
     }
 }

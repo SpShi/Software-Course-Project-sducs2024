@@ -164,6 +164,7 @@ public class EliteServlet extends HttpServlet{
                 if(type1==0||type1==2){
                     req.getRequestDispatcher("elite_modify.jsp").forward(req,resp);
                 }
+                else out.println("<script>alert('无权限'); location.href='login.html';</script>");
 
                 break;
             case "modify":
@@ -196,9 +197,8 @@ public class EliteServlet extends HttpServlet{
                     return;
                 }
 
-                User userm=(User)session.getAttribute("user_now");
+                long idm=Long.parseLong(req.getParameter("id"));
                 long telmm=Long.parseLong(telm);
-//                out.println(userm);
 //                out.println(namem);
 //                out.println(idnumm);
 //                out.println(genderm);
@@ -211,7 +211,7 @@ public class EliteServlet extends HttpServlet{
 //                out.println(inttm);
 //                out.println(slfem);
 //                out.println(expem);
-                int countm = eliteBiz.modify(userm.getId(),namem,idnumm,resumem,genderm, agem,degreesm,telmm,
+                int countm = eliteBiz.modify(idm,namem,idnumm,resumem,genderm, agem,degreesm,telmm,
                         majorm, emailm, ctfctm, inttm, slfem,expem);
                 if(countm>0){
                     out.println("<script>alert('用户信息修改成功'); location.href='elite.let?type=details';</script>");

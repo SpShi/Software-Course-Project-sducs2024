@@ -50,8 +50,8 @@ public class CompDao {
     public int modify(long id,String name,String idNumber,long license,long tel,String ename,String addr) throws SQLException {
         Connection conn = DBHelper.getConnection();
         String sql="update enterprise set `name` = ?, idNumber = ?,state = ?,license = ?,tel = ?, ename = ? ,addr =?" +
-                "where id=?";
-        int count = runner.update(conn,sql,name,idNumber,license,tel,ename,id,addr);
+                " where id=?";
+        int count = runner.update(conn,sql,name,idNumber,false,license,tel,ename,addr,id);
         DBHelper.close(conn);
         return count;
     }

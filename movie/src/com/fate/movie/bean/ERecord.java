@@ -51,7 +51,7 @@ public class ERecord {
         return senddate;
     }
 
-    public void setSenddate(Date buyDate) {
+    public void setSenddate(Date senddate) {
         this.senddate = senddate;
     }
 

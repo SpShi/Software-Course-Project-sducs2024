@@ -110,8 +110,10 @@ public class ERecordServlet extends HttpServlet {
                 List<ERecord> jRecords = eRecordBiz.getRecordsByJobId(user.getId(),false,2);
                 //3.存request
                 req.setAttribute("jRecords",jRecords);
+
                 //4.转发
                 req.getRequestDispatcher("resume_list.jsp").forward(req,resp);
+                //out.println(jRecords);
                 break;
             case "doajax":
 
