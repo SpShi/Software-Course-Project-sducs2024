@@ -2,7 +2,6 @@ package com.fate.movie.action;
 
 
 import com.fate.movie.bean.Comp;
-import com.fate.movie.bean.Elite;
 import com.fate.movie.bean.User;
 import com.fate.movie.biz.CompBiz;
 import com.fate.movie.biz.UserBiz;
