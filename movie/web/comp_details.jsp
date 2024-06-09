@@ -1,18 +1,14 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.fate.movie.bean.User" %>
-<%@ page import="com.fate.movie.bean.Comp" %>
-<%@ page import="com.fate.movie.dao.CompDao" %>
-<%@ page import="com.fate.movie.bean.Member" %>
+
 <%--
   Created by IntelliJ IDEA.
-  User: 29012
-  Date: 2024/5/13
-  Time: 14:24
+  User: 电影
+  Date: 2022/12/21
+  Time: 11:58
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!DOCTYPE html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html >
 <html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -48,7 +44,7 @@
                         <table>
                             <tr>
                                 <!-- <td width="100" align="center"><img src="./Images/mime.gif" /></td> -->
-                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 企业中心 > 企业信息查看</h3></td>
+                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 个人中心 > 我的信息</h3></td>
                             </tr>
                         </table>
                     </td>
@@ -61,80 +57,79 @@
                         </table>
                     </td>
                 </tr>
-                <!-- 添加产品开始 -->
                 <tr>
                     <td width="2%">&nbsp;</td>
                     <td width="96%">
-                        <table width="100%">
-                            <tr>
-                                <td colspan="2">
-                                    <form action="" method="">
-                                        <table width="100%"class="cont">
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>账号：</td>
-                                                <td width="20%"><input class="text" type="text" name="id"  value="${compx.id}" readonly/></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td width="15%">注册人：</td>
-                                                <td width="25%"><input class="text" type="text" name="ename" value="${compx.name}" readonly/></td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>企业名称：</td>
-                                                <td width="20%">
-                                                    <input class="text" type="text" name="name" value="${compx.ename}" readonly/>
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>身份证号：</td>
-                                                <td width="20%">
-                                                    <input class="text" type="text" name="idnumber" value="${compx.idnumber}"  readonly />
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>经营许可证编号：</td>
-                                                <td width="20%">
-                                                    <input class="text" type="number" name="license" value="${compx.license}"  readonly />
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>联系方式：</td>
-                                                <td width="20%">
-                                                    <input class="text" type="text" name="tel" value="${compx.tel}" readonly />
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="2%">&nbsp;</td>
-                                                <td>地址：</td>
-                                                <td width="20%">
-                                                    <input class="text" type="text" name="addr" value="${compx.addr}" readonly/>
-                                                </td>
-                                                <td width="2%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td></td>
-                                                <td colspan="3"><input class="btn" type="button" value="修改" onclick="window.location='comp.let?type=modifypre&id=${compx.id}';" /></td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                </td>
+                        <table width="100%" style="margin-left: 30px;">
+
+                            <tr class="lab">
+
+                                <td width="120px">账号：</td>
+                                <td>${compx.id}</td>
+                                <%--                                    <td ><input class="input" placeholder="长度6~15个字符"  type="text" name="name" value="${m.name}" required/></td>--%>
+                                <!-- <td class="err">长度1~15个字符</td> -->
+
                             </tr>
+                            <tr class="lab">
+
+                                <td width="120px">注册人：</td>
+                                <td>${compx.ename}</td>
+                                <%--                                    <td ><input class="input" placeholder="长度6~15个字符"  type="text" name="name" value="${m.name}" required/></td>--%>
+                                <!-- <td class="err">长度1~15个字符</td> -->
+
+                            </tr>
+                            <tr class="lab">
+
+                                <td width="120px">企业名：</td>
+                                <%--                                    <td><input class="input" placeholder="长度17个字符"  type="text" name="idnum" value="${m.idNumber}" required/></td>--%>
+                                <!-- <td class="err">长度17个字符</td> -->
+
+                                <td>${compx.name}</td>
+
+
+                            </tr>
+                            <tr class="lab">
+
+                                <td width="120px">身份证号：</td>
+                                <td>${compx.idnumber}</td>
+                                <%--                                    <td ><input class="input" placeholder="长度6~15个字符"  type="text" name="name" value="${m.name}" required/></td>--%>
+                                <!-- <td class="err">长度1~15个字符</td> -->
+
+                            </tr>
+                            <tr class="lab">
+
+                                <td width="120px">经营许可证编号：</td>
+                                <td>${compx.license}</td>
+                                <%--                                    <td ><input class="input" placeholder="长度6~15个字符"  type="text" name="name" value="${m.name}" required/></td>--%>
+                                <!-- <td class="err">长度1~15个字符</td> -->
+
+                            </tr>
+                            <tr class="lab">
+
+                                <td width="120px">电话号码：</td>
+                                <%--                                    <td><input class="input" placeholder="您的年龄应在18岁到60岁之间"  id="balance" type="number" name="age" value="${m.age}" required/></td>--%>
+                                <%--                                    <td class="err">您的年龄应在18岁到60岁之间</td>--%>
+                                <td>${compx.tel}</td>
+
+
+                            </tr>
+                            <tr class="lab">
+
+                                <td width="120px">地址：</td>
+                                <td>${compx.addr}</td>
+                                <%--                                    <td ><input class="input" placeholder="长度6~15个字符"  type="text" name="name" value="${m.name}" required/></td>--%>
+                                <!-- <td class="err">长度1~15个字符</td> -->
+
+                            </tr>
+
                         </table>
                     </td>
                     <td width="2%">&nbsp;</td>
                 </tr>
+                <td width="2%">&nbsp;</td>
+                <td ><a class="btlg"  onclick="return confirm('确认修改');" href="comp.let?type=modifypre&id=${compx.id}">修改</a></td>
+
+
                 <!-- 添加产品结束 -->
                 <tr>
                     <td height="40" colspan="4">
@@ -156,16 +151,64 @@
     </tr>
     <!-- 底部部分 -->
     <tr>
-        <td valign="bottom" background="./Images/mail_left_bg.gif">
-            <img src="./Images/buttom_left.gif" width="17" height="17" />
+        <td width="17" valign="bottom" background="./Images/mail_left_bg.gif">
+            <img src="./Images/image.png" width="0" height="39" />
         </td>
-        <td background="./Images/buttom_bgs.gif">
-            <img src="./Images/buttom_bgs.gif" width="17" height="17">
+        <td valign="top" background="./Images/image.png">
+
         </td>
-        <td valign="bottom" background="./Images/mail_right_bg.gif">
-            <img src="./Images/buttom_right.gif" width="16" height="17" />
-        </td>
+        <td  width="17" valign="bottom" background="./Images/mail_right_bg.gif">
+            <img src="./Images/image.png" width="5" height="39" /></td>
     </tr>
 </table>
 </body>
 </html>
+<style>
+
+    .lab{
+        margin-top: 100px;
+        color: dimgray;
+        font-size: 14px;
+        width: 40%;
+        height: 50px;
+        margin-left: 30px;
+        /* background-color: aqua; */
+    }
+    .input{
+        width: 70%;
+        height: 30px;
+        border: none;
+        /* border-color: skyblue; */
+        padding-left: 8px;
+        outline: none;
+        /* background-color: pink; */
+    }
+    .tex{
+        width: 90%;
+        height: 90px;
+        border: none;
+        padding-left: 8px;
+        padding-top: 5px;
+        margin-top: 10px;
+        outline: none;
+    }
+    .con{
+        /* height: 400px; */
+        /* background-color: aquamarine; */
+    }
+    .btlg{
+        float:right;
+        margin-right: 100px;
+        margin-top: 300px;
+        width:75px;
+        height: 40px;
+        background-color: #409EFF;
+        border: none;
+        color:white;
+        font-size:17px;
+        border-radius: 5px;
+        text-align:center;
+        vertical-align: middle;
+        line-height: 40px;
+    }
+</style>

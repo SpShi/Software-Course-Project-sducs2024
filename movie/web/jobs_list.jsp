@@ -11,7 +11,7 @@
 <html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="keywords"  content = " 电影 java jsp"/>
+    <meta http-equiv="keywords"  content = " 岗位 java jsp"/>
     <meta http-equiv="author" content="Bronya"/>
     <link rel="stylesheet" type="text/css" href="./Style/skin.css" />
 </head>
@@ -20,12 +20,13 @@
     <!-- 头部开始 -->
     <tr>
         <td width="17" valign="top" background="./Images/mail_left_bg.gif">
-            <img src="./Images/left_top_right.gif" width="17" height="29" />
+            <img src="./Images/image.png" width="0" height="39" />
         </td>
-        <td valign="top" background="./Images/content_bg.gif">
+        <td valign="top" background="./Images/image.png">
 
         </td>
-        <td width="16" valign="top" background="./Images/mail_right_bg.gif"><img src="./Images/nav_right_bg.gif" width="16" height="29" /></td>
+        <td  width="17" valign="top" background="./Images/mail_right_bg.gif">
+            <img src="./Images/image.png" width="5" height="39" /></td>
     </tr>
     <!-- 中间部分开始 -->
     <tr>
@@ -40,8 +41,8 @@
                     <td colspan="4">
                         <table>
                             <tr>
-                                <td width="100" align="center"><img src="./Images/mime.gif" /></td>
-                                <td valign="bottom"><h3 style="letter-spacing:1px;">岗位 > 岗位列表 </h3></td>
+                                <!-- <td width="100" align="center"><img src="./Images/mime.gif" /></td> -->
+                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 岗位管理 > 在招岗位</h3></td>
                             </tr>
                         </table>
                     </td>
@@ -156,3 +157,57 @@
 </table>
 </body>
 </html>
+<style>
+
+    .lab{
+        margin-top: 100px;
+        color: dimgray;
+        font-size: 14px;
+        width: 40%;
+        height: 50px;
+        margin-left: 30px;
+        /* background-color: aqua; */
+    }
+    .input{
+        width: 70%;
+        height: 30px;
+        border: none;
+        /* border-color: skyblue; */
+        padding-left: 8px;
+        outline: none;
+        /* background-color: pink; */
+    }
+    .select{
+        width: 70%;
+        height: 30px;
+        border: none;
+        /* border-color: skyblue; */
+        padding-left: 8px;
+        outline: none;
+        /* background-color: pink; */
+    }
+    .tex{
+        width: 90%;
+        height: 90px;
+        border: none;
+        padding-left: 8px;
+        padding-top: 5px;
+        margin-top: 10px;
+        outline: none;
+    }
+    .btn{
+        float:right;
+        margin-top: 5px;
+        margin-bottom:5px ;
+        width:75px;
+        height: 40px;
+        background-color: #409EFF;
+        border: none;
+        color:white;
+        font-size:17px;
+        border-radius: 5px;
+        text-align:center;
+        vertical-align: middle;
+        line-height: 40px;
+    }
+</style>

@@ -25,6 +25,6 @@
         <!--主体左部分-->
         <frame src="left_comp.jsp" name="left" noresize="noresize" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" />
         <!--主体右部分-->
-        <frame src="./main.jsp" name="main" frameborder="0" scrolling="auto" marginwidth="0" marginheight="0" />
+        <frame src="./comp.let?type=details" name="main" frameborder="0" scrolling="auto" marginwidth="0" marginheight="0" />
     </frameset>
 </html>

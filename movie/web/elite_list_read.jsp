@@ -112,12 +112,13 @@
     <!-- 头部开始 -->
     <tr>
         <td width="17" valign="top" background="./Images/mail_left_bg.gif">
-            <img src="./Images/left_top_right.gif" width="17" height="29" />
+            <img src="./Images/image.png" width="0" height="39" />
         </td>
-        <td valign="top" background="./Images/content_bg.gif">
+        <td valign="top" background="./Images/image.png">
 
         </td>
-        <td width="16" valign="top" background="./Images/mail_right_bg.gif"><img src="./Images/nav_right_bg.gif" width="16" height="29" /></td>
+        <td  width="17" valign="top" background="./Images/mail_right_bg.gif">
+            <img src="./Images/image.png" width="5" height="39" /></td>
     </tr>
     <!-- 中间部分开始 -->
     <tr>
@@ -132,8 +133,8 @@
                     <td colspan="4">
                         <table>
                             <tr>
-                                <td width="100" align="center"><img src="./Images/mime.gif" /></td>
-                                <td valign="bottom"><h3 style="letter-spacing:1px;">rencaichaxun > 人才列表 </h3></td>
+                                <!-- <td width="100" align="center"><img src="./Images/mime.gif" /></td> -->
+                                <td valign="bottom"><h3 style="letter-spacing:1px; color:#409EFF;font-size: 15px;"> &nbsp;&nbsp;&nbsp;&nbsp; 人才管理 > 人才查找</h3></td>
                             </tr>
                         </table>
                     </td>
@@ -151,12 +152,12 @@
                     <td width="96%">
                         <fieldset>
                             <legend>查询条件</legend>
-                            <table width="100%" class="cont"  >
-                                <tr>
-                                    <td colspan="8" align="center">
-                                        最大年龄:<input type="text" name="ageh" value="60"/> &nbsp;&nbsp;
-                                        最小年龄:<input type="text" name="agel" value="18"/> &nbsp;&nbsp;
-                                        <select class="input" id="education" name="degrees">
+                            <table class="cont"  >
+                                <tr width="100%">
+                                    <td colspan="8" >
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最大年龄:&nbsp;&nbsp;<input type="text" name="ageh" value="60" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;最小年龄:&nbsp;&nbsp;<input type="text" name="agel" value="18" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学历水平:&nbsp;&nbsp;<select class="input" id="education" name="degrees" width="auto" >
                                             <option value="0">无学历</option>
                                             <option value="1">小学毕业</option>
                                             <option value="2">初中毕业</option>
@@ -165,17 +166,17 @@
                                             <option value="5">学士学位</option>
                                             <option value="6">硕士学位</option>
                                             <option value="7">博士学位</option>
-                                        </select>
-                                        <select class="input" id="gender" name="gender">
-                                            <option value="0">其他</option>
+                                    </select></td> </tr>
+                                <tr width="100%"> <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性&nbsp;&nbsp;别:&nbsp;&nbsp;</td><td><select class="input" id="gender" name="gender" width="auto">
+                                            <option value="0">不限</option>
                                             <option value="1">女</option>
                                             <option value="2">男</option>
-                                        </select>
-                                        <select class="input" id="desc" name="desc">
+                                        </select></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;排序方式:&nbsp;&nbsp;</td><td><select class="input" id="desc" name="desc" width="auto">
                                             <option value="true">学历从低到高</option>
                                             <option value="false">学历从高到低</option>
-                                        </select>
-                                        请输入关键字:&nbsp;&nbsp;<input class="text" type="text" id="intro" name="keyword"/>
+                                        </select></td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请输入关键字:&nbsp;&nbsp;<input class="text" type="text" id="intro" name="keyword" width="auto"/>
                                         <input type="button" id="btnQuery" value="搜索" style="width: 80px;"/>
                                     </td>
                                 </tr>
@@ -342,22 +343,13 @@
         /* background-color: aqua; */
     }
     .input{
-        width: 70%;
+        width: 200px;
         height: 30px;
         border: none;
         /* border-color: skyblue; */
-        padding-left: 8px;
+        padding-left: 20px;
         outline: none;
         /* background-color: pink; */
-    }
-    .tex{
-        width: 90%;
-        height: 90px;
-        border: none;
-        padding-left: 8px;
-        padding-top: 5px;
-        margin-top: 10px;
-        outline: none;
     }
     .con{
         /* height: 400px; */
