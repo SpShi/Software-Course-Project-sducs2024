@@ -66,7 +66,7 @@
 
 05261758 latest已更新,修改了sql文件,增加了jobs*页面
 
-05271015 latest已更新,修改了sql和Comp*,给Comp增加了addr属性,添加了Comp*.jsp
+05271015 latest已更新,修改了sql和Comp*,给Comp增加了addr属性,添加了Comp*.jsp -S
 
 05271146 latest已更新,修改了sql文件的错误 -Pardo
 
@@ -83,6 +83,8 @@
 06041415 latest已更新,修改了comp端的bug -Pardo
 
 06041422 latest已更新,完成了admin端的基础功能 -L
+
+06091846 latest已更新，修改了comp和admin的一些外观 -S
 
 ## 怎样提交修改后的代码
 
