@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>人才招聘网站登录界面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="人才招聘人才招聘系统" />
+    <meta name="keywords" content="天命,人才招聘人才招聘系统" />
+    <meta name="Author" content="Bronya" />
+    <meta name="CopyRight" content="天命科技" />
+    <link rel="stylesheet" type="text/css" href="./Style/skin.css" />
+    <script language="javascript" src="Js/jquery-3.3.1.min.js"></script>
+    <script language="JavaScript">
+        //1.当文档加载完毕,调用jquery
+        $(function () {
+            //2.执行图片点击事件
+            $("#code").click(function () {
+                //3.设置图片的src属性,注意需要添加随机数
+                $(this).prop("src","code.let?id="+Math.random());
+            });
+        });
+    </script>
+</head>
+
+<body>
+<img class="body"></img>
+<div class="login">
+    <form id="fmLogin" method="post" action="user.let?type=login" >
+        <table valign="top" width="90%" style="margin-left: 15px">
+            <h4 style="letter-spacing:1px;font-size:23px;margin: 20px 10px; color: rgb(119, 118, 118);">登录</h4>
+            <tr class="lab"><td>账&nbsp;&nbsp;&nbsp;&nbsp;号：</td>
+                <td><input class="input" placeholder="请输入账号" type="text" name="id" value="1000000005"/></td></tr>
+            <tr class="lab"><td>密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+                <td><input class="input" placeholder="请输入密码" type="password" name="pwd" value="999" /></td></tr>
+        </table>
+        <div style="margin-top: 70px; background-color: #e0e8ef;">
+            <td><input class="btlg" type="submit" value="登录" /></td>
+            <td><input class="btre" type="reset" value="重填" /></td>
+        </div>
+        <!--        ///有bug 要先登录才能注册-->
+        <div class="regis">
+            没有账号?&nbsp;&nbsp;<a style="color: #409EFF;" href="./user.let?type=addpre" >注册</a>
+        </div>
+    </form>
+</div>
+</body>
+<style>
+    .body{
+        background: url("./Images/elite.jpeg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        opacity: 0.8;
+        filter: blur(5px);
+
+
+    }
+    .login{
+        float: right;
+        width: 300px;
+        height:400px;
+        background-color: rgba(255, 255, 255, 0.789);
+        margin-right: 200px;
+        margin-top: 10%;
+        text-align: center;
+        border-radius: 10px;
+        backdrop-filter: blur(1px);
+    }
+    .lab{
+        color: dimgray;
+        font-size: 12px;
+        width: 100%;
+        height: 50px;
+        margin-left: 20px;
+        /* background-color: aqua; */
+    }
+    .input{
+        width: 90%;
+        height: 30px;
+        border: none;
+        padding-left: 8px;
+        outline: none;
+    }
+    .btlg{
+        float: left;
+        margin-left: 60px;
+        width:60px;
+        height: 30px;
+        background-color: #409EFF;
+        border: none;
+        color: white;
+        border-radius: 5px;
+    }
+    .btre{
+        float: left;
+        margin-left: 60px;
+        width:60px;
+        height: 30px;
+        /* background-color: #409EFF; */
+        border: none;
+        /* color: white; */
+        border-radius: 5px;
+    }
+    .regis{
+        float: left;
+        margin-top: 70px;
+        margin-left: 32%;
+        font-size: 13px;
+
+    }
+
+</style>
+
+</html>
