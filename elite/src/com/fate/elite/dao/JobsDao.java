@@ -179,18 +179,22 @@ public class JobsDao {
     public List<Jobs> getAllwithLimit(long place,int agel,int ageh,int gender,int degrees,
                                       int salary,String key,boolean desc) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="select * from  jobs ";
+        String sql="select * from ( select * from jobs ";
         if(place==0){
             sql=sql+ "where age>=? AND age<=?";
         }
         else{
             sql=sql+"where place=? AND age>=? AND age<=?";
         }
-        if(gender>0)  sql+=" AND gender="+gender;
-        sql+=" AND degrees>=? AND salary >=?";
-        if(key!="") sql+="and intro like '%"+key+"%'";
-        sql+=" ORDER BY salary ";
+        if(gender==1)  sql+=" AND gender <> 2 ";
+        else if(gender==2) sql+=" AND gender <> 1 ";
+        sql+=" AND degrees<=? AND salary >=? ORDER BY salary ";
         if(desc) sql=sql+"desc";
+        sql+=" ) as b ";
+        if(key!="") {
+            sql+="where b.intro like '%"+key+"%' or b.certificates like '%"+key+"%' " +
+                    "or b.name like '%"+key+"%' " ;
+        }
         List<Jobs> jobs ;
         if(place==0) jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),agel,ageh,degrees,salary);
         else jobs= runner.query(conn,sql,new BeanListHandler<Jobs>(Jobs.class),place,agel,ageh,degrees,salary);

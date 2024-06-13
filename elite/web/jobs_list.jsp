@@ -80,7 +80,7 @@
                                         </tr>
                                         <c:forEach items="${jobs}" var="b">
                                             <tr align="center" class="d">
-                                                <td><a href="movie.let?type=details&id=${b.id}">${b.id}</a></td>
+                                                <td><a href="jobs.let?type=details&id=${b.id}">${b.id}</a></td>
                                                 <td>${b.name}</td>
                                                 <td>${b.comp.name}</td>
                                                 <td>${b.age}</td>

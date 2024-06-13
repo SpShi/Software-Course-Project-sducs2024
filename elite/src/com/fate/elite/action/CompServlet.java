@@ -182,6 +182,10 @@ public class CompServlet extends HttpServlet{
                 if(type3==2){
                     req.getRequestDispatcher("comp_list.jsp").forward(req,resp);
                 }
+                else if(type3==0||type3==0)
+                {
+                    req.getRequestDispatcher("comp_list_elite.jsp").forward(req,resp);
+                }
                 break;
             case "details":
                 long compId;

@@ -316,23 +316,6 @@ public class EliteServlet extends HttpServlet{
         int degrees=Integer.parseInt(req.getParameter("degrees"));
         Boolean desc=Boolean.parseBoolean(req.getParameter("desc"));
         keyword = keyword.isEmpty()?null:keyword;
-//        int pageSize = 5;
-//        int pageCount = eliteBiz.getPageCount( pageSize,18,60,0,0,intro,false);
-//        int pageIndex = Integer.parseInt(req.getParameter("pageIndex"));
-//        if(pageIndex<1){
-//            pageIndex = 1;
-//        }
-//        if(pageIndex>pageCount){
-//            pageIndex = pageCount;
-//        }
-//        List<Elite> elites = eliteBiz.getByPage(pageIndex,pageSize,18,60,0,0,intro,false);
-//
-//        //2.存
-//        req.setAttribute("pageCount",pageCount);
-//        req.setAttribute("elite_list",elites);
-//
-//        //3. 转发到jsp页面
-//        req.getRequestDispatcher("elite_list_read.jsp?pageIndex="+pageIndex).forward(req,resp);
         List<Elite> elites = eliteBiz.getAllwithLimit(agel,ageh,gender,degrees,keyword,desc);
         out.print(JSON.toJSONString(elites));
     }

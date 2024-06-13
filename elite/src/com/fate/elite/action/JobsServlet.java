@@ -1,5 +1,7 @@
 package com.fate.elite.action;
 
+import com.alibaba.fastjson.JSON;
+import com.fate.elite.bean.Elite;
 import com.fate.elite.bean.Jobs;
 import com.fate.elite.bean.User;
 import com.fate.elite.biz.JobsBiz;
@@ -135,17 +137,20 @@ public class JobsServlet extends HttpServlet {
                     out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
                     return;
                 }
-                long places=Long.parseLong(req.getParameter("place"));
+                String ss=req.getParameter("place");
+
+                long places;
+                if(ss==null) places=0;
+                else places=Long.parseLong(ss);
                 int agel=Integer.parseInt(req.getParameter("agel"));
                 int ageh=Integer.parseInt(req.getParameter("ageh"));
                 int genders=Integer.parseInt(req.getParameter("gender"));
                 int degreess=Integer.parseInt(req.getParameter("degrees"));
                 int salarys=Integer.parseInt(req.getParameter("salary"));
-                String intros=req.getParameter("intro");
+                String intros=req.getParameter("keyword");
                 boolean desc=Boolean.parseBoolean("desc");
                 List<Jobs> jobsList2 = jobsBiz.getAllwithLimit(places,agel,ageh,genders,degreess,salarys,intros,desc);
-                req.setAttribute("jobsList",jobsList2);
-                req.getRequestDispatcher("jobs_list.jsp").forward(req,resp);
+                out.print(JSON.toJSONString(jobsList2));
 
                 break;
             case "exit":

@@ -50,8 +50,11 @@ public class ERecordBiz {
                 record.setElite(elite);
                 long jobid=record.getJobid();
                 Jobs jobs=jobsDao.getById(jobid);
+                jobid=jobs.getPlace();
+                Comp comp=compDao.getById(jobid);
                 //设置给elite.setType()
                 record.setJobs(jobs);
+                record.setComp(comp);
             }
 
         } catch (SQLException throwables) {

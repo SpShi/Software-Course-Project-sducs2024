@@ -74,7 +74,7 @@
                         <tr>
                             <!--左边内容-->
                             <td colspan="2" valign="top">
-                                <marquee><h3 style="margin:20px 0 10px 10px;">感谢您使用天命人才招聘人才招聘系统</h3>  </marquee>
+                                <marquee><h3 style="margin:20px 0 10px 10px;">感谢您使用天命人才招聘系统</h3>  </marquee>
                             </td>
                         </tr>
 

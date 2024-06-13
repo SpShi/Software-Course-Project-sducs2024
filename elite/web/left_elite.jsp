@@ -49,11 +49,12 @@
                         </ul>
                     </div>
                     <!-- *********** -->
-                    <h1 class="type"><a href="javascript:void(0)">个人中心</a></h1>
+                    <h1 class="type"><a href="javascript:void(0)">求职中心</a></h1>
                     <div class="content">
                         <ul class="RM">
-                            <li><a href="./set_pwd_new.jsp" target="main">修改密码</a></li>
-                            <li><a href="./elite.let?type=details" target="main">个人信息</a></li>
+                            <li><a href="jobs_search.jsp" target="main">工作查找</a></li>
+                            <li><a href="./comp.let?type=query&pageIndex=1" target="main">公司查看</a></li>
+                            <li><a href="./erecord.let?type=queryelite&pageIndex=1" target="main">简历投递情况</a></li>
                         </ul>
                     </div>
 

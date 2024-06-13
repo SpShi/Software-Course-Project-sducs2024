@@ -161,7 +161,7 @@ public class ERecordServlet extends HttpServlet {
     private void queryelite(HttpServletRequest req, HttpServletResponse resp, PrintWriter out) throws ServletException, IOException {
         HttpSession session1 = req.getSession();
         User user = (User)session1.getAttribute("user_now");
-        int statee = Integer.parseInt(req.getParameter("statee"));
+        int statee = 2;
 
 
         //1.获取信息(页数，页码,信息)

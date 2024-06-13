@@ -45,14 +45,17 @@ public class ERecordDao {
      */
     public List<ERecord>  getByPage(int pageIndex,int pageSize,long eliteId,int state) throws SQLException {
         Connection conn  = DBHelper.getConnection();
-        String sql = "select * from e2c_record where eliteid= ? limit ?,?";
+        String sql = "select * from e2c_record where eliteid= ?";
         int offset = (pageIndex-1)*pageSize;
         List<ERecord> records ;
         if(state <2) {
-            sql+=" and state=?";
-            records= runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),eliteId,state,offset,pageSize);
+            sql+=" and state=?  limit ?,?";
+            records= runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),eliteId,offset,pageSize,state);
         }
-        else records= runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),eliteId,offset,pageSize);
+        else {
+            sql+=" limit ?,?";
+            records= runner.query(conn,sql,new BeanListHandler<ERecord>(ERecord.class),eliteId,offset,pageSize);
+        }
         DBHelper.close(conn);
         return  records;
     }
