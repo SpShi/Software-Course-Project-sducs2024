@@ -58,24 +58,26 @@
                         var na= $("<td>" + job.name + "</td>");
                         var compna= $("<td>" + job.comp.ename + "</td>");
                         var ag= $("<td>" + job.age + "</td>");
-                        if(job.state==1) var ge= $("<td>限女</td>");
-                        else if(job.state==2) var ge= $("<td>限男</td>");
+                        if(job.gender==1) var ge= $("<td>限女</td>");
+                        else if(job.gender==2) var ge= $("<td>限男</td>");
                         else var ge= $("<td>不限</td>");
 
 
-                        if(job.state==0) var de= $("<td>无学历</td>");
-                        else if(job.state==1) var de= $("<td>小学毕业</td>");
-                        else if(job.state==2) var de= $("<td>初中毕业</td>");
-                        else if(job.state==3) var de= $("<td>高中毕业</td>");
-                        else if(job.state==4) var de= $("<td>专科</td>");
-                        else if(job.state==5) var de= $("<td>学士学位</td>");
-                        else if(job.state==6) var de= $("<td>硕士学位</td>");
-                        else if(job.state==7) var de= $("<td>博士学位</td>");
+                        if(job.degrees==0) var de= $("<td>无学历</td>");
+                        else if(job.degrees===1) var de= $("<td>小学毕业</td>");
+                        else if(job.degrees===2) var de= $("<td>初中毕业</td>");
+                        else if(job.degrees===3) var de= $("<td>高中毕业</td>");
+                        else if(job.degrees===4) var de= $("<td>专科</td>");
+                        else if(job.degrees===5) var de= $("<td>学士学位</td>");
+                        else if(job.degrees===6) var de= $("<td>硕士学位</td>");
+                        else if(job.degrees===7) var de= $("<td>博士学位</td>");
                         else var de= $("<td>保密</td>");
                         var ma= $("<td>" + job.major + "</td>");
+                        var sa= $("<td>" + job.salary + "</td>");
                         var em= $("<td>" + job.email + "</td>");
                         var int= $("<td>" + job.intro + "</td>");
-
+                        var butt=$("<td colspan=\"3\"><input class=\"btn\" type=\"button\" value=\"投递简历\" " +
+                            "onclick=\"window.location='erecord.let?type=addpre&jobid="+job.id +"';\" /></td>" )
                         //将所有 td 元素添加到tr中
                         tr.append(id);
                         tr.append(na);
@@ -84,8 +86,10 @@
                         tr.append(ge);
                         tr.append(de);
                         tr.append(ma);
+                        tr.append(sa);
                         tr.append(em);
                         tr.append(int);
+                        tr.append(butt);
                         //将 tr 添加到 ID 为 "tbRecord" 的表格的 tbody 中
                         $("#tbRecord").find("tbody").append(tr);
                     }
@@ -197,11 +201,14 @@
                                                 <th>性别要求</th>
                                                 <th>最低学历</th>
                                                 <th>专业要求</th>
+                                                <th>基础薪资</th>
                                                 <th>邮箱</th>
                                                 <th>求职要求</th>
+                                                <th>求职</th>
                                             </tr>
                                             </thead>
                                             <tbody>
+
                                             </tbody>
                                         </table>
                                     </form>

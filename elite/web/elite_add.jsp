@@ -28,14 +28,36 @@
             });
 
         });
-
+        function getFullPath(obj){
+            if (obj){
+                //ie
+                if (window.navigator.userAgent.indexOf("MSIE") >= 1){
+                    obj.select();
+                    return document.selection.createRange().text;
+                }else if (window.navigator.userAgent.indexOf("Firefox") >= 1){
+                    //firefox
+                    return window.URL.createObjectURL(obj.files.item(0));
+                }else if(navigator.userAgent.indexOf("Chrome")>0){
+                    //chrome
+                    return window.URL.createObjectURL(obj.files.item(0));
+                }
+                return obj.value;
+            }
+        }
+        $(function(){
+            $("#pic").change(function(){
+                var path = getFullPath($(this)[0]);
+                console.log(path);
+                $("#imgPic").prop("src",path);
+            });
+        });
     </script>
 </head>
 <body>
 <img class="body"></img>
 <div class="back">
     <div class="reg">
-        <form action="elite.let?type=add" method="post">
+        <form action="elite.let?type=add" method="post" enctype="multipart/form-data">>
             <table valign="top" style=" text-align: center;margin-left: 120px;width: 100%;">
                 <h4 style="letter-spacing:1px;font-size:23px; color: rgb(119, 118, 118);">完善个人信息</h4>
                 <tr class="lab"><td>用户名：</td>
@@ -89,9 +111,7 @@
 
                 <tr class="lab"><td>简历：</td>
                     <td>
-                        <textarea class="tex"  type="text" name="resume"  rows="5" required></textarea>
-
-                        <!-- <input class="input"  type="text" name="age" value="" required/> -->
+                        <input  type="file" id="pic" name="resume"  rows="5" required/></td>
                     </td>
                 </tr>
 

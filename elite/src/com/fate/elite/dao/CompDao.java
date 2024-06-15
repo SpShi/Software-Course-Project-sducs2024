@@ -28,9 +28,9 @@ public class CompDao {
      */
     public int add(long id,String name,String idNumber,long license,long tel,String ename,String addr) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql="insert into enterprise(id,`name`,idNumber,state,license,tel,ename,addr"+
+        String sql="insert into enterprise(id,`name`,idNumber,state,license,tel,ename,addr)"+
                 " values(?,?,?,0,?,?,?,?)";
-        int count = runner.update(conn,sql,id,name,idNumber,license,tel,ename);
+        int count = runner.update(conn,sql,id,name,idNumber,license,tel,ename,addr);
         DBHelper.close(conn);
         return count;
     }

@@ -5,6 +5,11 @@ import com.fate.elite.bean.Elite;
 import com.fate.elite.bean.User;
 import com.fate.elite.biz.EliteBiz;
 import com.fate.elite.biz.UserBiz;
+import com.fate.elite.util.DateHelper;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -96,57 +102,15 @@ public class EliteServlet extends HttpServlet{
                 req.getRequestDispatcher("elite_add.jsp").forward(req,resp);
                 break;
             case "add":
-
-                User usera=(User)session.getAttribute("user_now");
-                String namea =  req.getParameter("name");
-                String idnuma=req.getParameter("idnum");
-                long gendera=Long.parseLong(req.getParameter("gender"));
-                long agea=Long.parseLong(req.getParameter("age"));
-                long degreesa=Long.parseLong(req.getParameter("degrees"));
-                String tela =  req.getParameter("tel");
-                String resumea=req.getParameter("resume");
-                String majora=req.getParameter("major");
-                String emaila=req.getParameter("email");
-                String ctfcta=req.getParameter("ctfct");
-                String intta=req.getParameter("intt");
-                String slfea=req.getParameter("slfe");
-                String expea=req.getParameter("expe");
-
-                if(!eliteBiz.checktel(tela))
-                {
-                    out.println("<script>alert('电话号码不合法'); location.href='elite.let?type=add';</script>");
-                    return;
+                try {
+                    add(req,resp,out);
+                } catch (FileUploadException e) {
+                    e.printStackTrace();
+                    resp.sendError(500,"文件上传失败");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    resp.sendError(500,e.getMessage());
                 }
-                if(!eliteBiz.checkiN(idnuma))
-                {
-                    out.println("<script>alert('身份证号码不合法'); location.href='elite.let?type=add';</script>");
-                    return;
-                }
-                long telnum=Long.parseLong(tela);
-                int count = eliteBiz.add(usera.getId(),namea,idnuma,resumea,gendera, agea,degreesa,telnum,
-                        majora, emaila, ctfcta, intta, slfea,expea);
-
-//                out.println(usera);
-//                out.println(namea);
-//                out.println(idnuma);
-//                out.println(gendera);
-//                out.println(agea);
-//                out.println(degreesa);
-//                out.println(Long.parseLong(tela));
-//                out.println(majora);
-//                out.println(emaila);
-//                out.println(ctfcta);
-//                out.println(intta);
-//                out.println(slfea);
-//                out.println(expea);
-
-
-                if(count>0){
-                    out.println("<script>alert('用户信息添加成功'); location.href='elite.let?type=query';</script>");
-                }else{
-                    out.println("<script>alert('用户信息添加失败'); location.href='elite.let?type=add';</script>");
-                }
-
                 break;
             case "modifypre":
                 if(session.getAttribute("user_now")==null){
@@ -168,58 +132,11 @@ public class EliteServlet extends HttpServlet{
 
                 break;
             case "modify":
-
-                if(session.getAttribute("user_now")==null){
-                    out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
-                    return;
+                try {
+                    modify(req,resp,out);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                String namem =  req.getParameter("name");
-                String idnumm=req.getParameter("idnum");
-                long genderm=Long.parseLong(req.getParameter("gender"));
-                long agem=Long.parseLong(req.getParameter("age"));
-                long degreesm=Long.parseLong(req.getParameter("degrees"));
-                String telm =  req.getParameter("tel");
-                String resumem=req.getParameter("resume");
-                String majorm=req.getParameter("major");
-                String emailm=req.getParameter("email");
-                String ctfctm=req.getParameter("ctfct");
-                String inttm=req.getParameter("intt");
-                String slfem=req.getParameter("slfe");
-                String expem=req.getParameter("expe");
-                if(!eliteBiz.checktel(telm))
-                {
-                    out.println("<script>alert('电话号码不合法'); location.href='elite.let?type=details';</script>");
-                    return;
-                }
-                if(!eliteBiz.checkiN(idnumm))
-                {
-                    out.println("<script>alert('身份证号码不合法'); location.href='elite.let?type=details';</script>");
-                    return;
-                }
-
-                long idm=Long.parseLong(req.getParameter("id"));
-                long telmm=Long.parseLong(telm);
-//                out.println(namem);
-//                out.println(idnumm);
-//                out.println(genderm);
-//                out.println(agem);
-//                out.println(degreesm);
-//                out.println(Long.parseLong(telm));
-//                out.println(majorm);
-//                out.println(emailm);
-//                out.println(ctfctm);
-//                out.println(inttm);
-//                out.println(slfem);
-//                out.println(expem);
-                int countm = eliteBiz.modify(idm,namem,idnumm,resumem,genderm, agem,degreesm,telmm,
-                        majorm, emailm, ctfctm, inttm, slfem,expem);
-                if(countm>0){
-                    out.println("<script>alert('用户信息修改成功'); location.href='elite.let?type=details';</script>");
-                }
-                else{
-                    out.println("<script>alert('用户信息修改失败'); location.href='elite.let?type=details';</script>");
-                }
-
                 break;
             case "remove":
                 if(session.getAttribute("user_now")==null){
@@ -318,5 +235,246 @@ public class EliteServlet extends HttpServlet{
         keyword = keyword.isEmpty()?null:keyword;
         List<Elite> elites = eliteBiz.getAllwithLimit(agel,ageh,gender,degrees,keyword,desc);
         out.print(JSON.toJSONString(elites));
+    }
+    private void add(HttpServletRequest req, HttpServletResponse resp,  PrintWriter  out) throws Exception {
+        HttpSession session = req.getSession();
+        User user=(User)session.getAttribute("user_now");
+        if(user==null){
+            out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+            return;
+        }
+        //1.构建一个磁盘工厂
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        //1.1 设置大小
+        factory.setSizeThreshold(1024*9);
+        //1.2 临时仓库
+        File file = new File("c:\\temp");
+        if(!file.exists()){
+            file.mkdir();//创建文件夹
+        }
+        factory.setRepository(file);
+
+        //2.文件上传+表单数据
+        ServletFileUpload fileUpload = new ServletFileUpload(factory);
+
+        //3.将请求解析成一个个FileItem(文件+表单元素)
+        List<FileItem> fileItems = fileUpload.parseRequest(req);
+
+        //4.遍历FileItem
+        Elite elite=new Elite();
+        for(FileItem item: fileItems){
+            if(item.isFormField()){
+                //4.1 元素名称和用户填写的值  name: 文城
+                String  name = item.getFieldName();
+                String value = item.getString("utf-8");//防止乱码
+                switch(name){
+                    case "id":
+                        elite.setId(Long.parseLong(value));
+                        break;
+                    case "name":
+                        elite.setName(value);
+                        break;
+                    case "idnum": {
+                        if(!eliteBiz.checkiN(value))
+                        {
+                            out.println("<script>alert('身份证号码不合法'); location.href='elite.let?type=details';</script>");
+                            return;
+                        }
+                        elite.setIdNumber(value);
+                        break;
+                    }
+                    case "gender":
+                        elite.setGender(Long.parseLong(value));
+                        break;
+                    case "age":
+                        elite.setAge(Long.parseLong(value));
+                        break;
+                    case "degrees":
+                        elite.setDegrees(Long.parseLong(value));
+                        break;
+                    case "tel":
+                    {
+                        if(!eliteBiz.checktel(value))
+                        {
+                            out.println("<script>alert('电话号码不合法'); location.href='elite.let?type=details';</script>");
+                            return;
+                        }
+                        elite.setTel(Long.parseLong(value));
+                        break;
+                    }
+                    case "major":
+                        elite.setMajor(value);
+                        break;
+                    case "email":
+                        elite.setEmail(value);
+                        break;
+                    case "ctfct":
+                        elite.setCertificate(value);
+                        break;
+                    case "intt":
+                        elite.setIntention(value);
+                        break;
+                    case "slfe":
+                        elite.setSelfevaluation(value);
+                        break;
+                    case "expe":
+                        elite.setExperience(value);
+                        break;
+
+                }
+            }else {
+                //4.2 文件: 图片的文件名  city.png,用户不选择图片时，fileName的数据为""
+                String fileName = item.getName();
+                //避免文件替换：当前的系统时间.png
+                if(fileName.trim().length()>0) {
+                    //4.2.1 获取后缀名 .png
+                    String filterName = fileName.substring(fileName.lastIndexOf("."));
+                    //4.2.2 修改文件名  20211117112512234.png
+                    fileName = DateHelper.getImageName() + filterName;
+                    //保存到哪里
+                    //虚拟路径: Images/cover/1-1.png
+                    //文件的读写:实际路径 D://xx  --> 虚拟路径: Images/cover对应的实际路径
+                    String path = req.getServletContext().getRealPath("/Images/cover");
+                    //d:/xxx/xx/ 20211117112512234.png
+                    String filePath = path + "/" + fileName;
+                    //数据库表中的路径 ：Images/cover/101-1.png：相对项目的根目录的位置
+                    String dbPath = "Images/cover/" + fileName;
+                    elite.setResume(dbPath);
+                    //4.3 保存文件
+                    item.write(new File(filePath));
+                }
+            }
+        }
+        long idm=Long.parseLong(req.getParameter("id"));
+        //out.println(elite);
+        int count = eliteBiz.add(user.getId(),elite.getName(),elite.getIdNumber(),elite.getResume(),
+                elite.getGender(),elite.getAge(),elite.getDegrees(),elite.getTel(),elite.getMajor(),elite.getEmail(),
+                elite.getIdNumber(),elite.getIntention(),elite.getSelfevaluation(),elite.getExperience());
+        if(count>0){
+            out.println("<script>alert('用户信息添加成功'); location.href='elite.let?type=query';</script>");
+        }else{
+            out.println("<script>alert('用户信息添加失败'); location.href='elite.let?type=add';</script>");
+        }
+    }
+    private void modify(HttpServletRequest req, HttpServletResponse resp, PrintWriter out) throws Exception
+    {
+        HttpSession session = req.getSession();
+        if(session.getAttribute("user_now")==null){
+            out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+            return;
+        }
+        //1.构建一个磁盘工厂
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        //1.1 设置大小
+        factory.setSizeThreshold(1024*9);
+        //1.2 临时仓库
+        File file = new File("c:\\temp");
+        if(!file.exists()){
+            file.mkdir();//创建文件夹
+        }
+        factory.setRepository(file);
+
+        //2.文件上传+表单数据
+        ServletFileUpload fileUpload = new ServletFileUpload(factory);
+
+        //3.将请求解析成一个个FileItem(文件+表单元素)
+        List<FileItem> fileItems = fileUpload.parseRequest(req);
+
+        //4.遍历FileItem
+        Elite elite=new Elite();
+        for(FileItem item: fileItems){
+            if(item.isFormField()){
+                //4.1 元素名称和用户填写的值  name: 文城
+                String  name = item.getFieldName();
+                String value = item.getString("utf-8");//防止乱码
+                switch(name){
+                    case "id":
+                        elite.setId(Long.parseLong(value));
+                        break;
+                    case "name":
+                        elite.setName(value);
+                        break;
+                    case "idnum": {
+                        if(!eliteBiz.checkiN(value))
+                        {
+                            out.println("<script>alert('身份证号码不合法'); location.href='elite.let?type=details';</script>");
+                            return;
+                        }
+                        elite.setIdNumber(value);
+                        break;
+                    }
+                    case "gender":
+                        elite.setGender(Long.parseLong(value));
+                        break;
+                    case "age":
+                        elite.setAge(Long.parseLong(value));
+                        break;
+                    case "degrees":
+                        elite.setDegrees(Long.parseLong(value));
+                        break;
+                    case "tel":
+                    {
+                        if(!eliteBiz.checktel(value))
+                        {
+                            out.println("<script>alert('电话号码不合法'); location.href='elite.let?type=details';</script>");
+                            return;
+                        }
+                        elite.setTel(Long.parseLong(value));
+                        break;
+                    }
+                    case "major":
+                        elite.setMajor(value);
+                        break;
+                    case "email":
+                        elite.setEmail(value);
+                        break;
+                    case "ctfct":
+                        elite.setCertificate(value);
+                        break;
+                    case "intt":
+                        elite.setIntention(value);
+                        break;
+                    case "slfe":
+                        elite.setSelfevaluation(value);
+                        break;
+                    case "expe":
+                        elite.setExperience(value);
+                        break;
+
+                }
+            }else {
+                //4.2 文件: 图片的文件名  city.png,用户不选择图片时，fileName的数据为""
+                String fileName = item.getName();
+                //避免文件替换：当前的系统时间.png
+                if(fileName.trim().length()>0) {
+                    //4.2.1 获取后缀名 .png
+                    String filterName = fileName.substring(fileName.lastIndexOf("."));
+                    //4.2.2 修改文件名  20211117112512234.png
+                    fileName = DateHelper.getImageName() + filterName;
+                    //保存到哪里
+                    //虚拟路径: Images/cover/1-1.png
+                    //文件的读写:实际路径 D://xx  --> 虚拟路径: Images/cover对应的实际路径
+                    String path = req.getServletContext().getRealPath("/Images/cover");
+                    //d:/xxx/xx/ 20211117112512234.png
+                    String filePath = path + "/" + fileName;
+                    //数据库表中的路径 ：Images/cover/101-1.png：相对项目的根目录的位置
+                    String dbPath = "Images/cover/" + fileName;
+                    elite.setResume(dbPath);
+                    //4.3 保存文件
+                    item.write(new File(filePath));
+                }
+            }
+        }
+        long idm=Long.parseLong(req.getParameter("id"));
+        //out.println(elite);
+        int countm = eliteBiz.modify(idm,elite.getName(),elite.getIdNumber(),elite.getResume(),
+                elite.getGender(),elite.getAge(),elite.getDegrees(),elite.getTel(),elite.getMajor(),elite.getEmail(),
+                elite.getIdNumber(),elite.getIntention(),elite.getSelfevaluation(),elite.getExperience());
+        if(countm>0){
+            out.println("<script>alert('用户信息修改成功'); location.href='elite.let?type=details';</script>");
+        }
+        else{
+            out.println("<script>alert('用户信息修改失败'); location.href='elite.let?type=details';</script>");
+        }
     }
 }

@@ -22,23 +22,21 @@ public class ERecordBiz {
     JobsBiz jobsBiz = new JobsBiz();
     CompDao compDao=new CompDao();
     CompBiz compBiz=new CompBiz();
-    public List<ERecord> getRecordsByEliteId(long eliteid,int state){
-        List<ERecord> records = null;
+    public ERecord getById(long id){
+        ERecord record = null;
         try {
-            records=eRecordDao.getRecordsByEliteId(eliteid,state);
-            Elite elite = eliteBiz.getById(eliteid);
-            for(ERecord record:records){
-                long jobId = record.getJobid();
-                Jobs jobs=jobsBiz.getById(jobId);
-                record.setJobs(jobs);
-                Comp comp=compDao.getById(jobs.getPlace());
-                record.setComp(comp);
-                record.setElite(elite);
-            }
+            record=eRecordDao.getById(id);
+            Elite elite = eliteBiz.getById(id);
+            long jobId = record.getJobid();
+            Jobs jobs=jobsBiz.getById(jobId);
+            record.setJobs(jobs);
+            Comp comp=compDao.getById(jobs.getPlace());
+            record.setComp(comp);
+            record.setElite(elite);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return records;
+        return record;
     }
     public List<ERecord>  getByPage(int pageIndex,int pageSize,long eliteid,int state) {
         List<ERecord> records = null;
@@ -113,29 +111,24 @@ public class ERecordBiz {
      * 要么全部成功，要么全部失败(一个业务(事务处理))
      * 前提:用同一个connection对象(如何?)
      * @param eliteid
-     * @param jobsidList
+     * @param jobsid
      * @param comment
      * @return 0:操作失败  1:操作成功
      */
-    public int add(long eliteid,List<Long> jobsidList,String comment){
+    public int add(long eliteid,long jobsid,String comment){
         try {
             //1.启动事务
             DBHelper.beginTransaction();
-            double total = 0;
-            Elite elite=eliteBiz.getById(eliteid);
             //2.拿到投简历的工作编号
-            for(long jobsid: jobsidList){
-                //人才编号
-
-                //人才对象
-                Jobs jobs = jobsBiz.getById(jobsid);
-                //调用价格
-                //算押金
-                //调用recordDao-->insert
-                java.util.Date currentDate = new java.util.Date();
-                eRecordDao.add(eliteid,jobsid,currentDate,comment);
-
+            ERecord eRecord=eRecordDao.getid(eliteid,jobsid);
+            if(eRecord!=null)
+            {
+                return -1;
             }
+            //调用recordDao-->insert
+            java.util.Date currentDate = new java.util.Date();
+            eRecordDao.add(eliteid,jobsid,currentDate,comment);
+
             //.事务结束:
             DBHelper.commitTransaction();//事务提交:成功
 
@@ -155,20 +148,18 @@ public class ERecordBiz {
 
     /**
      * 回复简历
-     * @param eliteid
-     * @param jobid
+     * @param id
      * @param comment
      * @param state
      * @return
      */
-    public int  modify(long eliteid,long jobid,String comment,int state) {
+    public int  modify(long id,String comment,int state) {
         //1.开启事务
         try {
             //1.启动事务
             DBHelper.beginTransaction();
             java.util.Date currentDate = new java.util.Date();
-            eRecordDao.modify(currentDate,comment,state,eliteid,jobid);
-
+            eRecordDao.modify(currentDate,comment,state,id);
             //.事务结束:
             DBHelper.commitTransaction();//事务提交:成功
         } catch (SQLException throwables) {
@@ -183,16 +174,6 @@ public class ERecordBiz {
 
         return 1;
 
-    }
-    public int getById(long eliteid,long jobid){
-        int id=0;
-        try {
-            ERecord eRecord=eRecordDao.getid(eliteid,jobid);
-            id=eRecord.getId();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return id;
     }
     /**
      *

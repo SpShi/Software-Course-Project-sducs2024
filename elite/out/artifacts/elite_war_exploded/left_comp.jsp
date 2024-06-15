@@ -77,7 +77,7 @@
                         <li><a href="javascript:void(0)" target="main">图片上传</a></li>
                     </ul>
                 </div>
-                <!-- *********** -->
+                -->
             </div>
         </td>
     </tr>

@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 13/06/2024 20:32:29
+ Date: 15/06/2024 22:01:52
 */
 
 SET NAMES utf8mb4;
@@ -41,7 +41,7 @@ INSERT INTO `admin` VALUES (1000000013, 'admin2', 15153312459, 1);
 -- ----------------------------
 DROP TABLE IF EXISTS `e2c_record`;
 CREATE TABLE `e2c_record`  (
-  `id` int(8) NOT NULL,
+  `id` int(8) NOT NULL AUTO_INCREMENT,
   `eliteid` bigint(15) DEFAULT NULL,
   `jobid` bigint(15) DEFAULT NULL,
   `senddate` datetime(0) DEFAULT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE `e2c_record`  (
   `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `state` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of e2c_record
@@ -63,6 +63,9 @@ INSERT INTO `e2c_record` VALUES (6, 1000000007, 4, '2021-12-15 00:00:00', '2021-
 INSERT INTO `e2c_record` VALUES (7, 1000000008, 5, '2021-12-13 00:00:00', '2021-12-13 00:00:01', '你好', 0);
 INSERT INTO `e2c_record` VALUES (8, 1000000010, 4, '2021-12-13 00:01:00', '2021-12-13 00:01:21', '不录用', 1);
 INSERT INTO `e2c_record` VALUES (9, 1000000009, 3, '2021-12-15 00:00:00', '2021-12-13 00:02:11', '录用', 1);
+INSERT INTO `e2c_record` VALUES (10, 1000000007, 5, '2024-06-15 16:16:43', NULL, '', 0);
+INSERT INTO `e2c_record` VALUES (11, 1000000007, 3, '2024-06-15 16:18:06', '2024-06-15 18:53:46', '1122', 1);
+INSERT INTO `e2c_record` VALUES (12, 1000000007, 2, '2024-06-15 18:51:23', NULL, '12', 0);
 
 -- ----------------------------
 -- Table structure for elite
@@ -90,14 +93,14 @@ CREATE TABLE `elite`  (
 -- ----------------------------
 -- Records of elite
 -- ----------------------------
-INSERT INTO `elite` VALUES (1000000000, 'name0', '370581200304176378', 0, '1', 1, 26, 0, 15153380272, 'major', '356303329@qq.com', '1', '1', '1', '1');
-INSERT INTO `elite` VALUES (1000000001, 'name1', '370681200304176378', 0, '1', 1, 27, 0, 15153380273, 'major', '356303339@qq.com', '1', '1', '1', '1');
-INSERT INTO `elite` VALUES (1000000002, 'name2', '370481200304176378', 0, '1', 1, 24, 0, 15153380275, 'major', '356303349@qq.com', '1', '1', '1', '1');
-INSERT INTO `elite` VALUES (1000000003, 'name3', '370381200304176378', 0, '1', 1, 29, 0, 15153380274, 'major', '356303529@qq.com', '1', '1', '1', '1');
-INSERT INTO `elite` VALUES (1000000007, '123456', '371202200303138619', 0, '1', 0, 25, 0, 15153380271, 'major', '356303328@qq.com', '2', '1', '1', '1');
-INSERT INTO `elite` VALUES (1000000008, 'name8', '370682200304176378', 0, '1', 1, 27, 0, 15154560273, 'major', '356243339@qq.com', '1', '1', '1', '1');
-INSERT INTO `elite` VALUES (1000000009, 'name9', '370483200304176378', 0, '1', 1, 24, 0, 15153346275, 'major', '356303114@qq.com', '1', '1', '1', '1');
-INSERT INTO `elite` VALUES (1000000010, 'name10', '370384200304176378', 0, '1', 1, 29, 0, 15153380894, 'major', '351203529@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000000, 'name0', '370581200304176378', 0, 'Images/cover/20240615214336.png', 1, 26, 0, 15153380272, 'major', '356303329@qq.com', '370581200304176378', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000001, 'name1', '370681200304176378', 0, 'Images/cover/20221223214238854.png', 1, 27, 0, 15153380273, 'major', '356303339@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000002, 'name2', '370481200304176378', 0, 'Images/cover/20221223214238854.png', 1, 24, 0, 15153380275, 'major', '356303349@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000003, 'name3', '370381200304176378', 0, 'Images/cover/20221223214238854.png', 1, 29, 0, 15153380274, 'major', '356303529@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000007, '123456', '371202200303138619', 0, 'Images/cover/20240615205631.png', 0, 25, 0, 15153380271, 'major', '356303328@qq.com', '371202200303138619', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000008, 'name8', '370682200304176378', 0, 'Images/cover/20221223214238854.png', 1, 27, 0, 15154560273, 'major', '356243339@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000009, 'name9', '370483200304176378', 0, 'Images/cover/20221223214238854.png', 1, 24, 0, 15153346275, 'major', '356303114@qq.com', '1', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000010, 'name10', '370384200304176378', 0, 'Images/cover/20221223214238854.png', 1, 29, 0, 15153380894, 'major', '351203529@qq.com', '1', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for enterprise
@@ -121,6 +124,7 @@ CREATE TABLE `enterprise`  (
 INSERT INTO `enterprise` VALUES (1000000004, '企业级1', '370581200304176378', 12345678900, 15788855666, 'name1', 0, '即墨');
 INSERT INTO `enterprise` VALUES (1000000005, '企业级2', '370781200304176379', 12345678901, 15788855667, 'name2', 0, '即墨');
 INSERT INTO `enterprise` VALUES (1000000006, '企业级2', '370581200306176378', 12345678902, 15788855668, 'name3', 0, '即墨');
+INSERT INTO `enterprise` VALUES (1000000015, '122', '370781200304176379', 12345678902, 15153380272, '123', 0, '1');
 
 -- ----------------------------
 -- Table structure for jobs
@@ -139,7 +143,7 @@ CREATE TABLE `jobs`  (
   `email` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `intro` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of jobs
@@ -150,6 +154,7 @@ INSERT INTO `jobs` VALUES (3, '食堂阿姨', 1000000005, 60, 0, 05, '1', '1', 1
 INSERT INTO `jobs` VALUES (4, '宿管阿姨', 1000000005, 55, 1, 07, '1', '1', 1200, '126@qq.com', '宿管阿姨');
 INSERT INTO `jobs` VALUES (5, '保安', 1000000006, 50, 2, 06, '1', '1', 1500, '127@qq.com', '保安');
 INSERT INTO `jobs` VALUES (13, '2121', 1000000005, 21, 0, 00, '1', '1', 2, '2', '1');
+INSERT INTO `jobs` VALUES (14, '2', 1000000005, 60, 0, 00, '', '', 2, '1', '');
 
 -- ----------------------------
 -- Table structure for sp
@@ -164,7 +169,7 @@ CREATE TABLE `sp`  (
 -- ----------------------------
 -- Records of sp
 -- ----------------------------
-INSERT INTO `sp` VALUES (0000000001, 1000000015);
+INSERT INTO `sp` VALUES (0000000001, 1000000016);
 
 -- ----------------------------
 -- Table structure for user
@@ -175,7 +180,7 @@ CREATE TABLE `user`  (
   `pwd` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   `type` int(1) UNSIGNED ZEROFILL NOT NULL COMMENT '0是个人,1是公司,2是管理员',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1000000015 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1000000016 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -185,16 +190,17 @@ INSERT INTO `user` VALUES (1000000001, '1212', 0);
 INSERT INTO `user` VALUES (1000000002, '123', 0);
 INSERT INTO `user` VALUES (1000000003, '1717', 0);
 INSERT INTO `user` VALUES (1000000004, '542', 1);
-INSERT INTO `user` VALUES (1000000005, '999', 1);
+INSERT INTO `user` VALUES (1000000005, '1', 1);
 INSERT INTO `user` VALUES (1000000006, '5217', 1);
 INSERT INTO `user` VALUES (1000000007, '123', 0);
 INSERT INTO `user` VALUES (1000000008, '123', 0);
 INSERT INTO `user` VALUES (1000000009, '123', 0);
 INSERT INTO `user` VALUES (1000000010, '123', 0);
-INSERT INTO `user` VALUES (1000000011, '123', 2);
+INSERT INTO `user` VALUES (1000000011, '1', 2);
 INSERT INTO `user` VALUES (1000000012, '123', 2);
 INSERT INTO `user` VALUES (1000000013, '123', 2);
 INSERT INTO `user` VALUES (1000000014, '123', 0);
+INSERT INTO `user` VALUES (1000000015, '123', 1);
 
 -- ----------------------------
 -- View structure for erecordview

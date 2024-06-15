@@ -107,21 +107,21 @@ public class CompServlet extends HttpServlet{
 
                 if(!compBiz.checktel(tela))
                 {
-                    out.println("<script>alert('电话号码不合法'); location.href='comp.let?type=query';</script>");
+                    out.println("<script>alert('电话号码不合法'); location.href='comp_add.jsp';</script>");
                     return;
                 }
                 if(!compBiz.checkiN(idnuma))
                 {
-                    out.println("<script>alert('身份证号码不合法'); location.href='comp.let?type=query';</script>");
+                    out.println("<script>alert('身份证号码不合法'); location.href='comp_add.jsp';</script>");
                     return;
                 }
                 User usera=(User)session.getAttribute("user_now");
                 long idtmp=usera.getId();
                  int count = compBiz.add(idtmp,namea,idnuma,licensea,Long.parseLong(tela),enamea,addra);
                 if(count>0){
-                    out.println("<script>alert('企业注册成功'); location.href='comp.let?type=query';</script>");
+                    out.println("<script>alert('企业信息初始化成功'); location.href='index_comp.jsp';</script>");
                 }else{
-                    out.println("<script>alert('企业注册失败'); location.href='comp.let?type=query';</script>");
+                    out.println("<script>alert('企业信息初始化失败'); location.href='comp_add.jsp';</script>");
                 }
 
                 break;

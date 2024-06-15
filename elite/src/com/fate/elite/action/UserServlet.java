@@ -130,10 +130,10 @@ public class UserServlet extends HttpServlet {
                 userBiz.modifysp(1,idtmp+1);
                 int count = userBiz.add(idtmp,pwda,typea);
                 if(count>0){
-                    out.println("<script>alert('用户注册成功,请牢记您的ID:"+idtmp+"后重新登录'); location.href='user.let?type=query';</script>");
+                    out.println("<script>alert('用户注册成功,请牢记您的ID:"+idtmp+"后重新登录'); location.href='login.html';</script>");
                 }else{
                     userBiz.modifysp(1,idtmp-1);
-                    out.println("<script>alert('用户注册失败'); location.href = 'index_elite.jsp';</script>");
+                    out.println("<script>alert('用户注册失败'); location.href = 'login.html';</script>");
                 }
 
                 break;
@@ -181,6 +181,8 @@ public class UserServlet extends HttpServlet {
                 //修改密码
                 //1.获取用户输入的新的密码
                 String newPwd = req.getParameter("newpwd");
+                String newPwd2 = req.getParameter("newpwd2");
+                if(newPwd!=newPwd2) out.println("<script>alert('两次密码不一致');</script>");
                 //2.获取用户的编号-session
                 long idm = ((User)session.getAttribute("user_now")).getId();
 

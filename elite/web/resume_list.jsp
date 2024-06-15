@@ -84,30 +84,11 @@
                                                 <td>${b.comment}</td>
                                                 <td>${b.comp.name}</td>
                                                 <td><img src="${b.elite.resume}" class="cover"/></td>
-<%--                                                <td>--%>
-<%--                                                    <a href="erecord.let?type=details&id=${b.id}">详情</a>--%>
-<%--                                                    <a onclick="return confirm('确认修改');" href="erecord.let?type=modifypre&id=${b.id}">修改</a>&nbsp;&nbsp;--%>
-<%--                                                    <a onclick="return confirm('确认删除');" href="erecord.let?type=remove&id=${b.id}">删除</a>--%>
-<%--                                                </td>--%>
+                                                <td>
+                                                    <a onclick="return confirm('确认回复');" href="erecord.let?type=modifypre&id=${b.id}">回复</a>&nbsp;&nbsp;
+                                                </td>
                                             </tr>
                                         </c:forEach>
-
-<%--                                        <tr><td colspan="9" align="center">--%>
-<%--                                            <div class="pager">--%>
-<%--                                                <ul class="clearfix">--%>
-<%--                                                    <li><a href="erecord.let?type=queryelite&pageIndex=${param.pageIndex-1}">上一页</a></li>--%>
-<%--                                                    <c:forEach var="i" begin="1" end="${pageCount}" step="1">--%>
-<%--                                                        <c:if test="${i==param.pageIndex}">--%>
-<%--                                                            <li class="current"><a href="erecord.let?type=queryelite&pageIndex=${i}">${i}</a></li>--%>
-<%--                                                        </c:if>--%>
-<%--                                                        <c:if test="${i!=param.pageIndex}">--%>
-<%--                                                            <li><a href="erecord.let?type=queryelite&pageIndex=${i}">${i}</a></li>--%>
-<%--                                                        </c:if>--%>
-<%--                                                    </c:forEach>--%>
-<%--                                                    <li><a href="erecord.let?type=queryelite&pageIndex=${param.pageIndex+1}">下一页</a></li>--%>
-<%--                                                </ul>--%>
-<%--                                            </div>--%>
-<%--                                        </td></tr>--%>
                                     </table>
 
                                 </td>

@@ -10,7 +10,7 @@
 <!DOCTYPE html >
 <html >
 <head>
-    <title>天命科技 - 网站后台人才招聘中心</title>
+    <title>天命科技 - 网站人才招聘中心</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="天命科技专业的网站 " />
     <meta name="keywords" content="天命,网站人才招聘系统,企业网站" />
@@ -25,6 +25,6 @@
         <!--主体左部分-->
         <frame src="left_comp.jsp" name="left" noresize="noresize" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" />
         <!--主体右部分-->
-        <frame src="./main_new.jsp" name="main" frameborder="0" scrolling="auto" marginwidth="0" marginheight="0" />
+        <frame src="./comp.let?type=details" name="main" frameborder="0" scrolling="auto" marginwidth="0" marginheight="0" />
     </frameset>
 </html>

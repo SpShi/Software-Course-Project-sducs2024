@@ -35,7 +35,7 @@
 
 <div class="back">
     <div class="reg">
-        <form action="elite.let?type=add" method="post">
+        <form action="comp.let?type=add" method="post">
             <table valign="top" style=" text-align: center;margin-left: 120px;width: 100%;">
                 <h4 style="letter-spacing:1px;font-size:23px; color: rgb(119, 118, 118);">完善个人信息</h4>
                 <tr class="lab"><td>注册人：</td>

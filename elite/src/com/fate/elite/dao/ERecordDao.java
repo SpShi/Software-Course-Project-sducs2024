@@ -129,7 +129,7 @@ public class ERecordDao {
      */
 
     public int add(long eliteid,long jobid, Date sendDate,String comment) throws SQLException {
-        String sql="insert into e2c_record values(?,?,?,?,0)";
+        String sql="insert into e2c_record (eliteid,jobid,senddate,comment,state) values(?,?,?,?,0)";
         Connection conn = DBHelper.getConnection();
         int count = runner.update(conn,sql,eliteid,jobid,sendDate,comment);
         DBHelper.close(conn);
@@ -140,15 +140,14 @@ public class ERecordDao {
      *重新投递简历
      * @param sendDate
      * @param comment
-     * @param eliteid
-     * @param jobid
+     * @param id
      * @return
      * @throws SQLException
      */
-    public  int modify(Date sendDate,String comment,int state,long eliteid,long jobid) throws SQLException {
-        String sql = "update  e2c_record set backdate =?,comment = ?,state=? where eliteid=? and jobid= ?";
+    public  int modify(Date sendDate,String comment,int state,long id) throws SQLException {
+        String sql = "update  e2c_record set backdate =?,comment = ?,state=? where id= ?";
         Connection conn = DBHelper.getConnection();
-        int count = runner.update(conn,sql,sendDate,comment,state,eliteid,jobid);
+        int count = runner.update(conn,sql,sendDate,comment,state,id);
         DBHelper.close(conn);
         return count;
     }
@@ -160,7 +159,7 @@ public class ERecordDao {
      * @throws SQLException
      */
     public ERecord getid(long eliteid,long jobid) throws SQLException {
-        String sql = "select * from e2c_record where eliteid=? and jobid= ?";
+        String sql = "select * from e2c_record where eliteid=? and jobid= ? and state=0";
         Connection conn = DBHelper.getConnection();
         ERecord eRecord=runner.query(conn,sql,new BeanHandler<ERecord>(ERecord.class),eliteid,jobid);
         DBHelper.close(conn);

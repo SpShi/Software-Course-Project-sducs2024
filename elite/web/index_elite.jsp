@@ -10,7 +10,7 @@
 <!DOCTYPE html >
 <html >
 <head>
-  <title>天命科技 - 网站后台人才招聘中心</title>
+  <title>天命科技 - 网站人才招聘中心</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="description" content="天命科技专业的网站 " />
   <meta name="keywords" content="天命,网站人才招聘系统,企业网站" />

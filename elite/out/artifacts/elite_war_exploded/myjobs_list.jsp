@@ -72,7 +72,7 @@
                                             <th>留言</th>
                                             <th>公司名称</th>
                                             <th>简历</th>
-                                            <th>操作</th>
+<%--                                            <th>操作</th>--%>
                                         </tr>
                                         <c:forEach items="${eRecords}" var="b">
                                             <tr align="center" class="d">
@@ -83,11 +83,11 @@
                                                 <td>${b.comment}</td>
                                                 <td>${b.comp.name}</td>
                                                 <td><img src="${b.elite.resume}" class="cover"/></td>
-                                                <td>
-                                                    <a href="erecord.let?type=details&id=${b.id}">详情</a>
-                                                    <a onclick="return confirm('确认修改');" href="erecord.let?type=modifypre&id=${b.id}">修改</a>&nbsp;&nbsp;
-                                                    <a onclick="return confirm('确认删除');" href="erecord.let?type=remove&id=${b.id}">删除</a>
-                                                </td>
+<%--                                                <td>--%>
+<%--                                                    <a href="erecord.let?type=details&id=${b.id}">详情</a>--%>
+<%--                                                    <a onclick="return confirm('确认修改');" href="erecord.let?type=modifypre&id=${b.id}">修改</a>&nbsp;&nbsp;--%>
+<%--                                                    <a onclick="return confirm('确认删除');" href="erecord.let?type=remove&id=${b.id}">删除</a>--%>
+<%--                                                </td>--%>
                                             </tr>
                                         </c:forEach>
 

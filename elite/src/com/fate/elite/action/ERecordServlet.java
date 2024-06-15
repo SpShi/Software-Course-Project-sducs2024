@@ -3,6 +3,7 @@ package com.fate.elite.action;
 import com.alibaba.fastjson.JSON;
 import com.fate.elite.bean.Comp;
 import com.fate.elite.bean.ERecord;
+import com.fate.elite.bean.Jobs;
 import com.fate.elite.bean.User;
 import com.fate.elite.biz.CompBiz;
 import com.fate.elite.biz.ERecordBiz;
@@ -56,41 +57,52 @@ public class ERecordServlet extends HttpServlet {
         }
 
         switch(type){
+            case "addpre":
+                long jobid_a=Long.parseLong(req.getParameter("jobid"));
+                Jobs jobs=jobsBiz.getById(jobid_a);
+                req.setAttribute("job",jobs);
+                req.getRequestDispatcher("resume_add.jsp").forward(req,resp);
+                break;
             case "add":
                 //1.购买的会员编号
                 long userId = user.getId();
                 //2.购买的人才编号
-                String ids = req.getParameter("ids");
-                String []strs= ids.split("_");
-                List<Long> eliteIds = new ArrayList<Long>();
-                for(String s:strs){
-                    Long id = Long.parseLong(s);
-                    eliteIds.add(id);
+                int count=0;
+                long jobid=Long.parseLong(req.getParameter("jobid"));
+                String comment=req.getParameter("comment");
+                if(user.getType()==0){
+                    //4.调用biz
+                    count =  eRecordBiz.add(user.getId(),jobid,comment);
                 }
-                String comment=null;
-                //4.调用biz
-                int count=  eRecordBiz.add(userId,eliteIds,comment);
+                else{
+                    out.println("<script>alert('简历投递失败');location.href='jobs_search.jsp';</script>");
+                }
                 if(count>0){
 
-                    out.println("<script>alert('简历投递成功');location.href='main_new.jsp';</script>");
+                    out.println("<script>alert('简历投递成功');location.href='./erecord.let?type=queryelite&pageIndex=1';</script>");
+                }else if(count==-1){
+                    out.println("<script>alert('已投递过简历');location.href='jobs_search.jsp';</script>");
                 }else{
-                    out.println("<script>alert('简历投递失败');location.href='main_new.jsp';</script>");
-                }
+                out.println("<script>alert('简历投递失败');location.href='jobs_search.jsp';</script>");
+            }
+                break;
+            case "modifypre":
+                long id_m=Long.parseLong(req.getParameter("id"));
+                ERecord eRecord=eRecordBiz.getById(id_m);
+                req.setAttribute("eRecord",eRecord);
+                req.getRequestDispatcher("resume_reply.jsp").forward(req,resp);
                 break;
             case "reply":
-                //1.购买的会员编号
-                long idr = user.getId();
                 //2.购买的人才编号
-                Long eid = Long.parseLong(req.getParameter("ids"));
+                Long eid = Long.parseLong(req.getParameter("id"));
                 String commentr=req.getParameter("comment");
-                int sr=Integer.parseInt(req.getParameter("state"));
                 //4.调用biz
-                int countr=eRecordBiz.modify(eid,idr,commentr,sr);
+                int countr=eRecordBiz.modify(eid,commentr,1);
                 if(countr>0){
 
-                    out.println("<script>alert('简历回复成功');location.href='main_new.jsp';</script>");
+                    out.println("<script>alert('简历回复成功');location.href='./erecord.let?type=queryjob';</script>");
                 }else{
-                    out.println("<script>alert('简历回复失败');location.href='main_new.jsp';</script>");
+                    out.println("<script>alert('简历回复失败');location.href='./erecord.let?type=queryjob';</script>");
                 }
                 break;
             case "queryelite":
@@ -98,13 +110,6 @@ public class ERecordServlet extends HttpServlet {
                 break;
             case "queryjob":
                 //1.获取岗位信息
-//                String s=req.getParameter("jobid");
-//                if(s==null)  {
-//                    out.println("<script>alert('简历查询失败');location.href='main_new.jsp';</script>");
-//                }
-//                long jobid=Long.parseLong(s);
-//                boolean desc=Boolean.parseBoolean(req.getParameter("desc"));
-//                int statej=Integer.parseInt(req.getParameter("statej"));
                 //2.获取会员对象和所有的未还的记录
 
                 List<ERecord> jRecords = eRecordBiz.getRecordsByJobId(user.getId(),false,2);

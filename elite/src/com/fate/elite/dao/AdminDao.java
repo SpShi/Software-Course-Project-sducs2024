@@ -24,7 +24,7 @@ public class AdminDao {
      */
     public int add(long id, String name, long tel) throws SQLException {
         Connection conn = DBHelper.getConnection();
-        String sql = "insert into admin(id,`name`,tel,state values(?,?,?,1)";
+        String sql = "insert into admin(id,`name`,tel,state) values(?,?,?,1)";
         int count = runner.update(conn, sql, id, name, tel);
         DBHelper.close(conn);
         return count;

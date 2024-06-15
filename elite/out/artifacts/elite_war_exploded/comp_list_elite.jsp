@@ -100,7 +100,6 @@
                                                 <th >企业名称</th>
                                                 <th >联系电话</th>
                                                 <th colspan="10"  style="word-break: break-word">地址</th>
-                                                <th >操作</th>
                                             </tr>
                                             <c:forEach items="${compList}" var="m">
                                                 <tr align="center" class="d">
