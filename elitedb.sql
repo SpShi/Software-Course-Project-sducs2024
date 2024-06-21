@@ -11,7 +11,7 @@
  Target Server Version : 50744
  File Encoding         : 65001
 
- Date: 15/06/2024 22:01:52
+ Date: 21/06/2024 09:58:52
 */
 
 SET NAMES utf8mb4;
@@ -65,7 +65,7 @@ INSERT INTO `e2c_record` VALUES (8, 1000000010, 4, '2021-12-13 00:01:00', '2021-
 INSERT INTO `e2c_record` VALUES (9, 1000000009, 3, '2021-12-15 00:00:00', '2021-12-13 00:02:11', '录用', 1);
 INSERT INTO `e2c_record` VALUES (10, 1000000007, 5, '2024-06-15 16:16:43', NULL, '', 0);
 INSERT INTO `e2c_record` VALUES (11, 1000000007, 3, '2024-06-15 16:18:06', '2024-06-15 18:53:46', '1122', 1);
-INSERT INTO `e2c_record` VALUES (12, 1000000007, 2, '2024-06-15 18:51:23', NULL, '12', 0);
+INSERT INTO `e2c_record` VALUES (12, 1000000007, 2, '2024-06-15 18:51:23', '2024-06-17 17:27:28', '', 1);
 
 -- ----------------------------
 -- Table structure for elite
@@ -93,7 +93,7 @@ CREATE TABLE `elite`  (
 -- ----------------------------
 -- Records of elite
 -- ----------------------------
-INSERT INTO `elite` VALUES (1000000000, 'name0', '370581200304176378', 0, 'Images/cover/20240615214336.png', 1, 26, 0, 15153380272, 'major', '356303329@qq.com', '370581200304176378', '1', '1', '1');
+INSERT INTO `elite` VALUES (1000000000, 'name0', '370581200304176378', 0, 'Images/cover/20240617172543.png', 1, 26, 0, 15153380272, 'major', '356303329@qq.com', '370581200304176378', '1', '1', '1');
 INSERT INTO `elite` VALUES (1000000001, 'name1', '370681200304176378', 0, 'Images/cover/20221223214238854.png', 1, 27, 0, 15153380273, 'major', '356303339@qq.com', '1', '1', '1', '1');
 INSERT INTO `elite` VALUES (1000000002, 'name2', '370481200304176378', 0, 'Images/cover/20221223214238854.png', 1, 24, 0, 15153380275, 'major', '356303349@qq.com', '1', '1', '1', '1');
 INSERT INTO `elite` VALUES (1000000003, 'name3', '370381200304176378', 0, 'Images/cover/20221223214238854.png', 1, 29, 0, 15153380274, 'major', '356303529@qq.com', '1', '1', '1', '1');
@@ -169,7 +169,7 @@ CREATE TABLE `sp`  (
 -- ----------------------------
 -- Records of sp
 -- ----------------------------
-INSERT INTO `sp` VALUES (0000000001, 1000000016);
+INSERT INTO `sp` VALUES (0000000001, 1000000017);
 
 -- ----------------------------
 -- Table structure for user
@@ -180,7 +180,7 @@ CREATE TABLE `user`  (
   `pwd` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   `type` int(1) UNSIGNED ZEROFILL NOT NULL COMMENT '0是个人,1是公司,2是管理员',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1000000016 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1000000017 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -201,6 +201,7 @@ INSERT INTO `user` VALUES (1000000012, '123', 2);
 INSERT INTO `user` VALUES (1000000013, '123', 2);
 INSERT INTO `user` VALUES (1000000014, '123', 0);
 INSERT INTO `user` VALUES (1000000015, '123', 1);
+INSERT INTO `user` VALUES (1000000016, '123', 0);
 
 -- ----------------------------
 -- View structure for erecordview
